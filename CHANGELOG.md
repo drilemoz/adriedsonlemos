@@ -1,5 +1,12 @@
 # Histórico do portfólio
 
+## 1.2.0
+
+- Adicionadas opções de contato público por e-mail e telefone, com links nativos `mailto:` e `tel:`.
+- Rodapé informa a versão corrente do portal e direciona para este histórico.
+- Identidade e controle sequencial de versão por `VERSION`, `VERSION_CODE` e `github-manager.json`.
+- Mantidas as melhorias 1.1.0 de APKs, GitHub Actions e Termux Manager.
+
 ## 1.1.0
 
 - Tratamento de projetos sem Releases públicas.

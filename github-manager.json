@@ -1,0 +1,15 @@
+{
+  "projectName": "Adriedson Lemos | Portfólio",
+  "name": "adriedsonlemos",
+  "displayName": "Adriedson Lemos | Tecnologia & Projetos",
+  "version": "1.2.0",
+  "versionName": "1.2.0",
+  "versionCode": 3,
+  "build": 3,
+  "projectType": "website",
+  "type": "Web",
+  "framework": "static",
+  "language": "HTML, CSS, JavaScript",
+  "repository": "drilemoz/adriedsonlemos",
+  "website": "https://adriedsonlemos.vercel.app"
+}

@@ -188,11 +188,28 @@ html[data-theme="dark"] .art-back { background: linear-gradient(145deg,#122f57,#
 .contact-card h2 span { color: #7af9e5; }
 .contact-card p:not(.kicker) { color: #c4d7e8; max-width: 520px; margin-bottom: 26px; font-size: 1rem; }
 .contact-arrow { position: absolute; right: 65px; bottom: 30px; font-size: 10rem; line-height: 1; color: rgba(255,255,255,.09); pointer-events: none; }
+/* Formas de contato legíveis e tocáveis no celular, em ambos os temas. */
+.contact-methods { display: flex; flex-wrap: wrap; gap: 12px; max-width: 780px; position: relative; z-index: 1; }
+.contact-method { min-height: 70px; min-width: 0; display: inline-flex; align-items: center; gap: 12px; padding: 12px 15px; border: 1px solid rgba(255,255,255,.27); border-radius: 15px; background: rgba(255,255,255,.09); color: #fff; text-decoration: none; transition: background .2s, transform .2s; }
+.contact-method:hover, .contact-method:focus-visible { background: rgba(255,255,255,.17); color: #fff; transform: translateY(-1px); }
+.contact-method .method-icon { width: 39px; height: 39px; flex: none; border-radius: 11px; display: grid; place-items: center; background: rgba(255,255,255,.16); font-size: 1.1rem; }
+.contact-method small { display: block; font-size: .72rem; font-weight: 650; color: #d7e8f5; line-height: 1.4; }
+.contact-method strong { display: block; font-size: clamp(.83rem, 2vw, .97rem); font-weight: 750; line-height: 1.4; overflow-wrap: anywhere; }
+.contact-method .method-arrow { align-self: flex-start; color: #7af9e5; font-size: 1.07rem; }
+.contact-card .btn-white { margin-top: 26px; position: relative; z-index: 1; }
+.contact-card a:focus-visible { outline: 3px solid #7af9e5; outline-offset: 3px; }
 .btn-white { background: #fff; color: #0e3151; }
 .footer { border-top: 1px solid var(--line); padding-block: 25px; }
 .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .footer-brand { font-size: 1.35rem; font-weight: 850; letter-spacing: -.08em; color: var(--heading); }
 .footer-inner p,.footer-inner a:last-child { margin: 0; font-size: .77rem; color: var(--muted); }
+.footer-details { flex: 1; min-width: 0; }
+.footer-inner .footer-details p { margin: 0; color: var(--muted); font-size: .78rem; }
+.footer-inner .footer-details .footer-version { margin-top: 4px; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 7px; font-size: .76rem; }
+.footer-version strong { color: var(--heading); font-variant-numeric: tabular-nums; }
+.footer-version a { color: var(--blue) !important; font-size: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.footer .back-to-top { flex: none; }
+
 
 @media (max-width: 980px) {
   .hero-grid { gap: 28px; }
@@ -255,7 +272,10 @@ html[data-theme="dark"] .art-back { background: linear-gradient(145deg,#122f57,#
   .contact-card { border-radius: 20px; }
   .contact-arrow { display: none; }
   .footer-inner { flex-wrap: wrap; }
-  .footer-inner p { order: 3; flex-basis: 100%; }
+  .footer-details { order: 3; flex-basis: 100%; }
+  .contact-methods { flex-direction: column; }
+  .contact-method { width: 100%; }
+  .contact-method strong { font-size: .94rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

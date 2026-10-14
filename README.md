@@ -1,4 +1,4 @@
-# Adriedson Lemos | Portfólio pessoal v1.1.0
+# Adriedson Lemos | Portfólio pessoal v1.2.0
 
 Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a trajetória de Adriedson Lemos e seus projetos públicos do GitHub.
 
@@ -6,7 +6,7 @@ Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a traj
 
 - **Tema claro por padrão**: fundo branco. Botão para alternar para tema escuro com fundo quase preto (`#08090c`); escolha fica salva no navegador.
 - Layout responsivo para celular, tablet e desktop.
-- Seções: apresentação, sobre mim, projetos, jornada e contato pelo GitHub.
+- Seções: apresentação, sobre mim, projetos, jornada e contato por e-mail, telefone e GitHub.
 - Catálogo inicial de projetos conhecidos, renderizado mesmo sem acesso à API do GitHub.
 - Consulta opcional à API pública do GitHub para listar os repositórios públicos (sem tokens).
 - Busca e filtros por tipo de projeto.
@@ -20,6 +20,8 @@ Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a traj
 - `app.js`: catálogo, busca, filtros, tema, integração GitHub, APKs.
 - `favicon.svg`: identidade visual minimalista.
 - `vercel.json`: cabeçalhos de segurança para Vercel.
+- `VERSION`, `VERSION_CODE` e `github-manager.json`: metadados explícitos de versão e identidade para importação do site no GitHub Manager. Não é APK e não usa identificador Android.
+- `CHANGELOG.md`: histórico de evolução mostrado no rodapé do site.
 - `tests/portfolio.test.cjs`: testes automatizados de links APK, Releases vazias e Artifacts do Actions, executados com Node.js, sem dependências externas.
 
 Para testar a lógica de downloads:
@@ -66,6 +68,19 @@ O código tenta descobrir automaticamente o nome atual a partir da URL do reposi
 
 O site não armazena APKs, não usa credenciais nem cria links de download temporário ou fictícios. Por depender de APIs públicas, a seção de downloads pode sofrer com limites de taxa, erros de rede e expiração dos Artifacts. As consultas de cada projeto são feitas conforme os cartões aparecem e ficam em cache por aba por 15 minutos.
 
+## Atualização 1.2.0
+
+- Incluídos e-mail `drilemoz@gmail.com` e telefone `+55 (37) 99874-7642` com atalhos para envio de mensagem por aplicativo de e-mail e ligação no celular.
+- Adicionado número **v1.2.0** no rodapé, com link para o histórico público de alterações.
+- Criados `VERSION`, `VERSION_CODE` e `github-manager.json`, para oferecer identidade e versão explícitas ao GitHub Manager, sem simular projeto Android.
+- Mantidos o tema branco padrão e o preto profundo opcional, a navegação responsiva e os links aos projetos.
+
+### Versionamento do portal
+
+Atualize **juntos** os arquivos `VERSION`, `VERSION_CODE`, `github-manager.json`, rodapé no `index.html`, README e CHANGELOG em cada nova entrega. `VERSION_CODE` é um contador sequencial de entregas do site (`3` nesta versão), não um código Android. A identificação efetiva depende da versão instalada do GitHub Manager.
+
+**Privacidade:** o e-mail e o telefone estão visíveis no HTML público do portal e também podem ser coletados por robôs da internet. Não foi implementado envio por servidor nem formulário que armazene dados.
+
 ## Atualização 1.1.0
 
 - Corrigido botão de Releases vazias, inclusive Termux Manager.
@@ -77,6 +92,6 @@ O site não armazena APKs, não usa credenciais nem cria links de download tempo
 
 - Site pessoal em português brasileiro.
 - Descrições resumidas baseadas nos READMEs públicos dos projetos e nos interesses informados pelo autor.
-- Fotos, contatos adicionais, empregadores, endereço e dados privados não foram incluídos.
+- Fotos, empregadores, endereço residencial e outras informações privadas não foram incluídos. O e-mail e telefone publicados foram fornecidos explicitamente para a seção de contato.
 - Alguns projetos estão em fase de desenvolvimento, pré-lançamento ou validação. Links de repositório não equivalem a APK estável.
 - Antes de divulgar o domínio final, confira a descrição pessoal e os links de downloads.
