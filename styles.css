@@ -156,6 +156,8 @@ html[data-theme="dark"] .art-back { background: linear-gradient(145deg,#122f57,#
 .project-link.code { background: var(--tag); color: var(--blue); }
 .project-link.release { color: var(--heading); border: 1px solid var(--line); }
 .project-link.apk { background: #167c6d; color: #fff; }
+.project-link.artifact { color: var(--heading); border: 1px solid var(--line); }
+.project-link[hidden] { display: none; }
 .project-link:hover { filter: brightness(.93); }
 .empty { color: var(--muted); padding: 36px; border: 1px dashed var(--line); border-radius: 16px; }
 .projects-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 18px; margin: 28px 0 12px; }

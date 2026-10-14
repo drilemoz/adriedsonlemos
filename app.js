@@ -1,14 +1,14 @@
 /* Portfólio público de Adriedson Lemos.
  * Sem frameworks, rastreadores, tokens privados ou dependências externas.
- * Após mudar o username no GitHub, atualize INITIAL_GITHUB_USER.
+ * O usuário público atual é drilemoz; revise a constante se mudar novamente.
  */
 (function () {
   'use strict';
 
-  const INITIAL_GITHUB_USER = 'adriedsonlemoz';
+  const INITIAL_GITHUB_USER = 'drilemoz';
   const PORTFOLIO_REPO = 'adriedsonlemos';
   const API_BASE = 'https://api.github.com';
-  const CACHE_TTL_MS = 30 * 60 * 1000;
+  const CACHE_TTL_MS = 15 * 60 * 1000;
   const KNOWN = [
     { repo: 'Vigia-IA', name: 'Vigia IA', description: 'Monitoramento com IA local, câmeras e um módulo de mapas e navegação pensado também para cicloviagem.', categories: ['android'], kind: 'Android / IA', stack: ['Flutter', 'IA local', 'Mapas offline'], icon: '◎', featured: true },
     { repo: 'Explorador-XP', name: 'Explorador XP', description: 'Explorador de arquivos Android com organização, multimídia e recursos de acesso e transferência pela rede.', categories: ['android', 'ferramentas'], kind: 'Android / Utilitário', stack: ['Kotlin', 'Arquivos', 'Rede local'], icon: '▦', featured: true },
@@ -33,7 +33,6 @@
   const fetchedReleases = new Map();
   const fetchingReleases = new Map();
   let observer = null;
-  let remainingRequests = 0;
   let limitedByApi = false;
 
   const $ = function (selector) { return document.querySelector(selector); };
@@ -102,17 +101,67 @@
     if (!card || !release) return;
     const link = card.querySelector('.project-link.release');
     const meta = card.querySelector('.project-meta');
-    if (meta && release.apkVersion) {
-      meta.textContent = 'APK: ' + release.apkVersion + (release.version && release.version !== release.apkVersion ? ' · há release mais recente' : '') + (release.pre ? ' · pré-lançamento' : '');
-    } else if (meta && release.version) {
-      meta.textContent = 'Release: ' + release.version + (release.pre ? ' · pré-lançamento' : '');
+    if (!link || !meta) return;
+    const repo = card.dataset.repo;
+    link.hidden = true;
+    link.classList.remove('apk', 'artifact');
+    link.removeAttribute('title');
+    link.removeAttribute('aria-label');
+
+    if (release.error) {
+      meta.textContent = 'Não foi possível consultar os downloads no GitHub agora.';
+      return;
     }
-    if (release.apk && link) {
+
+    if (release.apk) {
+      meta.textContent = 'APK publicado: ' + (release.apkVersion || 'versão disponível')
+        + (release.version && release.version !== release.apkVersion ? ' · há Release mais recente' : '')
+        + (release.pre ? ' · pré-lançamento' : '');
       link.href = release.apk;
       link.textContent = '↓ Baixar APK';
       link.classList.add('apk');
-      link.setAttribute('aria-label', 'Baixar APK de ' + card.dataset.title + ' pelo GitHub');
-      link.title = 'Arquivo APK publicado nas Releases do GitHub';
+      link.setAttribute('aria-label', 'Baixar APK de ' + card.dataset.title + ' nas Releases do GitHub');
+      link.title = 'Download direto de um arquivo APK anexado a uma Release';
+      link.hidden = false;
+      return;
+    }
+
+    if (release.artifactRun) {
+      meta.textContent = (release.version ? 'Release: ' + release.version + ' · ' : '')
+        + 'APK nos Artifacts do Actions · login necessário · arquivo temporário';
+      // Artifacts podem exigir login e são normalmente arquivos ZIP, não downloads APK diretos.
+      link.href = repoUrl(repo) + '/actions/runs/' + release.artifactRun;
+      link.textContent = 'Ver APK no Actions ↗';
+      link.classList.add('artifact');
+      link.setAttribute('aria-label', 'Abrir a execução do GitHub Actions com Artifact de APK de ' + card.dataset.title);
+      link.title = 'Abra a execução e procure o Artifact; o download requer login e pode expirar';
+      link.hidden = false;
+      return;
+    }
+
+    if (release.version) {
+      meta.textContent = 'Release: ' + release.version + ' · sem APK anexado'
+        + (release.pre ? ' · pré-lançamento' : '');
+      link.href = repoUrl(repo) + '/releases';
+      link.textContent = 'Ver versões ↗';
+      link.hidden = false;
+      return;
+    }
+
+    if (repo.toLowerCase() === 'termuxmanager') {
+      meta.textContent = 'Ferramenta para Termux · instalação pelo README · sem Releases públicas';
+      link.href = repoUrl(repo) + '/blob/main/README.md';
+      link.textContent = 'Como instalar ↗';
+      link.hidden = false;
+      return;
+    }
+
+    meta.textContent = 'Ainda não há Releases públicas com download.';
+    if (card.dataset.android === 'true') {
+      link.href = repoUrl(repo) + '/actions';
+      link.textContent = 'Ver compilações ↗';
+      link.title = 'Confira as execuções; pode não haver APK disponível';
+      link.hidden = false;
     }
   }
 
@@ -130,6 +179,7 @@
       const card = element('article', 'project-card' + (item.featured ? ' featured' : ''));
       card.dataset.repo = item.repo;
       card.dataset.title = item.name;
+      card.dataset.android = String(item.categories.includes('android'));
       const top = element('div', 'project-card-top');
       top.append(element('span', 'project-icon', item.icon), element('span', 'project-kind', item.archived ? 'Arquivado' : item.kind));
       card.appendChild(top);
@@ -141,7 +191,9 @@
       card.appendChild(element('div', 'project-meta', 'Código e documentação no GitHub'));
       const links = element('div', 'project-links');
       links.appendChild(makeExternal(repoUrl(item.repo), 'Ver código ↗', 'project-link code'));
-      links.appendChild(makeExternal(repoUrl(item.repo) + '/releases', 'Ver versões ↗', 'project-link release'));
+      const releaseLink = makeExternal(repoUrl(item.repo) + '/releases', 'Consultando versões...', 'project-link release');
+      releaseLink.hidden = true;
+      links.appendChild(releaseLink);
       card.appendChild(links);
       fragment.appendChild(card);
       applyRelease(card, fetchedReleases.get(item.repo));
@@ -159,7 +211,7 @@
     try {
       const response = await fetch(url, { headers: { Accept: 'application/vnd.github+json' }, signal: controller.signal });
       if (!response.ok) {
-        if (response.status === 403 || response.status === 429) limitedByApi = true;
+        if (response.status === 429 || (response.status === 403 && response.headers.get('x-ratelimit-remaining') === '0')) limitedByApi = true;
         throw new Error('GitHub API: HTTP ' + response.status);
       }
       return await response.json();
@@ -168,14 +220,14 @@
 
   function readCachedRelease(repo) {
     try {
-      const raw = sessionStorage.getItem('portfolio-release:' + githubUser + '/' + repo);
+      const raw = sessionStorage.getItem('portfolio-v1.1-release:' + githubUser + '/' + repo);
       if (!raw) return null;
       const cached = JSON.parse(raw);
       return Date.now() - cached.time < CACHE_TTL_MS ? cached.release : null;
     } catch (error) { return null; }
   }
   function cacheRelease(repo, release) {
-    try { sessionStorage.setItem('portfolio-release:' + githubUser + '/' + repo, JSON.stringify({ time: Date.now(), release: release })); } catch (error) { /* cache opcional */ }
+    try { sessionStorage.setItem('portfolio-v1.1-release:' + githubUser + '/' + repo, JSON.stringify({ time: Date.now(), release: release })); } catch (error) { /* cache opcional */ }
   }
   function validateDownload(asset, repo) {
     if (!asset || typeof asset.name !== 'string' || !/\.apk$/i.test(asset.name)) return null;
@@ -185,37 +237,74 @@
       return url.protocol === 'https:' && url.hostname === 'github.com' && url.pathname.toLowerCase().startsWith(prefix.toLowerCase()) ? url.href : null;
     } catch (error) { return null; }
   }
+  function isApkArtifact(artifact) {
+    return artifact && !artifact.expired && typeof artifact.name === 'string'
+      && /(?:\.apk$|(?:^|[^a-z])apk(?:[^a-z]|$))/i.test(artifact.name)
+      && artifact.workflow_run && Number.isSafeInteger(artifact.workflow_run.id)
+      && artifact.workflow_run.id > 0;
+  }
+
+  async function findApkArtifact(repo) {
+    // Apenas dados públicos. Nunca cria URLs assinadas de download nem solicita tokens.
+    try {
+      const result = await fetchJson(API_BASE + '/repos/' + encodeURIComponent(githubUser)
+        + '/' + encodeURIComponent(repo) + '/actions/artifacts?per_page=100');
+      if (!result || !Array.isArray(result.artifacts)) return null;
+      const matches = result.artifacts.filter(isApkArtifact).sort(function (a, b) {
+        return String(b.created_at || '').localeCompare(String(a.created_at || ''));
+      });
+      return matches.length ? matches[0].workflow_run.id : null;
+    } catch (error) { return null; }
+  }
+
   async function loadRelease(repo) {
     if (fetchedReleases.has(repo)) return fetchedReleases.get(repo);
     if (fetchingReleases.has(repo)) return fetchingReleases.get(repo);
     const cached = readCachedRelease(repo);
     if (cached) { fetchedReleases.set(repo, cached); return cached; }
-    if (limitedByApi || !safeRepoName(repo)) return null;
+    if (limitedByApi || !safeRepoName(repo)) return { error: true };
     const promise = (async function () {
       try {
-        /* A lista, e não /releases/latest, inclui pré-lançamentos públicos. */
-        const releases = await fetchJson(API_BASE + '/repos/' + encodeURIComponent(githubUser) + '/' + encodeURIComponent(repo) + '/releases?per_page=12');
-        if (!Array.isArray(releases)) return null;
-        const newest = releases.find(function (release) { return !release.draft; });
-        const withApk = releases.find(function (release) {
-          return !release.draft && Array.isArray(release.assets) && release.assets.some(function (asset) { return validateDownload(asset, repo); });
+        // Releases incluem pré-lançamentos; tags sem Release não são tratadas como download.
+        // Procura até 100 Releases, sem consultar infinitamente o histórico.
+        const releaseList = [];
+        for (let page = 1; page <= 2; page += 1) {
+          const result = await fetchJson(API_BASE + '/repos/' + encodeURIComponent(githubUser)
+            + '/' + encodeURIComponent(repo) + '/releases?per_page=50&page=' + page);
+          if (!Array.isArray(result)) throw new Error('Lista de Releases inválida');
+          releaseList.push.apply(releaseList, result.filter(function (entry) { return !entry.draft; }));
+          if (result.length < 50) break;
+        }
+        const newest = releaseList[0] || null;
+        const withApk = releaseList.find(function (entry) {
+          return Array.isArray(entry.assets) && entry.assets.some(function (asset) {
+            return validateDownload(asset, repo);
+          });
         });
         const apkAsset = withApk && withApk.assets.find(function (asset) { return validateDownload(asset, repo); });
+        const known = KNOWN.find(function (item) { return item.repo.toLowerCase() === repo.toLowerCase(); });
+        const android = known ? known.categories.includes('android') : repositoryList.some(function (item) {
+          return item.repo.toLowerCase() === repo.toLowerCase() && item.categories.includes('android');
+        });
+        const artifactRun = !apkAsset && android ? await findApkArtifact(repo) : null;
         const release = {
           version: newest && newest.tag_name ? newest.tag_name : '',
           apkVersion: withApk && withApk.tag_name ? withApk.tag_name : '',
           pre: Boolean(withApk ? withApk.prerelease : newest && newest.prerelease),
-          apk: apkAsset ? validateDownload(apkAsset, repo) : null
+          apk: apkAsset ? validateDownload(apkAsset, repo) : null,
+          artifactRun: artifactRun,
+          hasReleases: releaseList.length > 0
         };
         fetchedReleases.set(repo, release);
         cacheRelease(repo, release);
         return release;
-      } catch (error) { return null; }
+      } catch (error) { return { error: true }; }
       finally { fetchingReleases.delete(repo); }
     })();
     fetchingReleases.set(repo, promise);
     return promise;
   }
+
   function observeReleases() {
     if (!('IntersectionObserver' in window)) {
       Array.from(grid.children).slice(0, 8).forEach(function (card) { loadRelease(card.dataset.repo).then(function (value) { applyRelease(card, value); }); });

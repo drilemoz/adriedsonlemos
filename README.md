@@ -1,4 +1,4 @@
-# Adriedson Lemos | Portfólio pessoal
+# Adriedson Lemos | Portfólio pessoal v1.1.0
 
 Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a trajetória de Adriedson Lemos e seus projetos públicos do GitHub.
 
@@ -20,6 +20,13 @@ Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a traj
 - `app.js`: catálogo, busca, filtros, tema, integração GitHub, APKs.
 - `favicon.svg`: identidade visual minimalista.
 - `vercel.json`: cabeçalhos de segurança para Vercel.
+- `tests/portfolio.test.cjs`: testes automatizados de links APK, Releases vazias e Artifacts do Actions, executados com Node.js, sem dependências externas.
+
+Para testar a lógica de downloads:
+
+```bash
+node tests/portfolio.test.cjs
+```
 
 ## Publicar na Vercel
 
@@ -43,19 +50,28 @@ Acesse `http://localhost:8080` dentro da pasta do site.
 O nome atual configurado no topo de `app.js` é:
 
 ```js
-const INITIAL_GITHUB_USER = 'adriedsonlemoz';
+const INITIAL_GITHUB_USER = 'drilemoz';
 const PORTFOLIO_REPO = 'adriedsonlemos';
 ```
 
 O código tenta descobrir automaticamente o nome atual a partir da URL do repositório, aproveitando o redirecionamento de URLs antigas feito pelo GitHub. **Isso não é garantia permanente**, especialmente se o login antigo for assumido por outra conta. Ao mudar de usuário, atualize `INITIAL_GITHUB_USER`, as URLs de fallback em `index.html`, e qualquer link em redes sociais e integrações. 
 
-## Como funciona o download de APKs
+## Downloads: Releases, Actions e projetos sem APK (v1.1.0)
 
-A API pública de Releases é consultada sem autenticação e sem segredo. Para cada projeto visto na tela, o site procura nas últimas 12 Releases públicas um asset terminado em `.apk`. Se encontrar, usa o endereço oficial `github.com/<conta>/<repo>/releases/download/...`. Se não encontrar ou se a API falhar, apresenta somente o link **Ver versões**. **O site não armazena APKs** e não inventa arquivos que não existem.
+- **Releases públicas:** consulta até 100 Releases, incluindo pré-lançamentos. O botão **Baixar APK** só aparece se existir um arquivo `.apk` real entre os assets da Release. Uma tag ou uma Release com nome de APK, mas sem arquivo anexado, **não** é link de download.
+- **GitHub Actions:** se não encontrar APK nas Releases de um projeto Android, consulta os Artifacts públicos recentes. Se encontrar um Artifact não expirado com nome associado a APK, mostra **Ver APK no Actions**, levando à execução de origem (não tenta download direto). O visitante deve entrar no GitHub para baixar o Artifact, geralmente ZIP, que expira segundo a retenção configurada.
+- **Sem Release nem Artifact:** projetos Android mostram **Ver compilações** (sem garantia de existir APK). Projetos que não são Android ficam apenas com **Ver código**. Se houver uma Release sem APK, mostra **Ver versões** com aviso.
+- **Termux Manager:** não é aplicativo APK: é uma ferramenta para Termux. Quando não há Releases, o botão leva ao README e se chama **Como instalar**. Assim não é exibida uma página de Releases vazia.
+- **Falha na API ou limite de requisições:** não anuncia que não há Releases; informa indisponibilidade temporária da consulta, mantendo o link para o código.
 
-*Limitação:* APKs guardados apenas como artefatos de GitHub Actions, ou em Releases privadas, não aparecem como download direto. Se a Release mais recente não contiver APK, o site poderá apontar para um APK de uma Release anterior. Consulte a página de versões para conferir o histórico e o estado de cada compilação.
+O site não armazena APKs, não usa credenciais nem cria links de download temporário ou fictícios. Por depender de APIs públicas, a seção de downloads pode sofrer com limites de taxa, erros de rede e expiração dos Artifacts. As consultas de cada projeto são feitas conforme os cartões aparecem e ficam em cache por aba por 15 minutos.
 
-O GitHub aplica limites à API pública não autenticada. O site usa consultas de Releases ao aparecerem na tela e mantém um cache por aba de 30 minutos; quando o limite é alcançado, o catálogo inicial ainda funciona.
+## Atualização 1.1.0
+
+- Corrigido botão de Releases vazias, inclusive Termux Manager.
+- Corrigida distinção entre arquivo APK real, nome de Release, e Artifact do Actions.
+- Atualizado o usuário do GitHub para `drilemoz` nos links iniciais, mantendo a descoberta automática do proprietário pela API.
+- Mantidos os modos branco padrão e escuro quase preto, layout, filtros e estrutura estática sem dependências.
 
 ## Observações
 
