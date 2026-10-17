@@ -1,4 +1,4 @@
-# Adriedson Lemos | Portfólio pessoal v1.2.0
+# Adriedson Lemos | Portfólio pessoal v1.3.0
 
 Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a trajetória de Adriedson Lemos e seus projetos públicos do GitHub.
 
@@ -7,7 +7,7 @@ Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a traj
 - **Tema claro por padrão**: fundo branco. Botão para alternar para tema escuro com fundo quase preto (`#08090c`); escolha fica salva no navegador.
 - Layout responsivo para celular, tablet e desktop.
 - Seções: apresentação, sobre mim, projetos, jornada e contato por e-mail, telefone e GitHub.
-- Catálogo inicial de projetos conhecidos, renderizado mesmo sem acesso à API do GitHub.
+- Catálogo inicial com os 17 projetos públicos identificados em 17/10/2026, renderizado mesmo sem acesso à API do GitHub. A consulta online pode descobrir projetos novos depois dessa data.
 - Consulta opcional à API pública do GitHub para listar os repositórios públicos (sem tokens).
 - Busca e filtros por tipo de projeto.
 - Consulta sob demanda às Releases, à medida que os cartões entram na tela: exibe um **link direto para APK** somente se uma Release pública tiver um arquivo `.apk` válido. Caso contrário, mantém o link de Releases.
@@ -68,6 +68,15 @@ O código tenta descobrir automaticamente o nome atual a partir da URL do reposi
 
 O site não armazena APKs, não usa credenciais nem cria links de download temporário ou fictícios. Por depender de APIs públicas, a seção de downloads pode sofrer com limites de taxa, erros de rede e expiração dos Artifacts. As consultas de cada projeto são feitas conforme os cartões aparecem e ficam em cache por aba por 15 minutos.
 
+## Atualização 1.3.0 (17/10/2026)
+
+- Catálogo local revisado com base nos **17 repositórios públicos de projetos** da conta `drilemoz` (além do repositório deste portfólio).
+- Novos cartões conhecidos: **Nexora**, **Minha Câmera**, **Uai Vozes**, **Baixa Fácil**, **MeuGiga**, **Meu Vercel**, **Tática Manager**, **Lista de Compras** (`Lista-de-Compras`) e **Termux Manager Android** (`Termux-Manager`).
+- Removidos do catálogo de reserva os projetos **Saldo Real**, **Lista Nômade**, **Lista de Mercado**, **Meu PC**, **Guia DOA** e **Meu Bolsa Família**, não encontrados entre os repositórios públicos atuais. Eles podem continuar existindo fora da conta pública; a alteração não exclui repositórios nem seus dados.
+- Atualizadas as descrições das ferramentas que permaneceram no catálogo; diferenciado o projeto Android `Termux-Manager` da ferramenta de terminal `TermuxManager`.
+- Preservados tema claro/escuro, busca, filtros, links de GitHub, lógica de Releases/APKs e atualização automática pela API. Se a API pública falhar, a página usa os 17 projetos catalogados localmente.
+- Versão do portal `1.3.0`, `VERSION_CODE` `4`, metadados, rodapé e testes sincronizados.
+
 ## Atualização 1.2.0
 
 - Incluídos e-mail `drilemoz@gmail.com` e telefone `+55 (37) 99874-7642` com atalhos para envio de mensagem por aplicativo de e-mail e ligação no celular.
@@ -77,7 +86,7 @@ O site não armazena APKs, não usa credenciais nem cria links de download tempo
 
 ### Versionamento do portal
 
-Atualize **juntos** os arquivos `VERSION`, `VERSION_CODE`, `github-manager.json`, rodapé no `index.html`, README e CHANGELOG em cada nova entrega. `VERSION_CODE` é um contador sequencial de entregas do site (`3` nesta versão), não um código Android. A identificação efetiva depende da versão instalada do GitHub Manager.
+Atualize **juntos** os arquivos `VERSION`, `VERSION_CODE`, `github-manager.json`, rodapé no `index.html`, README e CHANGELOG em cada nova entrega. `VERSION_CODE` é um contador sequencial de entregas do site (`4` nesta versão), não um código Android. A identificação efetiva depende da versão instalada do GitHub Manager.
 
 **Privacidade:** o e-mail e o telefone estão visíveis no HTML público do portal e também podem ser coletados por robôs da internet. Não foi implementado envio por servidor nem formulário que armazene dados.
 

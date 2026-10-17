@@ -1,5 +1,13 @@
 # Histórico do portfólio
 
+## 1.3.0 — 17/10/2026
+
+- Catálogo local sincronizado com 17 repositórios públicos, excluindo o repositório do portfólio.
+- Incluídos Nexora, Uai Vozes, Minha Câmera, Baixa Fácil, MeuGiga, Meu Vercel, Tática Manager, Lista de Compras e Termux Manager Android.
+- Retirados do catálogo de fallback seis nomes que não estão mais entre os repositórios públicos atuais; nenhuma exclusão remota foi realizada.
+- Atualizadas descrições, categorias, tecnologias e projetos em destaque.
+- Versionamento e testes atualizados; tema e consulta de downloads preservados.
+
 ## 1.2.0
 
 - Adicionadas opções de contato público por e-mail e telefone, com links nativos `mailto:` e `tel:`.
