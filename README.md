@@ -19,15 +19,18 @@ Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a traj
 - `styles.css`: design, responsividade e temas.
 - `app.js`: catálogo, busca, filtros, tema, integração GitHub, APKs.
 - `favicon.svg`: identidade visual minimalista.
+- `assets/projects/*.svg`: capas ilustrativas vetoriais dos 17 projetos, sem dependências externas.
+- `og-image.png`, `robots.txt`, `sitemap.xml`: apresentação nas redes e configuração de indexação.
 - `vercel.json`: cabeçalhos de segurança para Vercel.
 - `VERSION`, `VERSION_CODE` e `github-manager.json`: metadados explícitos de versão e identidade para importação do site no GitHub Manager. Não é APK e não usa identificador Android.
 - `CHANGELOG.md`: histórico de evolução mostrado no rodapé do site.
-- `tests/portfolio.test.cjs`: testes automatizados de links APK, Releases vazias e Artifacts do Actions, executados com Node.js, sem dependências externas.
+- `tests/portfolio.test.cjs` e `tests/visual-version.test.cjs`: testes automatizados de links APK, Releases vazias e Artifacts do Actions, executados com Node.js, sem dependências externas.
 
 Para testar a lógica de downloads:
 
 ```bash
 node tests/portfolio.test.cjs
+node tests/visual-version.test.cjs
 ```
 
 ## Publicar na Vercel
@@ -68,6 +71,15 @@ O código tenta descobrir automaticamente o nome atual a partir da URL do reposi
 
 O site não armazena APKs, não usa credenciais nem cria links de download temporário ou fictícios. Por depender de APIs públicas, a seção de downloads pode sofrer com limites de taxa, erros de rede e expiração dos Artifacts. As consultas de cada projeto são feitas conforme os cartões aparecem e ficam em cache por aba por 15 minutos.
 
+## Atualização 1.4.0 (17/10/2026)
+
+- Foram adicionadas **17 capas vetoriais locais e leves**, uma por projeto catalogado. São **ilustrações conceituais**, não capturas reais dos aplicativos. O rótulo e o texto alternativo deixam isso explícito. Futuras capturas verificadas poderão substituir os arquivos em `assets/projects/`.
+- Os cartões agora mostram o estágio indicativo do desenvolvimento (Alfa, Beta, Em testes, Em evolução, Experimental ou Estável). Os estágios são editoriais, com base na documentação pública consultada; não são certificação de segurança/estabilidade do APK nem substituem testes em aparelho.
+- Adicionado selo de versão obtida sob demanda pela API do GitHub: **Release** para uma Release pública ou **Tag** para um repositório sem Release. Nunca deduz download a partir do nome de uma tag; o APK segue exigindo asset `.apk` real.
+- Corrigido fallback sem IntersectionObserver para consultar todas as versões, no máximo três requisições de cartões em paralelo, em vez de apenas os oito primeiros cartões.
+- SEO: metadados Open Graph/Twitter, imagem social PNG local, URL canônica, `robots.txt`, `sitemap.xml` e dados estruturados básicos. **A URL pública foi herdada do campo `website` de `github-manager.json` e deve ser verificada na hospedagem** antes de divulgar. Nenhuma implantação foi feita nesta entrega.
+- Atualizados VERSION, VERSION_CODE 5, identidade, documentação, rodapé e testes. Sem analytics, SDK externo, imagens de terceiros ou mudanças nos contatos públicos.
+
 ## Atualização 1.3.0 (17/10/2026)
 
 - Catálogo local revisado com base nos **17 repositórios públicos de projetos** da conta `drilemoz` (além do repositório deste portfólio).
@@ -86,7 +98,7 @@ O site não armazena APKs, não usa credenciais nem cria links de download tempo
 
 ### Versionamento do portal
 
-Atualize **juntos** os arquivos `VERSION`, `VERSION_CODE`, `github-manager.json`, rodapé no `index.html`, README e CHANGELOG em cada nova entrega. `VERSION_CODE` é um contador sequencial de entregas do site (`4` nesta versão), não um código Android. A identificação efetiva depende da versão instalada do GitHub Manager.
+Atualize **juntos** os arquivos `VERSION`, `VERSION_CODE`, `github-manager.json`, rodapé no `index.html`, README e CHANGELOG em cada nova entrega. `VERSION_CODE` é um contador sequencial de entregas do site (`5` nesta versão), não um código Android. A identificação efetiva depende da versão instalada do GitHub Manager.
 
 **Privacidade:** o e-mail e o telefone estão visíveis no HTML público do portal e também podem ser coletados por robôs da internet. Não foi implementado envio por servidor nem formulário que armazene dados.
 

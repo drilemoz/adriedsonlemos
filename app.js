@@ -10,23 +10,23 @@
   const API_BASE = 'https://api.github.com';
   const CACHE_TTL_MS = 15 * 60 * 1000;
   const KNOWN = [
-    { repo: 'Vigia-IA', name: 'Vigia IA', description: 'Monitoramento com IA local, câmeras IP e de celulares, mapas offline e navegação para cicloviagem. Integração com Minha Câmera.', categories: ['android'], kind: 'Android / IA', stack: ['Flutter', 'IA local', 'Mapas offline'], icon: '◎', featured: true },
-    { repo: 'Nexora', name: 'Nexora', description: 'Assistente de IA local no Android, executando modelos GGUF com llama.cpp, sem servidor de inferência.', categories: ['android'], kind: 'Android / IA offline', stack: ['Kotlin', 'GGUF', 'llama.cpp'], icon: '✧', featured: true },
-    { repo: 'Minha-Camera', name: 'Minha Câmera', description: 'Transforma um celular Android em câmera de rede local para outro aparelho, com transmissão MJPEG e H.264 experimental, mesmo sem internet.', categories: ['android', 'ferramentas'], kind: 'Android / Câmera', stack: ['Kotlin', 'Wi-Fi local', 'Vídeo'], icon: '◉', featured: true },
-    { repo: 'Explorador-XP', name: 'Explorador XP', description: 'Gerenciador de arquivos Android com multimídia, acesso WebDAV e SMB2/SMB3 e transferência pela rede local.', categories: ['android', 'ferramentas'], kind: 'Android / Arquivos', stack: ['Kotlin', 'SMB', 'WebDAV'], icon: '▦', featured: true },
-    { repo: 'GitHub-Manager', name: 'GitHub Manager', description: 'Ferramenta Android para administrar repositórios, versões, Actions, builds e downloads do GitHub.', categories: ['android', 'ferramentas'], kind: 'Android / DevTools', stack: ['Android', 'GitHub API', 'CI/CD'], icon: '⌘', featured: true },
-    { repo: 'Pulso', name: 'Pulso Bateria', description: 'Monitor de bateria Android com histórico de sessões, estimativas identificadas e laboratório para testes de energia solar e consumo.', categories: ['android', 'ferramentas'], kind: 'Android / Energia', stack: ['Kotlin', 'Compose', 'Room'], icon: '◍', featured: true },
-    { repo: 'UaiVozes', name: 'Uai Vozes', description: 'Conversão de texto em áudio com ElevenLabs no Android, biblioteca de áudios, seleção de vozes e leitura pelo sintetizador do sistema.', categories: ['android'], kind: 'Android / Áudio', stack: ['Flutter', 'ElevenLabs', 'TTS'], icon: '♫' },
-    { repo: 'BaixaFacil', name: 'Baixa Fácil', description: 'Navegador e gerenciador de downloads Android com detecção de vídeos, histórico, favoritos e diagnóstico local.', categories: ['android', 'ferramentas'], kind: 'Android / Downloads', stack: ['Java', 'WebView', 'Downloads'], icon: '↓' },
-    { repo: 'MeuGiga', name: 'MeuGiga', description: 'Acompanha o uso de dados móveis, franquia, alertas, consumo por aplicativo e consulta separada de Wi-Fi.', categories: ['android', 'ferramentas'], kind: 'Android / Internet', stack: ['Kotlin', 'Compose', 'Room'], icon: '▥' },
-    { repo: 'Meu-Vercel', name: 'Meu Vercel', description: 'Cliente Android para consultar e gerenciar projetos, deploys, domínios e configurações pela API da Vercel.', categories: ['android', 'ferramentas'], kind: 'Android / DevTools', stack: ['Flutter', 'Vercel API', 'Deploys'], icon: '△' },
-    { repo: 'MonitorRemoto', name: 'Monitor Remoto', description: 'Monitoramento e comandos autorizados entre celulares Android pareados, com telemetria, arquivos e localização pela rede.', categories: ['android', 'ferramentas'], kind: 'Android / Rede', stack: ['Kotlin', 'Rede local', 'Segurança'], icon: '⇄' },
-    { repo: 'Tatica-Manager', name: 'Tática Manager', description: 'Jogo de gerenciamento de futebol para Android, com partidas 2D, elenco, táticas e narração de eventos.', categories: ['android'], kind: 'Android / Jogo', stack: ['Flutter', 'Dart', 'Flame'], icon: '⚽' },
-    { repo: 'Lista-de-Compras', name: 'Lista de Compras', description: 'Organizador Android offline de compras, orçamentos, preços e listas com histórico e backup local.', categories: ['android'], kind: 'Android / Compras', stack: ['Kotlin', 'Material 3', 'Offline'], icon: '☷' },
-    { repo: 'eureciclo', name: 'Eu Reciclo', description: 'Calcula valores de materiais recicláveis, registra vendas, permite metas de compra e uso offline.', categories: ['android', 'web'], kind: 'Web / Android', stack: ['Vue', 'Vite', 'Capacitor'], icon: '♻' },
-    { repo: 'Termux-Manager', name: 'Termux Manager Android', description: 'Projeto experimental de integração do Termux com o Termux Manager em um APK Android de uso particular.', categories: ['android', 'ferramentas'], kind: 'Android / Termux', stack: ['Android', 'Termux', 'Integração'], icon: '▣' },
-    { repo: 'TermuxManager', name: 'Termux Manager', description: 'Gerenciador modular para importar, testar, executar e organizar projetos diretamente pelo terminal do Termux.', categories: ['ferramentas'], kind: 'Terminal / Ferramenta', stack: ['Termux', 'CLI', 'Automação'], icon: '>_' },
-    { repo: 'LoteriasFacil', name: 'Loterias Fácil', description: 'Aplicativo Android de acompanhamento de loterias, resultados, conferência e análise de combinações.', categories: ['android'], kind: 'Android / Dados', stack: ['Kotlin', 'Compose', 'SQLite'], icon: '◈' }
+    { repo: 'Vigia-IA', stage: 'Em evolução', name: 'Vigia IA', description: 'Monitoramento com IA local, câmeras IP e de celulares, mapas offline e navegação para cicloviagem. Integração com Minha Câmera.', categories: ['android'], kind: 'Android / IA', stack: ['Flutter', 'IA local', 'Mapas offline'], icon: '◎', featured: true },
+    { repo: 'Nexora', stage: 'Alfa', name: 'Nexora', description: 'Assistente de IA local no Android, executando modelos GGUF com llama.cpp, sem servidor de inferência.', categories: ['android'], kind: 'Android / IA offline', stack: ['Kotlin', 'GGUF', 'llama.cpp'], icon: '✧', featured: true },
+    { repo: 'Minha-Camera', stage: 'Em testes', name: 'Minha Câmera', description: 'Transforma um celular Android em câmera de rede local para outro aparelho, com transmissão MJPEG e H.264 experimental, mesmo sem internet.', categories: ['android', 'ferramentas'], kind: 'Android / Câmera', stack: ['Kotlin', 'Wi-Fi local', 'Vídeo'], icon: '◉', featured: true },
+    { repo: 'Explorador-XP', stage: 'Alfa', name: 'Explorador XP', description: 'Gerenciador de arquivos Android com multimídia, acesso WebDAV e SMB2/SMB3 e transferência pela rede local.', categories: ['android', 'ferramentas'], kind: 'Android / Arquivos', stack: ['Kotlin', 'SMB', 'WebDAV'], icon: '▦', featured: true },
+    { repo: 'GitHub-Manager', stage: 'Em evolução', name: 'GitHub Manager', description: 'Ferramenta Android para administrar repositórios, versões, Actions, builds e downloads do GitHub.', categories: ['android', 'ferramentas'], kind: 'Android / DevTools', stack: ['Android', 'GitHub API', 'CI/CD'], icon: '⌘', featured: true },
+    { repo: 'Pulso', stage: 'Alfa', name: 'Pulso Bateria', description: 'Monitor de bateria Android com histórico de sessões, estimativas identificadas e laboratório para testes de energia solar e consumo.', categories: ['android', 'ferramentas'], kind: 'Android / Energia', stack: ['Kotlin', 'Compose', 'Room'], icon: '◍', featured: true },
+    { repo: 'UaiVozes', stage: 'Alfa', name: 'Uai Vozes', description: 'Conversão de texto em áudio com ElevenLabs no Android, biblioteca de áudios, seleção de vozes e leitura pelo sintetizador do sistema.', categories: ['android'], kind: 'Android / Áudio', stack: ['Flutter', 'ElevenLabs', 'TTS'], icon: '♫' },
+    { repo: 'BaixaFacil', stage: 'Alfa', name: 'Baixa Fácil', description: 'Navegador e gerenciador de downloads Android com detecção de vídeos, histórico, favoritos e diagnóstico local.', categories: ['android', 'ferramentas'], kind: 'Android / Downloads', stack: ['Java', 'WebView', 'Downloads'], icon: '↓' },
+    { repo: 'MeuGiga', stage: 'Em testes', name: 'MeuGiga', description: 'Acompanha o uso de dados móveis, franquia, alertas, consumo por aplicativo e consulta separada de Wi-Fi.', categories: ['android', 'ferramentas'], kind: 'Android / Internet', stack: ['Kotlin', 'Compose', 'Room'], icon: '▥' },
+    { repo: 'Meu-Vercel', stage: 'Em testes', name: 'Meu Vercel', description: 'Cliente Android para consultar e gerenciar projetos, deploys, domínios e configurações pela API da Vercel.', categories: ['android', 'ferramentas'], kind: 'Android / DevTools', stack: ['Flutter', 'Vercel API', 'Deploys'], icon: '△' },
+    { repo: 'MonitorRemoto', stage: 'Alfa', name: 'Monitor Remoto', description: 'Monitoramento e comandos autorizados entre celulares Android pareados, com telemetria, arquivos e localização pela rede.', categories: ['android', 'ferramentas'], kind: 'Android / Rede', stack: ['Kotlin', 'Rede local', 'Segurança'], icon: '⇄' },
+    { repo: 'Tatica-Manager', stage: 'Em evolução', name: 'Tática Manager', description: 'Jogo de gerenciamento de futebol para Android, com partidas 2D, elenco, táticas e narração de eventos.', categories: ['android'], kind: 'Android / Jogo', stack: ['Flutter', 'Dart', 'Flame'], icon: '⚽' },
+    { repo: 'Lista-de-Compras', stage: 'Em evolução', name: 'Lista de Compras', description: 'Organizador Android offline de compras, orçamentos, preços e listas com histórico e backup local.', categories: ['android'], kind: 'Android / Compras', stack: ['Kotlin', 'Material 3', 'Offline'], icon: '☷' },
+    { repo: 'eureciclo', stage: 'Em evolução', name: 'Eu Reciclo', description: 'Calcula valores de materiais recicláveis, registra vendas, permite metas de compra e uso offline.', categories: ['android', 'web'], kind: 'Web / Android', stack: ['Vue', 'Vite', 'Capacitor'], icon: '♻' },
+    { repo: 'Termux-Manager', stage: 'Experimental', name: 'Termux Manager Android', description: 'Projeto experimental de integração do Termux com o Termux Manager em um APK Android de uso particular.', categories: ['android', 'ferramentas'], kind: 'Android / Termux', stack: ['Android', 'Termux', 'Integração'], icon: '▣' },
+    { repo: 'TermuxManager', stage: 'Estável', name: 'Termux Manager', description: 'Gerenciador modular para importar, testar, executar e organizar projetos diretamente pelo terminal do Termux.', categories: ['ferramentas'], kind: 'Terminal / Ferramenta', stack: ['Termux', 'CLI', 'Automação'], icon: '>_' },
+    { repo: 'LoteriasFacil', stage: 'Beta', name: 'Loterias Fácil', description: 'Aplicativo Android de acompanhamento de loterias, resultados, conferência e análise de combinações.', categories: ['android'], kind: 'Android / Dados', stack: ['Kotlin', 'Compose', 'SQLite'], icon: '◈' }
   ];
 
   let githubUser = INITIAL_GITHUB_USER;
@@ -96,7 +96,7 @@
       repo: item.name,
       name: item.name,
       description: item.description || 'Projeto de desenvolvimento disponível no meu GitHub.',
-      categories: [], kind: 'Código / Projeto', stack: item.language ? [item.language] : [], icon: '⌘', featured: false
+      categories: [], kind: 'Código / Projeto', stack: item.language ? [item.language] : [], icon: '⌘', stage: 'Projeto público', featured: false
     }, known || {}, { repo: item.name, archived: Boolean(item.archived) });
   }
 
@@ -105,6 +105,7 @@
     const link = card.querySelector('.project-link.release');
     const meta = card.querySelector('.project-meta');
     if (!link || !meta) return;
+    const versionBadge = card.querySelector('.project-version');
     const repo = card.dataset.repo;
     link.hidden = true;
     link.classList.remove('apk', 'artifact');
@@ -112,8 +113,18 @@
     link.removeAttribute('aria-label');
 
     if (release.error) {
+      if (versionBadge) versionBadge.textContent = 'Versão indisponível';
       meta.textContent = 'Não foi possível consultar os downloads no GitHub agora.';
       return;
+    }
+
+    if (versionBadge) {
+      // Tag do GitHub não é sinônimo de Release, e nome de Release não prova APK pronto.
+      versionBadge.textContent = release.version ? 'Release: ' + release.version
+        : release.tag ? 'Tag: ' + release.tag : 'Sem Release/tag pública';
+      versionBadge.title = release.version ? 'Identificador da Release pública mais recente'
+        : release.tag ? 'Tag pública mais recente; não indica uma Release disponível'
+          : 'Nenhuma versão foi localizada nas Releases/tags públicas';
     }
 
     if (release.apk) {
@@ -159,7 +170,7 @@
       return;
     }
 
-    meta.textContent = 'Ainda não há Releases públicas com download.';
+    meta.textContent = release.tag ? 'Tag pública encontrada · sem Release com download.' : 'Ainda não há Releases públicas com download.';
     if (card.dataset.android === 'true') {
       link.href = repoUrl(repo) + '/actions';
       link.textContent = 'Ver compilações ↗';
@@ -183,14 +194,37 @@
       card.dataset.repo = item.repo;
       card.dataset.title = item.name;
       card.dataset.android = String(item.categories.includes('android'));
+      // Capas conceituais locais não representam capturas reais da interface.
+      // Novos repositórios da API, ainda não catalogados, mostram o ícone original.
+      if (KNOWN.some(function (entry) { return entry.repo === item.repo; })) {
+        const artwork = element('figure', 'project-artwork');
+        const image = element('img', 'project-cover');
+        image.src = './assets/projects/' + encodeURIComponent(item.repo) + '.svg';
+        image.alt = 'Ilustração conceitual do projeto ' + item.name + '; não é uma captura do aplicativo';
+        image.width = 720;
+        image.height = 400;
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        artwork.append(image, element('figcaption', '', 'Arte ilustrativa'));
+        card.appendChild(artwork);
+      }
       const top = element('div', 'project-card-top');
-      top.append(element('span', 'project-icon', item.icon), element('span', 'project-kind', item.archived ? 'Arquivado' : item.kind));
+      const marker = element('div', 'project-markers');
+      marker.appendChild(element('span', 'project-kind', item.kind));
+      const stage = item.archived ? 'Arquivado' : (item.stage || 'Projeto público');
+      const statusBadge = element('span', 'project-stage', stage);
+      statusBadge.title = 'Etapa informativa; não é certificação de qualidade ou estabilidade do APK';
+      marker.appendChild(statusBadge);
+      top.append(element('span', 'project-icon', item.icon), marker);
       card.appendChild(top);
       card.appendChild(element('h3', '', item.name));
       card.appendChild(element('p', '', item.description));
       const tags = element('div', 'tech-tags');
       item.stack.slice(0, 3).forEach(function (tag) { tags.appendChild(element('span', '', tag)); });
       card.appendChild(tags);
+      const versionBadge = element('div', 'project-version', 'Versão: consulta sob demanda');
+      versionBadge.title = 'Releases e tags são consultadas via GitHub ao visualizar o projeto';
+      card.appendChild(versionBadge);
       card.appendChild(element('div', 'project-meta', 'Código e documentação no GitHub'));
       const links = element('div', 'project-links');
       links.appendChild(makeExternal(repoUrl(item.repo), 'Ver código ↗', 'project-link code'));
@@ -223,14 +257,14 @@
 
   function readCachedRelease(repo) {
     try {
-      const raw = sessionStorage.getItem('portfolio-v1.1-release:' + githubUser + '/' + repo);
+      const raw = sessionStorage.getItem('portfolio-v1.4-release:' + githubUser + '/' + repo);
       if (!raw) return null;
       const cached = JSON.parse(raw);
       return Date.now() - cached.time < CACHE_TTL_MS ? cached.release : null;
     } catch (error) { return null; }
   }
   function cacheRelease(repo, release) {
-    try { sessionStorage.setItem('portfolio-v1.1-release:' + githubUser + '/' + repo, JSON.stringify({ time: Date.now(), release: release })); } catch (error) { /* cache opcional */ }
+    try { sessionStorage.setItem('portfolio-v1.4-release:' + githubUser + '/' + repo, JSON.stringify({ time: Date.now(), release: release })); } catch (error) { /* cache opcional */ }
   }
   function validateDownload(asset, repo) {
     if (!asset || typeof asset.name !== 'string' || !/\.apk$/i.test(asset.name)) return null;
@@ -279,6 +313,16 @@
           if (result.length < 50) break;
         }
         const newest = releaseList[0] || null;
+        // Repositórios sem Release podem ter tags versionadas. Consultamos uma vez
+        // e identificamos claramente como TAG, nunca como Release nem APK.
+        let newestTag = '';
+        if (!newest) {
+          try {
+            const tags = await fetchJson(API_BASE + '/repos/' + encodeURIComponent(githubUser)
+              + '/' + encodeURIComponent(repo) + '/tags?per_page=1');
+            newestTag = Array.isArray(tags) && tags[0] && typeof tags[0].name === 'string' ? tags[0].name : '';
+          } catch (error) { /* Tags indisponíveis não invalidam os dados de Releases */ }
+        }
         const withApk = releaseList.find(function (entry) {
           return Array.isArray(entry.assets) && entry.assets.some(function (asset) {
             return validateDownload(asset, repo);
@@ -292,6 +336,7 @@
         const artifactRun = !apkAsset && android ? await findApkArtifact(repo) : null;
         const release = {
           version: newest && newest.tag_name ? newest.tag_name : '',
+          tag: newestTag,
           apkVersion: withApk && withApk.tag_name ? withApk.tag_name : '',
           pre: Boolean(withApk ? withApk.prerelease : newest && newest.prerelease),
           apk: apkAsset ? validateDownload(apkAsset, repo) : null,
@@ -310,7 +355,18 @@
 
   function observeReleases() {
     if (!('IntersectionObserver' in window)) {
-      Array.from(grid.children).slice(0, 8).forEach(function (card) { loadRelease(card.dataset.repo).then(function (value) { applyRelease(card, value); }); });
+      const cards = Array.from(grid.children);
+      // Navegadores antigos: todas as versões são consultáveis, com poucas
+      // requisições simultâneas para não sobrecarregar a API pública.
+      let cursor = 0;
+      async function worker() {
+        while (cursor < cards.length) {
+          const card = cards[cursor++];
+          const value = await loadRelease(card.dataset.repo);
+          if (card.isConnected) applyRelease(card, value);
+        }
+      }
+      for (let i = 0; i < Math.min(3, cards.length); i += 1) worker();
       return;
     }
     observer = new IntersectionObserver(function (entries) {

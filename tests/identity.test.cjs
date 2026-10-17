@@ -8,7 +8,7 @@ const version = fs.readFileSync(path.join(dir,'VERSION'),'utf8').trim();
 const code = Number(fs.readFileSync(path.join(dir,'VERSION_CODE'),'utf8').trim());
 const meta = JSON.parse(fs.readFileSync(path.join(dir,'github-manager.json'),'utf8'));
 assert.match(version,/^\d+\.\d+\.\d+$/);
-assert.equal(version,'1.3.0');
+assert.equal(version,'1.4.0');
 assert.equal(meta.version,version);
 assert.equal(meta.versionName,version);
 assert.equal(meta.build,code);

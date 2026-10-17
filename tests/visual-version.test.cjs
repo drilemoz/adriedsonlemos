@@ -1,0 +1,33 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const base = path.join(__dirname, '..');
+const code = fs.readFileSync(path.join(base,'app.js'),'utf8');
+const html = fs.readFileSync(path.join(base,'index.html'),'utf8');
+const css = fs.readFileSync(path.join(base,'styles.css'),'utf8');
+const catalog = code.replace('  let githubUser = INITIAL_GITHUB_USER;', '  globalThis.__known = KNOWN; return;\n  let githubUser = INITIAL_GITHUB_USER;');
+const ctx = {globalThis:null};ctx.globalThis = ctx;
+vm.createContext(ctx);vm.runInContext(catalog, ctx);
+const allowed = new Set(['Alfa','Beta','Em testes','Em evolução','Experimental','Estável']);
+for (const p of ctx.__known) {
+  assert.ok(allowed.has(p.stage),`Estágio conservador para ${p.repo}`);
+  const cover = path.join(base,'assets/projects',p.repo+'.svg');
+  const image = fs.readFileSync(cover,'utf8');
+  assert.match(image,/<svg\b/);
+  assert.match(image,/não é uma captura/i);
+  assert.ok(Buffer.byteLength(image)<6000,'Capa leve');
+}
+assert.equal(fs.readdirSync(path.join(base,'assets/projects')).filter(n=>n.endsWith('.svg')).length,17);
+assert.match(code,/loading = 'lazy'/);
+assert.match(code,/Ilustração conceitual do projeto/);
+assert.match(code,/Tag: /);
+assert.match(code,/Release: /);
+assert.match(code,/\/tags\?per_page=1/);
+assert.match(css,/\.project-artwork/);
+assert.match(html,/og:image[^>]*og-image\.png/);
+assert.match(html,/Versão do portal\s*<strong>v1\.4\.0<\/strong>/);
+assert.ok(fs.statSync(path.join(base,'og-image.png')).size>10000);
+assert.match(fs.readFileSync(path.join(base,'robots.txt'),'utf8'),/sitemap\.xml/);
+assert.match(fs.readFileSync(path.join(base,'sitemap.xml'),'utf8'),/urlset/);
+console.log('Capas, estágios, versões distintas, SEO e acessibilidade validados.');

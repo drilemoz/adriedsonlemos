@@ -1,5 +1,14 @@
 # Histórico do portfólio
 
+## 1.4.0 — 17/10/2026
+
+- Adicionadas capas SVG conceituais, locais e acessíveis aos 17 projetos, com indicação de que não são capturas reais.
+- Indicadores editoriais de estágio do desenvolvimento e selos dinâmicos de Release ou tag pública, sem confundir tag com APK disponível.
+- Corrigida consulta de versões nos navegadores sem IntersectionObserver.
+- Novos metadados de compartilhamento/SEO com imagem PNG, dados estruturados, robots e sitemap; domínio declarado requer verificação após publicar.
+- Metadados, documentação e testes atualizados. Versão 1.4.0, code 5.
+
+
 ## 1.3.0 — 17/10/2026
 
 - Catálogo local sincronizado com 17 repositórios públicos, excluindo o repositório do portfólio.

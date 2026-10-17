@@ -281,3 +281,15 @@ html[data-theme="dark"] .art-back { background: linear-gradient(145deg,#122f57,#
   html { scroll-behavior: auto; }
   *,*::before,*::after { transition-duration: .001ms !important; animation-duration: .001ms !important; }
 }
+
+/* v1.4.0: imagens ilustrativas locais, versão e estágio. */
+.project-artwork { margin: -9px -9px 19px; position: relative; overflow: hidden; border-radius: 13px; background: var(--surface-2); aspect-ratio: 9 / 5; border: 1px solid var(--line); }
+.project-cover { display: block; width: 100%; height: 100%; object-fit: cover; }
+.project-artwork figcaption { position: absolute; right: 9px; bottom: 8px; background: rgba(9, 20, 39, .84); color: #f3f8ff; border: 1px solid rgba(255,255,255,.12); border-radius: 6px; padding: 2px 8px; font-size: .57rem; font-weight: 750; letter-spacing: .045em; }
+.project-card-top { align-items: center; margin-bottom: 15px; }
+.project-markers { display: flex; flex-wrap: wrap; gap: 6px; justify-content: flex-end; min-width: 0; }
+.project-kind { white-space: normal; text-align: right; }
+.project-stage { color: var(--teal); border: 1px solid color-mix(in srgb, var(--teal) 50%, var(--line)); border-radius: 100px; padding: 4px 9px; font-size: .67rem; font-weight: 770; line-height: 1.4; }
+.project-version { align-self: flex-start; border-radius: 7px; background: var(--tag); border: 1px solid var(--line); color: var(--blue); font-size: .72rem; font-weight: 740; padding: 4px 9px; margin-bottom: 12px; max-width: 100%; overflow-wrap: anywhere; }
+.project-card .project-artwork + .project-card-top .project-icon { width: 39px; height: 39px; font-size: 1.3rem; }
+@media(max-width:550px) { .project-artwork { margin: -7px -7px 17px; } .project-stage,.project-kind { font-size: .64rem; } }
