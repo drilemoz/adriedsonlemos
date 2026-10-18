@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Adriedson Lemos: experiência em suporte e infraestrutura de TI, desenvolvimento Android, inteligência artificial local e projetos próprios.">
+  <meta name="description" content="Portfólio de Adriedson Lemos: experiência em TI e estudos técnicos de Vigia IA, Nexora, Pulso Bateria e Minha Câmera, com código e validações documentadas.">
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light dark">
   <meta name="application-name" content="Adriedson Lemos | Portfólio">
-  <meta name="application-version" content="1.5.0">
+  <meta name="application-version" content="1.6.0">
   <link rel="canonical" href="https://adriedsonlemos.vercel.app/">
   <meta property="og:url" content="https://adriedsonlemos.vercel.app/">
   <meta property="og:image" content="https://adriedsonlemos.vercel.app/og-image.png">
@@ -31,7 +31,7 @@
     <div class="container header-inner">
       <a class="brand" href="#inicio" aria-label="Adriedson Lemos, início"><span class="brand-logo">AL<span>.</span></span><span>adriedson<strong>lemos</strong></span></a>
       <nav id="nav" class="nav" aria-label="Navegação principal">
-        <a href="#sobre">Sobre</a><a href="#experiencia">Experiência</a><a href="#habilidades">Habilidades</a><a href="#projetos">Projetos</a><a href="#contato">Contato</a>
+        <a href="#sobre">Sobre</a><a href="#experiencia">Experiência</a><a href="#habilidades">Habilidades</a><a href="#destaques">Destaques</a><a href="#projetos">Projetos</a><a href="#contato">Contato</a>
       </nav>
       <div class="header-actions">
         <button id="theme-toggle" class="icon-btn theme-toggle" type="button" aria-label="Ativar modo escuro"><span class="theme-icon" aria-hidden="true">☾</span><span>Tema</span></button>
@@ -46,7 +46,7 @@
           <p class="eyebrow"><span class="live-dot"></span> Tecnologia, criação e aprendizado contínuo</p>
           <h1>Do código à vida real. <span class="gradient-text">Ideias que ganham forma.</span></h1>
           <p class="lead">Sou <strong>Adriedson Lemos</strong>. Tenho experiência em suporte e infraestrutura de TI e desenvolvo aplicativos Android e ferramentas próprias. Uno a prática de resolver problemas à curiosidade por IA local, eletrônica e automação.</p>
-          <div class="hero-actions"><a class="btn btn-primary" href="#projetos">Explorar projetos <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="./assets/docs/curriculo-adriedson-lemos.pdf" download="Curriculo-Adriedson-Lemos.pdf">Baixar currículo <span aria-hidden="true">↓</span></a></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#destaques">Ver projetos em destaque <span aria-hidden="true">↗</span></a><a class="btn btn-outline" href="./assets/docs/curriculo-adriedson-lemos.pdf" download="Curriculo-Adriedson-Lemos.pdf">Baixar currículo <span aria-hidden="true">↓</span></a></div>
           <p class="hero-profile-link"><a data-profile href="https://github.com/drilemoz" target="_blank" rel="noopener noreferrer">Ver repositórios no GitHub ↗</a></p>
           <div class="hero-tags"><span>Android</span><span>ESP32 &amp; sensores</span><span>IA local</span><span>Mapas offline</span><span>Energia solar</span></div>
         </div>
@@ -129,10 +129,101 @@
       </div>
     </section>
 
+    <section class="section showcase-section" id="destaques" aria-labelledby="destaques-title">
+      <div class="container">
+        <div class="showcase-heading">
+          <div><p class="kicker">PROJETOS EM PROFUNDIDADE</p><h2 id="destaques-title">Quatro projetos. <span class="muted">Decisões técnicas reais.</span></h2></div>
+          <p class="section-lead">O problema, a solução implementada e a diferença entre verificações de código e testes em aparelhos. Os outros projetos continuam no catálogo completo.</p>
+        </div>
+        <nav class="showcase-index" aria-label="Navegar entre estudos técnicos">
+          <a href="#estudo-vigia-ia">01 · Vigia IA</a><a href="#estudo-nexora">02 · Nexora</a><a href="#estudo-pulso-bateria">03 · Pulso Bateria</a><a href="#estudo-minha-camera">04 · Minha Câmera</a>
+        </nav>
+        <div class="showcase-grid">
+<article class="showcase-card" id="estudo-vigia-ia" aria-labelledby="titulo-vigia-ia">
+        <div class="showcase-cover">
+          <img src="./assets/projects/Vigia-IA.svg" alt="Capa conceitual de Vigia IA; não é captura da interface" loading="eager" width="720" height="400" decoding="async">
+          <span class="showcase-caption">Arte conceitual · não é captura de tela</span>
+        </div>
+        <div class="showcase-body">
+          <div class="showcase-overline"><span>01 / MONITORAMENTO E NAVEGAÇÃO</span><span class="showcase-stage">Em evolução · transmissão nativa experimental</span></div>
+          <h3 id="titulo-vigia-ia">Vigia IA</h3>
+          <p class="showcase-summary">Câmeras, inferência no aparelho e navegação em um aplicativo modular.</p>
+          <dl class="showcase-facts">
+            <div><dt>O desafio</dt><dd>Conciliar câmera local/remota, análise de objetos, mapas offline e consumo de bateria para cenários móveis.</dd></div>
+            <div><dt>Como foi abordado</dt><dd>Aplicativo Flutter com fontes locais e MJPEG/RTSP; detecção no receptor e integração MCRP com Minha Câmera. O transmissor Kotlin integrado foi introduzido experimentalmente na série 1.0.273.</dd></div>
+          </dl>
+          <div class="showcase-flow"><span class="showcase-flow-label">FLUXO TÉCNICO SIMPLIFICADO</span><ol><li>Fonte de câmera</li><li>Monitor Flutter</li><li>IA no receptor</li><li>Eventos / mapa</li></ol></div>
+          <div class="showcase-evidence"><strong>O que está validado e o que falta</strong><p>O projeto registra diagnósticos de IA e etapas do pipeline. A transmissão Kotlin da série 1.0.275 ainda depende de compilação Android e teste físico no Redmi A3; não há promessa de FPS ou autonomia.</p></div>
+          <div class="showcase-stack" aria-label="Tecnologias documentadas"><span>Flutter</span><span>Kotlin</span><span>LiteRT</span><span>MCRP</span><span>Mapas offline</span></div>
+          <div class="showcase-links"><a href="https://github.com/drilemoz/Vigia-IA" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a><a href="https://github.com/drilemoz/Vigia-IA/blob/main/README.md" target="_blank" rel="noopener noreferrer">Versões e ressalvas ↗</a></div>
+        </div>
+      </article>
+<article class="showcase-card" id="estudo-nexora" aria-labelledby="titulo-nexora">
+        <div class="showcase-cover">
+          <img src="./assets/projects/Nexora.svg" alt="Capa conceitual do Nexora; não é captura da interface" loading="eager" width="720" height="400" decoding="async">
+          <span class="showcase-caption">Arte conceitual · não é captura de tela</span>
+        </div>
+        <div class="showcase-body">
+          <div class="showcase-overline"><span>02 / IA LOCAL NO ANDROID</span><span class="showcase-stage">Alfa · desempenho sob investigação</span></div>
+          <h3 id="titulo-nexora">Nexora</h3>
+          <p class="showcase-summary">Inferência GGUF sem servidor, com diagnósticos de memória e geração.</p>
+          <dl class="showcase-facts">
+            <div><dt>O desafio</dt><dd>Executar modelos de linguagem em smartphones com limites de RAM, temperatura e capacidade de processamento.</dd></div>
+            <div><dt>Como foi abordado</dt><dd>Kotlin e JNI com llama.cpp, modelos GGUF gerenciados no aparelho, perfis de inferência, métricas de tokens e monitoramento de RAM/PSS e estado térmico.</dd></div>
+          </dl>
+          <div class="showcase-flow"><span class="showcase-flow-label">FLUXO TÉCNICO SIMPLIFICADO</span><ol><li>GGUF local</li><li>JNI / llama.cpp</li><li>Tokens e métricas</li><li>Resposta na interface</li></ol></div>
+          <div class="showcase-evidence"><strong>O que está validado e o que falta</strong><p>A documentação descreve melhorias no streaming e isolamento do estado de conversa. Ganhos recentes de CPU, bateria ou tokens/s não foram demonstrados por benchmark comparativo; mudanças JNI exigem teste real.</p></div>
+          <div class="showcase-stack" aria-label="Tecnologias documentadas"><span>Kotlin</span><span>JNI</span><span>llama.cpp</span><span>GGUF</span><span>SQLite</span></div>
+          <div class="showcase-links"><a href="https://github.com/drilemoz/Nexora" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a><a href="https://github.com/drilemoz/Nexora/blob/main/README.md" target="_blank" rel="noopener noreferrer">Arquitetura e limitações ↗</a></div>
+        </div>
+      </article>
+<article class="showcase-card" id="estudo-pulso-bateria" aria-labelledby="titulo-pulso-bateria">
+        <div class="showcase-cover">
+          <img src="./assets/projects/Pulso.svg" alt="Capa conceitual do Pulso Bateria; não é captura da interface" loading="eager" width="720" height="400" decoding="async">
+          <span class="showcase-caption">Arte conceitual · não é captura de tela</span>
+        </div>
+        <div class="showcase-body">
+          <div class="showcase-overline"><span>03 / ENERGIA E MEDIÇÃO</span><span class="showcase-stage">Alfa · testes Android pendentes</span></div>
+          <h3 id="titulo-pulso-bateria">Pulso Bateria</h3>
+          <p class="showcase-summary">Leituras oficiais, histórico e experimentos de carga e consumo.</p>
+          <dl class="showcase-facts">
+            <div><dt>O desafio</dt><dd>Separar corrente medida, estimativas e ausência de leitura ao avaliar bateria e fontes de energia solar.</dd></div>
+            <div><dt>Como foi abordado</dt><dd>BatteryManager como fonte prioritária, histórico Room e Labs para ensaios de carga/consumo. A API local AIDL exige autorização explícita por aplicativo e verificação de identidade.</dd></div>
+          </dl>
+          <div class="showcase-flow"><span class="showcase-flow-label">FLUXO TÉCNICO SIMPLIFICADO</span><ol><li>BatteryManager</li><li>Room / sessões</li><li>Labs</li><li>Relatório identificado</li></ol></div>
+          <div class="showcase-evidence"><strong>O que está validado e o que falta</strong><p>Na alpha.36 foram documentadas 26 verificações estáticas e 16 invariantes Kotlin/JVM aprovados em 17/10/2026. A compilação Android foi bloqueada pela obtenção do Gradle; testes entre aplicativos continuam pendentes.</p></div>
+          <div class="showcase-stack" aria-label="Tecnologias documentadas"><span>Kotlin</span><span>Compose</span><span>BatteryManager</span><span>Room</span><span>AIDL</span></div>
+          <div class="showcase-links"><a href="https://github.com/drilemoz/Pulso" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a><a href="https://github.com/drilemoz/Pulso/blob/main/docs/VALIDATION.md" target="_blank" rel="noopener noreferrer">Relatório de validação ↗</a></div>
+        </div>
+      </article>
+<article class="showcase-card" id="estudo-minha-camera" aria-labelledby="titulo-minha-camera">
+        <div class="showcase-cover">
+          <img src="./assets/projects/Minha-Camera.svg" alt="Capa conceitual de Minha Câmera; não é captura da interface" loading="eager" width="720" height="400" decoding="async">
+          <span class="showcase-caption">Arte conceitual · não é captura de tela</span>
+        </div>
+        <div class="showcase-body">
+          <div class="showcase-overline"><span>04 / VÍDEO PELA REDE LOCAL</span><span class="showcase-stage">Em testes · H.264 experimental</span></div>
+          <h3 id="titulo-minha-camera">Minha Câmera</h3>
+          <p class="showcase-summary">Um celular funciona como câmera e o outro recebe vídeo sem nuvem.</p>
+          <dl class="showcase-facts">
+            <div><dt>O desafio</dt><dd>Reaproveitar um Android como câmera remota, inclusive com tela apagada, e reduzir latência e consumo de energia.</dd></div>
+            <div><dt>Como foi abordado</dt><dd>Transmissão MJPEG em Wi-Fi local com pareamento e comandos autenticados. Controles de gravação, foto, zoom e lanterna são condicionados à capacidade do transmissor. H.264 continua experimental.</dd></div>
+          </dl>
+          <div class="showcase-flow"><span class="showcase-flow-label">FLUXO TÉCNICO SIMPLIFICADO</span><ol><li>Câmera Android</li><li>Wi-Fi local / token</li><li>Fluxo MJPEG</li><li>Receptor / gravação</li></ol></div>
+          <div class="showcase-evidence"><strong>O que está validado e o que falta</strong><p>O README registra paradas de quadros MJPEG e falhas H.264 no Redmi A3. As correções mais recentes precisam de build completo e ensaio físico; metas de FPS não equivalem a FPS observados.</p></div>
+          <div class="showcase-stack" aria-label="Tecnologias documentadas"><span>Kotlin</span><span>Camera API</span><span>MJPEG</span><span>Wi-Fi local</span><span>MCRP</span></div>
+          <div class="showcase-links"><a href="https://github.com/drilemoz/Minha-Camera" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a><a href="https://github.com/drilemoz/Minha-Camera/blob/main/docs/VALIDACAO_1_4_74.md" target="_blank" rel="noopener noreferrer">Análise de FPS e limitações ↗</a></div>
+        </div>
+      </article>
+        </div>
+        <p class="showcase-note">Os diagramas são fluxos explicativos simplificados, não medições de desempenho. As capas são ilustrativas. Os relatos e limites técnicos citados podem mudar a cada versão do código. Para o estado mais recente, consulte a documentação dos respectivos repositórios.</p>
+      </div>
+    </section>
+
     <section id="projetos" class="section projects-section">
       <div class="container">
         <div class="projects-head">
-          <div><p class="kicker">PORTFÓLIO</p><h2>Projetos que saíram <span class="muted">do papel.</span></h2><p class="section-lead">Aplicativos, ferramentas e experimentos publicados no meu GitHub. O desenvolvimento continua, versão após versão. As capas são ilustrações, não capturas reais dos aplicativos.</p></div>
+          <div><p class="kicker">PORTFÓLIO</p><h2>Projetos que saíram <span class="muted">do papel.</span></h2><p class="section-lead">Catálogo completo com 17 projetos públicos, incluindo os quatro estudos técnicos acima. As capas são ilustrações, não capturas reais das interfaces.</p></div>
           <div class="projects-count"><strong id="total">...</strong><span>projetos<br>apresentados</span></div>
         </div>
         <div class="controls">
@@ -190,7 +281,7 @@
       <a href="#inicio" class="footer-brand" aria-label="Voltar ao início">AL<span>.</span></a>
       <div class="footer-details">
         <p>© <span id="year"></span> Adriedson Lemos. HTML, CSS, JavaScript e curiosidade.</p>
-        <p class="footer-version">Versão do portal <strong>v1.5.0</strong> <span aria-hidden="true">·</span> <a href="https://github.com/drilemoz/adriedsonlemos/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Histórico de alterações ↗</a></p>
+        <p class="footer-version">Versão do portal <strong>v1.6.0</strong> <span aria-hidden="true">·</span> <a href="https://github.com/drilemoz/adriedsonlemos/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Histórico de alterações ↗</a></p>
       </div>
       <a href="#inicio" class="back-to-top">Voltar ao topo ↑</a>
     </div>

@@ -1,0 +1,35 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const vm = require('node:vm');
+const root=path.join(__dirname,'..');
+const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+const js=fs.readFileSync(path.join(root,'app.js'),'utf8');
+const css=fs.readFileSync(path.join(root,'styles.css'),'utf8');
+const repos=['Vigia-IA','Nexora','Pulso','Minha-Camera'];
+const targets=['vigia-ia','nexora','pulso-bateria','minha-camera'];
+assert.equal((html.match(/class="showcase-card"/g)||[]).length,4);
+for(const [i,slug] of targets.entries()) {
+ assert.match(html,new RegExp('id="estudo-'+slug+'"'));
+ assert.match(html,new RegExp('href="#estudo-'+slug+'"'));
+ assert.match(html,new RegExp('https://github\.com/drilemoz/'+repos[i]));
+ assert.match(html,new RegExp('assets/projects/'+repos[i]+'\.svg'));
+}
+assert.match(html,/fluxo técnico simplificado/i);
+assert.match(html,/não é captura de tela/i);
+assert.match(html,/26 verificações estáticas/i);
+assert.match(html,/16 invariantes Kotlin\/JVM/i);
+assert.match(html,/compilação Android foi bloqueada/i);
+assert.match(html,/Ganhos recentes de CPU, bateria ou tokens\/s não foram demonstrados/i);
+assert.match(html,/H\.264 continua experimental/i);
+assert.match(html,/class="showcase-note"/);
+assert.match(css,/\.showcase-grid/);
+assert.match(css,/@media\(max-width:550px\)/);
+const body=js.replace('  let githubUser = INITIAL_GITHUB_USER;', '  globalThis.__known = KNOWN; return;\n  let githubUser = INITIAL_GITHUB_USER;');
+const ctx={};ctx.globalThis=ctx;vm.createContext(ctx);vm.runInContext(body,ctx);
+const featured=ctx.__known.filter(i=>i.featured).map(i=>i.repo).sort();
+assert.deepEqual(Array.from(featured, String),repos.slice().sort());
+assert.equal(ctx.__known.length,17);
+assert.match(js,/Análise técnica ↗/);
+assert.doesNotMatch(html,/visão monocular|CID H54|href="tel:/i);
+console.log('Quatro estudos, fontes, ressalvas, navegação, 17 projetos e privacidade validados.');

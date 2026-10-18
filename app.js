@@ -13,8 +13,8 @@
     { repo: 'Vigia-IA', stage: 'Em evolução', name: 'Vigia IA', description: 'Monitoramento com IA local, câmeras IP e de celulares, mapas offline e navegação para cicloviagem. Integração com Minha Câmera.', categories: ['android'], kind: 'Android / IA', stack: ['Flutter', 'IA local', 'Mapas offline'], icon: '◎', featured: true },
     { repo: 'Nexora', stage: 'Alfa', name: 'Nexora', description: 'Assistente de IA local no Android, executando modelos GGUF com llama.cpp, sem servidor de inferência.', categories: ['android'], kind: 'Android / IA offline', stack: ['Kotlin', 'GGUF', 'llama.cpp'], icon: '✧', featured: true },
     { repo: 'Minha-Camera', stage: 'Em testes', name: 'Minha Câmera', description: 'Transforma um celular Android em câmera de rede local para outro aparelho, com transmissão MJPEG e H.264 experimental, mesmo sem internet.', categories: ['android', 'ferramentas'], kind: 'Android / Câmera', stack: ['Kotlin', 'Wi-Fi local', 'Vídeo'], icon: '◉', featured: true },
-    { repo: 'Explorador-XP', stage: 'Alfa', name: 'Explorador XP', description: 'Gerenciador de arquivos Android com multimídia, acesso WebDAV e SMB2/SMB3 e transferência pela rede local.', categories: ['android', 'ferramentas'], kind: 'Android / Arquivos', stack: ['Kotlin', 'SMB', 'WebDAV'], icon: '▦', featured: true },
-    { repo: 'GitHub-Manager', stage: 'Em evolução', name: 'GitHub Manager', description: 'Ferramenta Android para administrar repositórios, versões, Actions, builds e downloads do GitHub.', categories: ['android', 'ferramentas'], kind: 'Android / DevTools', stack: ['Android', 'GitHub API', 'CI/CD'], icon: '⌘', featured: true },
+    { repo: 'Explorador-XP', stage: 'Alfa', name: 'Explorador XP', description: 'Gerenciador de arquivos Android com multimídia, acesso WebDAV e SMB2/SMB3 e transferência pela rede local.', categories: ['android', 'ferramentas'], kind: 'Android / Arquivos', stack: ['Kotlin', 'SMB', 'WebDAV'], icon: '▦' },
+    { repo: 'GitHub-Manager', stage: 'Em evolução', name: 'GitHub Manager', description: 'Ferramenta Android para administrar repositórios, versões, Actions, builds e downloads do GitHub.', categories: ['android', 'ferramentas'], kind: 'Android / DevTools', stack: ['Android', 'GitHub API', 'CI/CD'], icon: '⌘' },
     { repo: 'Pulso', stage: 'Alfa', name: 'Pulso Bateria', description: 'Monitor de bateria Android com histórico de sessões, estimativas identificadas e laboratório para testes de energia solar e consumo.', categories: ['android', 'ferramentas'], kind: 'Android / Energia', stack: ['Kotlin', 'Compose', 'Room'], icon: '◍', featured: true },
     { repo: 'UaiVozes', stage: 'Alfa', name: 'Uai Vozes', description: 'Conversão de texto em áudio com ElevenLabs no Android, biblioteca de áudios, seleção de vozes e leitura pelo sintetizador do sistema.', categories: ['android'], kind: 'Android / Áudio', stack: ['Flutter', 'ElevenLabs', 'TTS'], icon: '♫' },
     { repo: 'BaixaFacil', stage: 'Alfa', name: 'Baixa Fácil', description: 'Navegador e gerenciador de downloads Android com detecção de vídeos, histórico, favoritos e diagnóstico local.', categories: ['android', 'ferramentas'], kind: 'Android / Downloads', stack: ['Java', 'WebView', 'Downloads'], icon: '↓' },
@@ -228,6 +228,13 @@
       card.appendChild(element('div', 'project-meta', 'Código e documentação no GitHub'));
       const links = element('div', 'project-links');
       links.appendChild(makeExternal(repoUrl(item.repo), 'Ver código ↗', 'project-link code'));
+      const studies = { 'Vigia-IA': 'vigia-ia', 'Nexora': 'nexora', 'Pulso': 'pulso-bateria', 'Minha-Camera': 'minha-camera' };
+      if (Object.prototype.hasOwnProperty.call(studies, item.repo)) {
+        const caseLink = element('a', 'project-link study', 'Análise técnica ↗');
+        caseLink.href = '#estudo-' + studies[item.repo];
+        caseLink.setAttribute('aria-label', 'Ler análise técnica de ' + item.name);
+        links.appendChild(caseLink);
+      }
       const releaseLink = makeExternal(repoUrl(item.repo) + '/releases', 'Consultando versões...', 'project-link release');
       releaseLink.hidden = true;
       links.appendChild(releaseLink);
@@ -257,14 +264,14 @@
 
   function readCachedRelease(repo) {
     try {
-      const raw = sessionStorage.getItem('portfolio-v1.5-release:' + githubUser + '/' + repo);
+      const raw = sessionStorage.getItem('portfolio-v1.6-release:' + githubUser + '/' + repo);
       if (!raw) return null;
       const cached = JSON.parse(raw);
       return Date.now() - cached.time < CACHE_TTL_MS ? cached.release : null;
     } catch (error) { return null; }
   }
   function cacheRelease(repo, release) {
-    try { sessionStorage.setItem('portfolio-v1.5-release:' + githubUser + '/' + repo, JSON.stringify({ time: Date.now(), release: release })); } catch (error) { /* cache opcional */ }
+    try { sessionStorage.setItem('portfolio-v1.6-release:' + githubUser + '/' + repo, JSON.stringify({ time: Date.now(), release: release })); } catch (error) { /* cache opcional */ }
   }
   function validateDownload(asset, repo) {
     if (!asset || typeof asset.name !== 'string' || !/\.apk$/i.test(asset.name)) return null;

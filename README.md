@@ -1,4 +1,4 @@
-# Adriedson Lemos | Portfólio pessoal v1.5.0
+# Adriedson Lemos | Portfólio pessoal v1.6.0
 
 Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a trajetória de Adriedson Lemos e seus projetos públicos do GitHub.
 
@@ -6,7 +6,7 @@ Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a traj
 
 - **Tema claro por padrão**: fundo branco. Botão para alternar para tema escuro com fundo quase preto (`#08090c`); escolha fica salva no navegador.
 - Layout responsivo para celular, tablet e desktop.
-- Seções: apresentação, sobre mim, experiência profissional, habilidades, projetos, jornada e contato profissional por e-mail, LinkedIn e GitHub.
+- Seções: apresentação, sobre mim, experiência profissional, habilidades, quatro estudos técnicos em destaque, catálogo completo, jornada e contato profissional por e-mail, LinkedIn e GitHub.
 - Catálogo inicial com os 17 projetos públicos identificados em 17/10/2026, renderizado mesmo sem acesso à API do GitHub. A consulta online pode descobrir projetos novos depois dessa data.
 - Consulta opcional à API pública do GitHub para listar os repositórios públicos (sem tokens).
 - Busca e filtros por tipo de projeto.
@@ -25,7 +25,7 @@ Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a traj
 - `vercel.json`: cabeçalhos de segurança para Vercel.
 - `VERSION`, `VERSION_CODE` e `github-manager.json`: metadados explícitos de versão e identidade para importação do site no GitHub Manager. Não é APK e não usa identificador Android.
 - `CHANGELOG.md`: histórico de evolução mostrado no rodapé do site.
-- `tests/portfolio.test.cjs` e `tests/visual-version.test.cjs`: testes automatizados de links APK, Releases vazias e Artifacts do Actions, executados com Node.js, sem dependências externas.
+- `tests/*.test.cjs`: sete grupos de testes automatizados para catálogo, privacidade, versão, estudos técnicos, links APK, Releases e Artifacts, executados com Node.js, sem dependências externas.
 
 Para testar a lógica de downloads:
 
@@ -72,6 +72,15 @@ O código tenta descobrir automaticamente o nome atual a partir da URL do reposi
 
 O site não armazena APKs, não usa credenciais nem cria links de download temporário ou fictícios. Por depender de APIs públicas, a seção de downloads pode sofrer com limites de taxa, erros de rede e expiração dos Artifacts. As consultas de cada projeto são feitas conforme os cartões aparecem e ficam em cache por aba por 15 minutos.
 
+## Atualização 1.6.0 (17/10/2026)
+
+- Quatro estudos técnicos antes do catálogo de 17 projetos: Vigia IA, Nexora, Pulso Bateria e Minha Câmera. Cada estudo mostra desafio, implementação, fluxo conceitual, tecnologias e estágio de validação, com acesso a README/documentação do projeto.
+- As quatro vitrines têm ilustrações SVG locais identificadas como conceituais; nenhuma captura real foi obtida ou simulada. Não foram fabricados resultados de benchmarking de CPU, memória, FPS ou bateria.
+- Destaque especial às limitações: transmissão Kotlin do Vigia IA ainda experimental, ganhos do Nexora não quantificados, no Pulso Bateria a validação alpha.36 inclui testes estáticos e Kotlin/JVM mas não build Android, e Minha Câmera ainda investiga instabilidades em MJPEG/H.264.
+- Navegação principal ganhou **Destaques** e os quatro cartões correspondentes têm **Análise técnica**. Todos os 17 projetos são preservados no catálogo completo.
+- Página estática sem JavaScript de terceiros; continuam os links às fontes públicas e a API GitHub já existente. Nenhum backend ou integração adicional.
+- `VERSION` 1.6.0, `VERSION_CODE` 7 e metadados sincronizados. Pendente: publicação na hospedagem e confirmação da URL canônica.
+
 ## Atualização 1.5.0 (17/10/2026)
 
 - Apresentação reforçada com experiência em suporte e infraestrutura de TI, sem confundir empregos anteriores e projetos atuais.
@@ -110,9 +119,9 @@ O site não armazena APKs, não usa credenciais nem cria links de download tempo
 
 ### Versionamento do portal
 
-Atualize **juntos** os arquivos `VERSION`, `VERSION_CODE`, `github-manager.json`, rodapé no `index.html`, README e CHANGELOG em cada nova entrega. `VERSION_CODE` é um contador sequencial de entregas do site (`6` nesta versão), não um código Android. A identificação efetiva depende da versão instalada do GitHub Manager.
+Atualize **juntos** os arquivos `VERSION`, `VERSION_CODE`, `github-manager.json`, rodapé no `index.html`, README e CHANGELOG em cada nova entrega. `VERSION_CODE` é um contador sequencial de entregas do site (`7` nesta versão), não um código Android. A identificação efetiva depende da versão instalada do GitHub Manager.
 
-**Privacidade atual (v1.5.0):** somente o e-mail profissional e os links de GitHub/LinkedIn aparecem no contato. O telefone da versão antiga foi removido. Não há analytics nem formulário com armazenamento; o e-mail visível ainda pode ser coletado por robôs.
+**Privacidade atual (v1.6.0):** somente o e-mail profissional e os links de GitHub/LinkedIn aparecem no contato. O telefone da versão antiga foi removido. Não há analytics nem formulário com armazenamento; o e-mail visível ainda pode ser coletado por robôs.
 
 ## Atualização 1.1.0
 

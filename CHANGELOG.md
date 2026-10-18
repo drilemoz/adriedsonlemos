@@ -1,5 +1,15 @@
 # Histórico de alterações
 
+## v1.6.0 · 17/10/2026
+
+- Criada vitrine técnica com quatro estudos em profundidade: Vigia IA, Nexora, Pulso Bateria e Minha Câmera.
+- Cada estudo identifica desafio, abordagem tecnológica, fluxo simplificado, tecnologias, estado de verificação e ressalvas específicas documentadas, com links diretos ao código e às evidências públicas.
+- Diferencia explicitamente testes estáticos/Kotlin-JVM de build Android e testes físicos; não apresenta metas de FPS, ganhos de desempenho ou autonomia como resultados medidos.
+- Acrescentada navegação por projetos em destaque, links do catálogo para os quatro estudos e preservadas as capas conceituais, com aviso de que não são capturas reais.
+- Mantidos todos os 17 projetos, o currículo profissional, o tema, os filtros, os downloads e o tratamento de dados pessoais da v1.5.0.
+- Versão 1.6.0 / código 7 sincronizados em metadados, interface, documentação e testes. Nenhuma publicação remota realizada.
+
+
 ## v1.5.0 · 17/10/2026
 
 - Nova seção de experiência profissional com três funções e empregadores documentados no currículo de 2024.
