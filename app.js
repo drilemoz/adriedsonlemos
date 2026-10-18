@@ -257,14 +257,14 @@
 
   function readCachedRelease(repo) {
     try {
-      const raw = sessionStorage.getItem('portfolio-v1.4-release:' + githubUser + '/' + repo);
+      const raw = sessionStorage.getItem('portfolio-v1.5-release:' + githubUser + '/' + repo);
       if (!raw) return null;
       const cached = JSON.parse(raw);
       return Date.now() - cached.time < CACHE_TTL_MS ? cached.release : null;
     } catch (error) { return null; }
   }
   function cacheRelease(repo, release) {
-    try { sessionStorage.setItem('portfolio-v1.4-release:' + githubUser + '/' + repo, JSON.stringify({ time: Date.now(), release: release })); } catch (error) { /* cache opcional */ }
+    try { sessionStorage.setItem('portfolio-v1.5-release:' + githubUser + '/' + repo, JSON.stringify({ time: Date.now(), release: release })); } catch (error) { /* cache opcional */ }
   }
   function validateDownload(asset, repo) {
     if (!asset || typeof asset.name !== 'string' || !/\.apk$/i.test(asset.name)) return null;

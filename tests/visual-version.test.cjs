@@ -26,7 +26,7 @@ assert.match(code,/Release: /);
 assert.match(code,/\/tags\?per_page=1/);
 assert.match(css,/\.project-artwork/);
 assert.match(html,/og:image[^>]*og-image\.png/);
-assert.match(html,/Versão do portal\s*<strong>v1\.4\.0<\/strong>/);
+assert.match(html,/Versão do portal\s*<strong>v1\.5\.0<\/strong>/);
 assert.ok(fs.statSync(path.join(base,'og-image.png')).size>10000);
 assert.match(fs.readFileSync(path.join(base,'robots.txt'),'utf8'),/sitemap\.xml/);
 assert.match(fs.readFileSync(path.join(base,'sitemap.xml'),'utf8'),/urlset/);

@@ -1,4 +1,16 @@
-# Histórico do portfólio
+# Histórico de alterações
+
+## v1.5.0 · 17/10/2026
+
+- Nova seção de experiência profissional com três funções e empregadores documentados no currículo de 2024.
+- Nova seção de habilidades por área, separando suporte/infraestrutura de programação e experimentação.
+- Atualização da apresentação, dos links de navegação e dos botões de currículo.
+- Inclusão do currículo profissional público em PDF, com formação trancada informada corretamente.
+- Remoção do número de telefone do site e exclusão de detalhes médicos, civis e outros dados pessoais do currículo público.
+- Link para LinkedIn como contato, mantendo o e-mail profissional já divulgado.
+- Atualização sequencial para 1.5.0 / código 6, teste de privacidade e metadados sincronizados.
+
+## Versões anteriores
 
 ## 1.4.0 — 17/10/2026
 

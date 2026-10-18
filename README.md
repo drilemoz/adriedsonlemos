@@ -1,4 +1,4 @@
-# Adriedson Lemos | Portfólio pessoal v1.3.0
+# Adriedson Lemos | Portfólio pessoal v1.5.0
 
 Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a trajetória de Adriedson Lemos e seus projetos públicos do GitHub.
 
@@ -6,7 +6,7 @@ Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a traj
 
 - **Tema claro por padrão**: fundo branco. Botão para alternar para tema escuro com fundo quase preto (`#08090c`); escolha fica salva no navegador.
 - Layout responsivo para celular, tablet e desktop.
-- Seções: apresentação, sobre mim, projetos, jornada e contato por e-mail, telefone e GitHub.
+- Seções: apresentação, sobre mim, experiência profissional, habilidades, projetos, jornada e contato profissional por e-mail, LinkedIn e GitHub.
 - Catálogo inicial com os 17 projetos públicos identificados em 17/10/2026, renderizado mesmo sem acesso à API do GitHub. A consulta online pode descobrir projetos novos depois dessa data.
 - Consulta opcional à API pública do GitHub para listar os repositórios públicos (sem tokens).
 - Busca e filtros por tipo de projeto.
@@ -19,6 +19,7 @@ Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a traj
 - `styles.css`: design, responsividade e temas.
 - `app.js`: catálogo, busca, filtros, tema, integração GitHub, APKs.
 - `favicon.svg`: identidade visual minimalista.
+- `assets/docs/curriculo-adriedson-lemos.pdf`: currículo profissional público de 2026, com experiência comprovada pelo documento de 2024, formação identificada como trancada e projetos de desenvolvimento. Sem telefone, endereço, idade ou condição de saúde.
 - `assets/projects/*.svg`: capas ilustrativas vetoriais dos 17 projetos, sem dependências externas.
 - `og-image.png`, `robots.txt`, `sitemap.xml`: apresentação nas redes e configuração de indexação.
 - `vercel.json`: cabeçalhos de segurança para Vercel.
@@ -71,6 +72,17 @@ O código tenta descobrir automaticamente o nome atual a partir da URL do reposi
 
 O site não armazena APKs, não usa credenciais nem cria links de download temporário ou fictícios. Por depender de APIs públicas, a seção de downloads pode sofrer com limites de taxa, erros de rede e expiração dos Artifacts. As consultas de cada projeto são feitas conforme os cartões aparecem e ficam em cache por aba por 15 minutos.
 
+## Atualização 1.5.0 (17/10/2026)
+
+- Apresentação reforçada com experiência em suporte e infraestrutura de TI, sem confundir empregos anteriores e projetos atuais.
+- Nova seção **Experiência profissional**: Atacadão (2019–2022), MEDGRUPO (2018–2019) e Prefeitura de Iguatama (2012–2014), conforme currículo de 2024 fornecido pelo titular.
+- Nova seção **Habilidades**: desenvolvimento, infraestrutura, ferramentas/dados e projetos pessoais, distinguindo conhecimento declarado de prática em projetos.
+- Formação indicada corretamente como **graduação trancada em Análise e Desenvolvimento de Sistemas (Estácio EAD)**, sem declarar diploma concluído.
+- PDF do currículo profissional revisado gerado localmente, incluído no site e acessível pelos botões **Baixar currículo** e **Visualizar PDF**. Fonte original de 2024 permanece fora do site, por conter dados pessoais e informações médicas.
+- Contato público: e-mail já existente e novo link ao LinkedIn informado no currículo. O telefone público anterior foi removido da página e **não** consta no PDF para reduzir a exposição de dados pessoais. Não publica condição médica, CID, estado civil, idade ou endereço.
+- Navegação, estilo responsivo e modo AMOLED/claro preservados. Sem bibliotecas ou servidores externos adicionados.
+- Versão `1.5.0`, código `6`, README, CHANGELOG, testes e `github-manager.json` sincronizados. A URL canônica herdada deve ser conferida antes da publicação.
+
 ## Atualização 1.4.0 (17/10/2026)
 
 - Foram adicionadas **17 capas vetoriais locais e leves**, uma por projeto catalogado. São **ilustrações conceituais**, não capturas reais dos aplicativos. O rótulo e o texto alternativo deixam isso explícito. Futuras capturas verificadas poderão substituir os arquivos em `assets/projects/`.
@@ -91,16 +103,16 @@ O site não armazena APKs, não usa credenciais nem cria links de download tempo
 
 ## Atualização 1.2.0
 
-- Incluídos e-mail `drilemoz@gmail.com` e telefone `+55 (37) 99874-7642` com atalhos para envio de mensagem por aplicativo de e-mail e ligação no celular.
+- Incluídos e-mail profissional e telefone para contato na versão histórica 1.2.0 (telefone removido do site na 1.5.0).
 - Adicionado número **v1.2.0** no rodapé, com link para o histórico público de alterações.
 - Criados `VERSION`, `VERSION_CODE` e `github-manager.json`, para oferecer identidade e versão explícitas ao GitHub Manager, sem simular projeto Android.
 - Mantidos o tema branco padrão e o preto profundo opcional, a navegação responsiva e os links aos projetos.
 
 ### Versionamento do portal
 
-Atualize **juntos** os arquivos `VERSION`, `VERSION_CODE`, `github-manager.json`, rodapé no `index.html`, README e CHANGELOG em cada nova entrega. `VERSION_CODE` é um contador sequencial de entregas do site (`5` nesta versão), não um código Android. A identificação efetiva depende da versão instalada do GitHub Manager.
+Atualize **juntos** os arquivos `VERSION`, `VERSION_CODE`, `github-manager.json`, rodapé no `index.html`, README e CHANGELOG em cada nova entrega. `VERSION_CODE` é um contador sequencial de entregas do site (`6` nesta versão), não um código Android. A identificação efetiva depende da versão instalada do GitHub Manager.
 
-**Privacidade:** o e-mail e o telefone estão visíveis no HTML público do portal e também podem ser coletados por robôs da internet. Não foi implementado envio por servidor nem formulário que armazene dados.
+**Privacidade atual (v1.5.0):** somente o e-mail profissional e os links de GitHub/LinkedIn aparecem no contato. O telefone da versão antiga foi removido. Não há analytics nem formulário com armazenamento; o e-mail visível ainda pode ser coletado por robôs.
 
 ## Atualização 1.1.0
 
@@ -113,6 +125,6 @@ Atualize **juntos** os arquivos `VERSION`, `VERSION_CODE`, `github-manager.json`
 
 - Site pessoal em português brasileiro.
 - Descrições resumidas baseadas nos READMEs públicos dos projetos e nos interesses informados pelo autor.
-- Fotos, empregadores, endereço residencial e outras informações privadas não foram incluídos. O e-mail e telefone publicados foram fornecidos explicitamente para a seção de contato.
+- Os empregadores anteriores aparecem a partir do currículo de 2024. Não incluímos fotos privadas, endereço, telefone, estado civil, idade ou informações médicas. O e-mail público é o mesmo do site anterior.
 - Alguns projetos estão em fase de desenvolvimento, pré-lançamento ou validação. Links de repositório não equivalem a APK estável.
 - Antes de divulgar o domínio final, confira a descrição pessoal e os links de downloads.
