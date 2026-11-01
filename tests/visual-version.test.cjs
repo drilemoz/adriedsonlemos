@@ -18,7 +18,7 @@ for (const p of ctx.__known) {
   assert.match(image,/não é uma captura/i);
   assert.ok(Buffer.byteLength(image)<6000,'Capa leve');
 }
-assert.equal(fs.readdirSync(path.join(base,'assets/projects')).filter(n=>n.endsWith('.svg')).length,17);
+assert.equal(fs.readdirSync(path.join(base,'assets/projects')).filter(n=>n.endsWith('.svg')).length,21);
 assert.match(code,/loading = 'lazy'/);
 assert.match(code,/Ilustração conceitual do projeto/);
 assert.match(code,/Tag: /);
@@ -26,7 +26,7 @@ assert.match(code,/Release: /);
 assert.match(code,/\/tags\?per_page=1/);
 assert.match(css,/\.project-artwork/);
 assert.match(html,/og:image[^>]*og-image\.png/);
-assert.match(html,/Versão do portal\s*<strong>v1\.6\.0<\/strong>/);
+assert.match(html,/Versão do portal\s*<strong>v1\.7\.0<\/strong>/);
 assert.ok(fs.statSync(path.join(base,'og-image.png')).size>10000);
 assert.match(fs.readFileSync(path.join(base,'robots.txt'),'utf8'),/sitemap\.xml/);
 assert.match(fs.readFileSync(path.join(base,'sitemap.xml'),'utf8'),/urlset/);

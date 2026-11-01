@@ -17,11 +17,15 @@ for(const [i,slug] of targets.entries()) {
 }
 assert.match(html,/fluxo técnico simplificado/i);
 assert.match(html,/não é captura de tela/i);
-assert.match(html,/26 verificações estáticas/i);
-assert.match(html,/16 invariantes Kotlin\/JVM/i);
-assert.match(html,/compilação Android foi bloqueada/i);
-assert.match(html,/Ganhos recentes de CPU, bateria ou tokens\/s não foram demonstrados/i);
-assert.match(html,/H\.264 continua experimental/i);
+
+
+
+
+assert.match(html,/H\.264 experimental/i);
+assert.match(html,/Wikipédia offline/i);
+assert.match(html,/1\.0\.323\+323/);
+assert.match(html,/0\.1\.0-alpha\.73/);
+assert.match(html,/1\.4\.76/);
 assert.match(html,/class="showcase-note"/);
 assert.match(css,/\.showcase-grid/);
 assert.match(css,/@media\(max-width:550px\)/);
@@ -29,7 +33,7 @@ const body=js.replace('  let githubUser = INITIAL_GITHUB_USER;', '  globalThis._
 const ctx={};ctx.globalThis=ctx;vm.createContext(ctx);vm.runInContext(body,ctx);
 const featured=ctx.__known.filter(i=>i.featured).map(i=>i.repo).sort();
 assert.deepEqual(Array.from(featured, String),repos.slice().sort());
-assert.equal(ctx.__known.length,17);
+assert.equal(ctx.__known.length,21);
 assert.match(js,/Análise técnica ↗/);
 assert.doesNotMatch(html,/visão monocular|CID H54|href="tel:/i);
-console.log('Quatro estudos, fontes, ressalvas, navegação, 17 projetos e privacidade validados.');
+console.log('Quatro estudos, fontes, ressalvas, navegação, 21 projetos e privacidade validados.');

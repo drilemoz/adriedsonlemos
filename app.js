@@ -9,24 +9,30 @@
   const PORTFOLIO_REPO = 'adriedsonlemos';
   const API_BASE = 'https://api.github.com';
   const CACHE_TTL_MS = 15 * 60 * 1000;
+  // Instantâneo editorial verificado nos READMEs públicos em 01/11/2026.
+  // Releases/tags são consultadas separadamente e não comprovam builds.
   const KNOWN = [
-    { repo: 'Vigia-IA', stage: 'Em evolução', name: 'Vigia IA', description: 'Monitoramento com IA local, câmeras IP e de celulares, mapas offline e navegação para cicloviagem. Integração com Minha Câmera.', categories: ['android'], kind: 'Android / IA', stack: ['Flutter', 'IA local', 'Mapas offline'], icon: '◎', featured: true },
-    { repo: 'Nexora', stage: 'Alfa', name: 'Nexora', description: 'Assistente de IA local no Android, executando modelos GGUF com llama.cpp, sem servidor de inferência.', categories: ['android'], kind: 'Android / IA offline', stack: ['Kotlin', 'GGUF', 'llama.cpp'], icon: '✧', featured: true },
-    { repo: 'Minha-Camera', stage: 'Em testes', name: 'Minha Câmera', description: 'Transforma um celular Android em câmera de rede local para outro aparelho, com transmissão MJPEG e H.264 experimental, mesmo sem internet.', categories: ['android', 'ferramentas'], kind: 'Android / Câmera', stack: ['Kotlin', 'Wi-Fi local', 'Vídeo'], icon: '◉', featured: true },
-    { repo: 'Explorador-XP', stage: 'Alfa', name: 'Explorador XP', description: 'Gerenciador de arquivos Android com multimídia, acesso WebDAV e SMB2/SMB3 e transferência pela rede local.', categories: ['android', 'ferramentas'], kind: 'Android / Arquivos', stack: ['Kotlin', 'SMB', 'WebDAV'], icon: '▦' },
-    { repo: 'GitHub-Manager', stage: 'Em evolução', name: 'GitHub Manager', description: 'Ferramenta Android para administrar repositórios, versões, Actions, builds e downloads do GitHub.', categories: ['android', 'ferramentas'], kind: 'Android / DevTools', stack: ['Android', 'GitHub API', 'CI/CD'], icon: '⌘' },
-    { repo: 'Pulso', stage: 'Alfa', name: 'Pulso Bateria', description: 'Monitor de bateria Android com histórico de sessões, estimativas identificadas e laboratório para testes de energia solar e consumo.', categories: ['android', 'ferramentas'], kind: 'Android / Energia', stack: ['Kotlin', 'Compose', 'Room'], icon: '◍', featured: true },
-    { repo: 'UaiVozes', stage: 'Alfa', name: 'Uai Vozes', description: 'Conversão de texto em áudio com ElevenLabs no Android, biblioteca de áudios, seleção de vozes e leitura pelo sintetizador do sistema.', categories: ['android'], kind: 'Android / Áudio', stack: ['Flutter', 'ElevenLabs', 'TTS'], icon: '♫' },
-    { repo: 'BaixaFacil', stage: 'Alfa', name: 'Baixa Fácil', description: 'Navegador e gerenciador de downloads Android com detecção de vídeos, histórico, favoritos e diagnóstico local.', categories: ['android', 'ferramentas'], kind: 'Android / Downloads', stack: ['Java', 'WebView', 'Downloads'], icon: '↓' },
-    { repo: 'MeuGiga', stage: 'Em testes', name: 'MeuGiga', description: 'Acompanha o uso de dados móveis, franquia, alertas, consumo por aplicativo e consulta separada de Wi-Fi.', categories: ['android', 'ferramentas'], kind: 'Android / Internet', stack: ['Kotlin', 'Compose', 'Room'], icon: '▥' },
-    { repo: 'Meu-Vercel', stage: 'Em testes', name: 'Meu Vercel', description: 'Cliente Android para consultar e gerenciar projetos, deploys, domínios e configurações pela API da Vercel.', categories: ['android', 'ferramentas'], kind: 'Android / DevTools', stack: ['Flutter', 'Vercel API', 'Deploys'], icon: '△' },
-    { repo: 'MonitorRemoto', stage: 'Alfa', name: 'Monitor Remoto', description: 'Monitoramento e comandos autorizados entre celulares Android pareados, com telemetria, arquivos e localização pela rede.', categories: ['android', 'ferramentas'], kind: 'Android / Rede', stack: ['Kotlin', 'Rede local', 'Segurança'], icon: '⇄' },
-    { repo: 'Tatica-Manager', stage: 'Em evolução', name: 'Tática Manager', description: 'Jogo de gerenciamento de futebol para Android, com partidas 2D, elenco, táticas e narração de eventos.', categories: ['android'], kind: 'Android / Jogo', stack: ['Flutter', 'Dart', 'Flame'], icon: '⚽' },
-    { repo: 'Lista-de-Compras', stage: 'Em evolução', name: 'Lista de Compras', description: 'Organizador Android offline de compras, orçamentos, preços e listas com histórico e backup local.', categories: ['android'], kind: 'Android / Compras', stack: ['Kotlin', 'Material 3', 'Offline'], icon: '☷' },
-    { repo: 'eureciclo', stage: 'Em evolução', name: 'Eu Reciclo', description: 'Calcula valores de materiais recicláveis, registra vendas, permite metas de compra e uso offline.', categories: ['android', 'web'], kind: 'Web / Android', stack: ['Vue', 'Vite', 'Capacitor'], icon: '♻' },
-    { repo: 'Termux-Manager', stage: 'Experimental', name: 'Termux Manager Android', description: 'Projeto experimental de integração do Termux com o Termux Manager em um APK Android de uso particular.', categories: ['android', 'ferramentas'], kind: 'Android / Termux', stack: ['Android', 'Termux', 'Integração'], icon: '▣' },
-    { repo: 'TermuxManager', stage: 'Estável', name: 'Termux Manager', description: 'Gerenciador modular para importar, testar, executar e organizar projetos diretamente pelo terminal do Termux.', categories: ['ferramentas'], kind: 'Terminal / Ferramenta', stack: ['Termux', 'CLI', 'Automação'], icon: '>_' },
-    { repo: 'LoteriasFacil', stage: 'Beta', name: 'Loterias Fácil', description: 'Aplicativo Android de acompanhamento de loterias, resultados, conferência e análise de combinações.', categories: ['android'], kind: 'Android / Dados', stack: ['Kotlin', 'Compose', 'SQLite'], icon: '◈' }
+    {"repo": "Vigia-IA", "name": "Vigia IA", "stage": "Em evolução", "description": "App modular de monitoramento com IA local e câmeras IP/Android. Mapas offline, navegação ciclística e ajuste de ritmo durante a rota; transmissão e diagnóstico seguem em evolução.", "categories": ["android"], "kind": "Android / IA e mapas", "stack": ["Flutter", "IA local", "Mapas offline"], "icon": "◎", "featured": true, "sourceVersion": "1.0.323+323"},
+    {"repo": "Nexora", "name": "Nexora", "stage": "Alfa", "description": "IA local Android com modelos GGUF e llama.cpp. Inclui biblioteca independente de Wikipédia offline com arquivos ZIM, índice SQLite FTS4 e leitor de artigos; integração da Wikipédia à IA ainda não implementada.", "categories": ["android"], "kind": "Android / IA offline", "stack": ["Kotlin", "llama.cpp", "ZIM / SQLite"], "icon": "✧", "featured": true, "sourceVersion": "0.1.0-alpha.38"},
+    {"repo": "Minha-Camera", "name": "Minha Câmera", "stage": "Em testes", "description": "Usa um Android como câmera pela rede local. MJPEG, pareamento e comandos autenticados, lanterna remota conforme hardware e H.264 experimental; requer validação de estabilidade e FPS em aparelhos.", "categories": ["android", "ferramentas"], "kind": "Android / Câmera", "stack": ["Kotlin", "MJPEG / H.264", "Wi-Fi local"], "icon": "◉", "featured": true, "sourceVersion": "1.4.76"},
+    {"repo": "Pulso", "name": "Pulso Bateria", "stage": "Alfa", "description": "Monitoramento de bateria offline com leituras identificadas, histórico e Labs de energia solar/carga/consumo. Painel remoto autorizado pela LAN, previsões condicionadas a dados e relatórios de testes.", "categories": ["android", "ferramentas"], "kind": "Android / Energia", "stack": ["Kotlin", "Compose", "Room / LAN"], "icon": "◍", "featured": true, "sourceVersion": "0.1.0-alpha.73"},
+    {"repo": "UAI-Cortes", "name": "UAI Cortes", "stage": "Alfa", "description": "Editor de vídeo Android com cortes, união, PiP, legendas e exportação MP4. Presets de legendas, sincronização de palavras e reconhecimento opcional; modo Vosk offline preservado.", "categories": ["android"], "kind": "Android / Edição de vídeo", "stack": ["Kotlin", "Compose", "Media3"], "icon": "▹", "sourceVersion": "0.1.90"},
+    {"repo": "QuantoSobra", "name": "Quanto Sobra?", "stage": "Alfa", "description": "Simulador offline de orçamento pessoal: renda CLT, MEI, PJ e outras modalidades, despesas, reservas e resultado mensal. Tributos editáveis não substituem apuração fiscal.", "categories": ["android"], "kind": "Android / Finanças", "stack": ["Kotlin", "Compose", "Offline"], "icon": "◈", "sourceVersion": "0.1.0-alpha.16"},
+    {"repo": "Finan-as-Viagens", "name": "Finanças da Viagem", "stage": "Em evolução", "description": "Finanças offline de cicloviagem: receitas, gastos, carteiras, orçamento, planejamento, recicláveis e backups. Distingue ganhos e despesas do dia sem contar transferências como receita.", "categories": ["android"], "kind": "Android / Cicloviagem", "stack": ["Kotlin", "Compose", "SQLite"], "icon": "₢", "sourceVersion": "1.0.1"},
+    {"repo": "InternetXP", "name": "Internet XP", "stage": "Em testes", "description": "Navegador Android com motor Mozilla GeckoView e visual inspirado no Windows XP. Abas, histórico, favoritos, downloads, menus contextuais e análise seletiva de mídias.", "categories": ["android", "ferramentas"], "kind": "Android / Navegador", "stack": ["GeckoView", "Android", "Navegação"], "icon": "◫", "sourceVersion": "1.0.40"},
+    {"repo": "Explorador-XP", "name": "Explorador XP", "stage": "Alfa", "description": "Explorador de arquivos Android com bibliotecas de fotos/vídeos via MediaStore, players multimídia, ZIP, WebDAV, SMB2/SMB3 e acesso à rede quando autorizado. Preparação para Google Play em andamento.", "categories": ["android", "ferramentas"], "kind": "Android / Arquivos", "stack": ["Kotlin", "MediaStore", "SMB / WebDAV"], "icon": "▦", "sourceVersion": "0.1.0-alpha.143"},
+    {"repo": "GitHub-Manager", "name": "GitHub Manager", "stage": "Em evolução", "description": "Administra repositórios, releases, GitHub Actions, downloads, Secrets e versões pelo Android. Inclui busca por AAB de Play em Releases/Artifacts, confirmação de arquivos e notificações opcionais.", "categories": ["android", "ferramentas"], "kind": "Android / DevTools", "stack": ["Android", "GitHub API", "CI/CD"], "icon": "⌘", "sourceVersion": "2.0.137"},
+    {"repo": "UaiVozes", "name": "Uai Vozes", "stage": "Alfa", "description": "Texto para áudio no Android por ElevenLabs, com biblioteca de MP3 e salvamento via seletor SAF. Também oferece leitura por sintetizador Android sem consumir créditos do serviço.", "categories": ["android"], "kind": "Android / Áudio", "stack": ["Flutter", "ElevenLabs", "TTS Android"], "icon": "♫", "sourceVersion": "0.1.0-alpha.26+26"},
+    {"repo": "BaixaFacil", "name": "Baixa Fácil", "stage": "Alfa", "description": "Navegador e gerenciador de downloads Android com histórico e favoritos. Busca local de endereços e sugestões online apenas quando ativadas, além de controles de transferência.", "categories": ["android", "ferramentas"], "kind": "Android / Downloads", "stack": ["Android", "WebView", "Downloads"], "icon": "↓", "sourceVersion": "0.1.0-alpha.84"},
+    {"repo": "MeuGiga", "name": "MeuGiga", "stage": "Em testes", "description": "Acompanha o consumo de dados móveis por aplicativo, com histórico e alertas de franquia. Consulta de Wi-Fi permanece separada dos cálculos da franquia móvel.", "categories": ["android", "ferramentas"], "kind": "Android / Dados móveis", "stack": ["Kotlin", "Android", "UsageStats"], "icon": "▥", "sourceVersion": "0.1.9"},
+    {"repo": "Meu-Vercel", "name": "Meu Vercel", "stage": "Em testes", "description": "Cliente Android da API Vercel para projetos e deploys. Permite promover deploys e solicitar rollback de produção com confirmação, sujeitos a permissões, plano e validação do resultado.", "categories": ["android", "ferramentas"], "kind": "Android / Deploys", "stack": ["Android", "Vercel API", "Deploys"], "icon": "△", "sourceVersion": "1.6.0"},
+    {"repo": "MonitorRemoto", "name": "Monitor Remoto", "stage": "Alfa", "description": "Gerenciamento remoto autorizado entre Androids com telemetria, arquivos e temperatura pela LAN/VPN. Foto remota depende de permissão e preparo explícito no aparelho monitorado.", "categories": ["android", "ferramentas"], "kind": "Android / Rede", "stack": ["Kotlin", "LAN / VPN", "Autorização"], "icon": "⇄", "sourceVersion": "0.1.0-alpha.105"},
+    {"repo": "Tatica-Manager", "name": "Tática Manager", "stage": "Em evolução", "description": "Jogo Android de gerenciamento de futebol em Flutter com partida 2D via Flame, elenco, estratégia, simulação e narração de eventos.", "categories": ["android"], "kind": "Android / Jogo", "stack": ["Flutter", "Dart", "Flame"], "icon": "⚽", "sourceVersion": "0.1.1.148"},
+    {"repo": "Lista-de-Compras", "name": "Lista de Compras", "stage": "Em evolução", "description": "Listas de compras offline para Android com orçamento, histórico de preços e organização de itens. Backup de dados é importante na migração entre identificadores de aplicativo.", "categories": ["android"], "kind": "Android / Compras", "stack": ["Kotlin", "Material 3", "Offline"], "icon": "☷", "sourceVersion": "1.0.46+50"},
+    {"repo": "eureciclo", "name": "Eu Reciclo", "stage": "Em evolução", "description": "Calculadora de materiais recicláveis com preços editáveis, histórico de vendas, metas de compra e backup. Aplicativo híbrido em Vue/Capacitor.", "categories": ["android", "web"], "kind": "Web / Android", "stack": ["Vue 3", "Vite", "Capacitor"], "icon": "♻", "sourceVersion": "1.4.12"},
+    {"repo": "Termux-Manager", "name": "Termux Manager Android", "stage": "Experimental", "description": "Integração experimental do aplicativo Termux a um snapshot do TermuxManager em APK privado para Android; não é o mesmo projeto que a ferramenta de terminal.", "categories": ["android", "ferramentas"], "kind": "Android / Termux", "stack": ["Android", "Termux", "Integração"], "icon": "▣", "sourceVersion": "0.1.0-alpha.5"},
+    {"repo": "TermuxManager", "name": "Termux Manager", "stage": "Estável", "description": "Gerenciador modular de projetos para o Termux: importa, prepara, executa, acompanha logs, gera backups e verifica atualizações com consentimento.", "categories": ["ferramentas"], "kind": "Terminal / Ferramenta", "stack": ["Termux", "CLI", "Automação"], "icon": ">_", "sourceVersion": "1.0.133"},
+    {"repo": "LoteriasFacil", "name": "Loterias Fácil", "stage": "Beta", "description": "Aplicativo nativo Kotlin e Jetpack Compose para consulta de resultados, conferência de jogos e análises locais de loterias, com dados em SQLite.", "categories": ["android"], "kind": "Android / Dados", "stack": ["Kotlin", "Compose", "SQLite"], "icon": "◈", "sourceVersion": "3.0.0-beta.7"}
   ];
 
   let githubUser = INITIAL_GITHUB_USER;
@@ -90,13 +96,25 @@
     $('#search').addEventListener('input', function (event) { query = event.target.value.trim().toLocaleLowerCase('pt-BR'); renderProjects(); });
   }
 
+  // Para futuros repositórios descobertos pela API, só aplica categorias
+  // quando a descrição/metadados indicam claramente a plataforma.
+  function inferredCategories(item) {
+    const details = [item.description || '', item.language || ''].concat(Array.isArray(item.topics) ? item.topics : [])
+      .join(' ').toLocaleLowerCase('pt-BR');
+    const result = [];
+    if (/android|jetpack|flutter|capacitor|\.apk\b|geckoview/.test(details)) result.push('android');
+    if (/website|página web|web app|site|javascript|typescript|html|vue|react|vite/.test(details)) result.push('web');
+    if (/ferramenta|gerenciador|utility|utilitário|cli|terminal|automação|devtools/.test(details)) result.push('ferramentas');
+    return result;
+  }
+
   function projectDetails(item) {
     const known = KNOWN.find(function (entry) { return entry.repo.toLowerCase() === item.name.toLowerCase(); });
     return Object.assign({
       repo: item.name,
       name: item.name,
       description: item.description || 'Projeto de desenvolvimento disponível no meu GitHub.',
-      categories: [], kind: 'Código / Projeto', stack: item.language ? [item.language] : [], icon: '⌘', stage: 'Projeto público', featured: false
+      categories: inferredCategories(item), kind: 'Código / Projeto', stack: item.language ? [item.language] : [], icon: '⌘', stage: 'Projeto público', featured: false
     }, known || {}, { repo: item.name, archived: Boolean(item.archived) });
   }
 
@@ -225,6 +243,11 @@
       const versionBadge = element('div', 'project-version', 'Versão: consulta sob demanda');
       versionBadge.title = 'Releases e tags são consultadas via GitHub ao visualizar o projeto';
       card.appendChild(versionBadge);
+      if (item.sourceVersion) {
+        const declared = element('div', 'project-code-version', 'Código (README, 01/11/2026): ' + item.sourceVersion);
+        declared.title = 'Versão declarada no código na data de conferência. Não comprova APK publicado ou compilação aprovada.';
+        card.appendChild(declared);
+      }
       card.appendChild(element('div', 'project-meta', 'Código e documentação no GitHub'));
       const links = element('div', 'project-links');
       links.appendChild(makeExternal(repoUrl(item.repo), 'Ver código ↗', 'project-link code'));
@@ -264,14 +287,14 @@
 
   function readCachedRelease(repo) {
     try {
-      const raw = sessionStorage.getItem('portfolio-v1.6-release:' + githubUser + '/' + repo);
+      const raw = sessionStorage.getItem('portfolio-v1.7-release:' + githubUser + '/' + repo);
       if (!raw) return null;
       const cached = JSON.parse(raw);
       return Date.now() - cached.time < CACHE_TTL_MS ? cached.release : null;
     } catch (error) { return null; }
   }
   function cacheRelease(repo, release) {
-    try { sessionStorage.setItem('portfolio-v1.6-release:' + githubUser + '/' + repo, JSON.stringify({ time: Date.now(), release: release })); } catch (error) { /* cache opcional */ }
+    try { sessionStorage.setItem('portfolio-v1.7-release:' + githubUser + '/' + repo, JSON.stringify({ time: Date.now(), release: release })); } catch (error) { /* cache opcional */ }
   }
   function validateDownload(asset, repo) {
     if (!asset || typeof asset.name !== 'string' || !/\.apk$/i.test(asset.name)) return null;

@@ -1,5 +1,16 @@
 # Histórico de alterações
 
+## v1.7.0 · 01/11/2026
+
+- Catálogo local atualizado de 17 para 21 repositórios públicos após comparação com os READMEs do GitHub. Novos projetos: UAI Cortes, Quanto Sobra?, Finanças da Viagem e Internet XP.
+- Inclusão de quatro capas SVG conceituais locais, com texto alternativo e aviso de que não representam capturas reais.
+- Descrições, tecnologias e categorias dos 21 projetos revistas. Categorias de novos repositórios são inferidas apenas quando metadados explícitos permitem; caso contrário continuam visíveis no filtro Todos.
+- Revisão editorial e técnica dos quatro estudos existentes: Vigia IA (1.0.323+323), Nexora (alpha.38), Pulso Bateria (alpha.73) e Minha Câmera (1.4.76), com ressalvas de CI, testes físicos e recursos experimentais.
+- Número de versão do código dos projetos exibido como instantâneo datado (01/11/2026), separado dos identificadores de Releases/tags e dos downloads APK reais.
+- Versionamento do portal em 1.7.0 / código 8, documentação e testes sincronizados. O currículo, contatos, temas e estrutura visual foram mantidos.
+- Os dados dos READMEs refletem o momento da consulta; futuras alterações nos repositórios exigirão revisão editorial. Sem mudança automática de produção implícita neste pacote.
+
+
 ## v1.6.0 · 17/10/2026
 
 - Criada vitrine técnica com quatro estudos em profundidade: Vigia IA, Nexora, Pulso Bateria e Minha Câmera.

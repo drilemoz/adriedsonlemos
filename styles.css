@@ -150,6 +150,7 @@ html[data-theme="dark"] .art-back { background: linear-gradient(145deg,#122f57,#
 .project-card p { color: var(--muted); font-size: .9rem; line-height: 1.7; margin-bottom: 20px; flex: 1; }
 .tech-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
 .tech-tags span { font-size: .69rem; background: var(--subtle); color: var(--muted); border: 1px solid var(--line); padding: 4px 8px; border-radius: 6px; }
+.project-code-version { font-size: .77rem; line-height: 1.45; opacity: .77; margin: .4rem 0 .15rem; }
 .project-meta { color: var(--muted); min-height: 20px; font-size: .72rem; margin-bottom: 15px; }
 .project-links { display: flex; flex-wrap: wrap; gap: 10px; padding-top: 16px; border-top: 1px solid var(--line); }
 .project-link { font-size: .77rem; font-weight: 800; min-height: 38px; border-radius: 9px; padding: 9px 12px; display: inline-flex; align-items: center; justify-content: center; gap: 7px; }

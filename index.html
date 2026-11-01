@@ -7,7 +7,7 @@
   <meta name="theme-color" content="#ffffff">
   <meta name="color-scheme" content="light dark">
   <meta name="application-name" content="Adriedson Lemos | Portfólio">
-  <meta name="application-version" content="1.6.0">
+  <meta name="application-version" content="1.7.0">
   <link rel="canonical" href="https://adriedsonlemos.vercel.app/">
   <meta property="og:url" content="https://adriedsonlemos.vercel.app/">
   <meta property="og:image" content="https://adriedsonlemos.vercel.app/og-image.png">
@@ -145,17 +145,17 @@
           <span class="showcase-caption">Arte conceitual · não é captura de tela</span>
         </div>
         <div class="showcase-body">
-          <div class="showcase-overline"><span>01 / MONITORAMENTO E NAVEGAÇÃO</span><span class="showcase-stage">Em evolução · transmissão nativa experimental</span></div>
+          <div class="showcase-overline"><span>01 / MONITORAMENTO E NAVEGAÇÃO</span><span class="showcase-stage">Em evolução · código 1.0.323+323</span></div>
           <h3 id="titulo-vigia-ia">Vigia IA</h3>
-          <p class="showcase-summary">Câmeras, inferência no aparelho e navegação em um aplicativo modular.</p>
+          <p class="showcase-summary">Monitoramento modular e mapas offline com navegação de bicicleta e ajuste de ritmo.</p>
           <dl class="showcase-facts">
-            <div><dt>O desafio</dt><dd>Conciliar câmera local/remota, análise de objetos, mapas offline e consumo de bateria para cenários móveis.</dd></div>
-            <div><dt>Como foi abordado</dt><dd>Aplicativo Flutter com fontes locais e MJPEG/RTSP; detecção no receptor e integração MCRP com Minha Câmera. O transmissor Kotlin integrado foi introduzido experimentalmente na série 1.0.273.</dd></div>
+            <div><dt>O desafio</dt><dd>Combinar câmeras, IA no aparelho e navegação offline sem ocultar custos de CPU, memória e bateria.</dd></div>
+            <div><dt>Como foi abordado</dt><dd>Flutter com módulos de câmeras e IA opcionais; mapas de bicicleta com velocidade, horas por dia e ajuste de ritmo durante a navegação. RTSP H.264 em Media3 existe como teste isolado; monitoramento principal de RTSP ainda usa LibVLC.</dd></div>
           </dl>
-          <div class="showcase-flow"><span class="showcase-flow-label">FLUXO TÉCNICO SIMPLIFICADO</span><ol><li>Fonte de câmera</li><li>Monitor Flutter</li><li>IA no receptor</li><li>Eventos / mapa</li></ol></div>
-          <div class="showcase-evidence"><strong>O que está validado e o que falta</strong><p>O projeto registra diagnósticos de IA e etapas do pipeline. A transmissão Kotlin da série 1.0.275 ainda depende de compilação Android e teste físico no Redmi A3; não há promessa de FPS ou autonomia.</p></div>
-          <div class="showcase-stack" aria-label="Tecnologias documentadas"><span>Flutter</span><span>Kotlin</span><span>LiteRT</span><span>MCRP</span><span>Mapas offline</span></div>
-          <div class="showcase-links"><a href="https://github.com/drilemoz/Vigia-IA" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a><a href="https://github.com/drilemoz/Vigia-IA/blob/main/README.md" target="_blank" rel="noopener noreferrer">Versões e ressalvas ↗</a></div>
+          <div class="showcase-flow"><span class="showcase-flow-label">FLUXO TÉCNICO SIMPLIFICADO</span><ol><li>Câmera / RTSP</li><li>Receptor e IA</li><li>Mapa offline</li><li>Rotas e diagnóstico</li></ol></div>
+          <div class="showcase-evidence"><strong>O que está validado e o que falta</strong><p>README da versão 1.0.323+323 registra alteração de ritmo sem reiniciar rota e diagnóstico de interações sem registrar coordenadas exatas. Há correções de análise/testes Flutter na série 1.0.320–323; isso não comprova APK Release, funcionamento no aparelho, FPS ou autonomia.</p></div>
+          <div class="showcase-stack" aria-label="Tecnologias documentadas"><span>Flutter</span><span>Kotlin</span><span>LiteRT</span><span>Media3 / VLC</span><span>Mapas offline</span></div>
+          <div class="showcase-links"><a href="https://github.com/drilemoz/Vigia-IA" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a><a href="https://github.com/drilemoz/Vigia-IA/blob/main/README.md" target="_blank" rel="noopener noreferrer">Versão e validações ↗</a></div>
         </div>
       </article>
 <article class="showcase-card" id="estudo-nexora" aria-labelledby="titulo-nexora">
@@ -164,17 +164,17 @@
           <span class="showcase-caption">Arte conceitual · não é captura de tela</span>
         </div>
         <div class="showcase-body">
-          <div class="showcase-overline"><span>02 / IA LOCAL NO ANDROID</span><span class="showcase-stage">Alfa · desempenho sob investigação</span></div>
+          <div class="showcase-overline"><span>02 / IA LOCAL NO ANDROID</span><span class="showcase-stage">Alfa · código 0.1.0-alpha.38</span></div>
           <h3 id="titulo-nexora">Nexora</h3>
-          <p class="showcase-summary">Inferência GGUF sem servidor, com diagnósticos de memória e geração.</p>
+          <p class="showcase-summary">Modelos GGUF locais e leitura offline de artigos de bibliotecas ZIM.</p>
           <dl class="showcase-facts">
-            <div><dt>O desafio</dt><dd>Executar modelos de linguagem em smartphones com limites de RAM, temperatura e capacidade de processamento.</dd></div>
-            <div><dt>Como foi abordado</dt><dd>Kotlin e JNI com llama.cpp, modelos GGUF gerenciados no aparelho, perfis de inferência, métricas de tokens e monitoramento de RAM/PSS e estado térmico.</dd></div>
+            <div><dt>O desafio</dt><dd>Rodar LLM no Android dentro dos limites reais de RAM e calor, e disponibilizar conteúdo local sem prometer respostas baseadas automaticamente na Wikipédia.</dd></div>
+            <div><dt>Como foi abordado</dt><dd>Kotlin, JNI e llama.cpp para modelos GGUF; módulo independente da Wikipédia com download/importação ZIM, validação básica, índice de títulos SQLite FTS4 e leitura de artigos offline.</dd></div>
           </dl>
-          <div class="showcase-flow"><span class="showcase-flow-label">FLUXO TÉCNICO SIMPLIFICADO</span><ol><li>GGUF local</li><li>JNI / llama.cpp</li><li>Tokens e métricas</li><li>Resposta na interface</li></ol></div>
-          <div class="showcase-evidence"><strong>O que está validado e o que falta</strong><p>A documentação descreve melhorias no streaming e isolamento do estado de conversa. Ganhos recentes de CPU, bateria ou tokens/s não foram demonstrados por benchmark comparativo; mudanças JNI exigem teste real.</p></div>
-          <div class="showcase-stack" aria-label="Tecnologias documentadas"><span>Kotlin</span><span>JNI</span><span>llama.cpp</span><span>GGUF</span><span>SQLite</span></div>
-          <div class="showcase-links"><a href="https://github.com/drilemoz/Nexora" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a><a href="https://github.com/drilemoz/Nexora/blob/main/README.md" target="_blank" rel="noopener noreferrer">Arquitetura e limitações ↗</a></div>
+          <div class="showcase-flow"><span class="showcase-flow-label">FLUXO TÉCNICO SIMPLIFICADO</span><ol><li>GGUF / ZIM local</li><li>llama.cpp / índice FTS4</li><li>Chat / pesquisa</li><li>Resposta / artigo</li></ol></div>
+          <div class="showcase-evidence"><strong>O que está validado e o que falta</strong><p>O README da alpha.38 informa abertura de artigos e índice de títulos. Ainda não há perguntas à IA usando Wikipédia, busca integral no conteúdo ou compatibilidade garantida com qualquer ZIM. Diagnósticos anteriores indicaram limites de tokens e interrupção em segundo plano, não prova de falta de RAM; build/JNI e testes reais continuam necessários.</p></div>
+          <div class="showcase-stack" aria-label="Tecnologias documentadas"><span>Kotlin</span><span>JNI</span><span>llama.cpp</span><span>GGUF</span><span>ZIM / FTS4</span></div>
+          <div class="showcase-links"><a href="https://github.com/drilemoz/Nexora" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a><a href="https://github.com/drilemoz/Nexora/blob/main/README.md" target="_blank" rel="noopener noreferrer">Wikipédia offline e limites ↗</a></div>
         </div>
       </article>
 <article class="showcase-card" id="estudo-pulso-bateria" aria-labelledby="titulo-pulso-bateria">
@@ -183,17 +183,17 @@
           <span class="showcase-caption">Arte conceitual · não é captura de tela</span>
         </div>
         <div class="showcase-body">
-          <div class="showcase-overline"><span>03 / ENERGIA E MEDIÇÃO</span><span class="showcase-stage">Alfa · testes Android pendentes</span></div>
+          <div class="showcase-overline"><span>03 / ENERGIA E MEDIÇÃO</span><span class="showcase-stage">Alfa · código 0.1.0-alpha.73</span></div>
           <h3 id="titulo-pulso-bateria">Pulso Bateria</h3>
-          <p class="showcase-summary">Leituras oficiais, histórico e experimentos de carga e consumo.</p>
+          <p class="showcase-summary">Medições e ensaios de bateria com Labs locais e controle remoto pela LAN.</p>
           <dl class="showcase-facts">
-            <div><dt>O desafio</dt><dd>Separar corrente medida, estimativas e ausência de leitura ao avaliar bateria e fontes de energia solar.</dd></div>
-            <div><dt>Como foi abordado</dt><dd>BatteryManager como fonte prioritária, histórico Room e Labs para ensaios de carga/consumo. A API local AIDL exige autorização explícita por aplicativo e verificação de identidade.</dd></div>
+            <div><dt>O desafio</dt><dd>Medir corrente e carga sem confundir leituras reais, estimativas e intervalos não observados, inclusive durante ensaios solares.</dd></div>
+            <div><dt>Como foi abordado</dt><dd>BatteryManager, histórico e relatórios persistentes; Labs Solar, Elétrico, Consumo e Carga automática. Pareamento LAN com QR e autorização explícita; controlador recebe estado e alertas, enquanto o relatório é salvo no monitorado.</dd></div>
           </dl>
-          <div class="showcase-flow"><span class="showcase-flow-label">FLUXO TÉCNICO SIMPLIFICADO</span><ol><li>BatteryManager</li><li>Room / sessões</li><li>Labs</li><li>Relatório identificado</li></ol></div>
-          <div class="showcase-evidence"><strong>O que está validado e o que falta</strong><p>Na alpha.36 foram documentadas 26 verificações estáticas e 16 invariantes Kotlin/JVM aprovados em 17/10/2026. A compilação Android foi bloqueada pela obtenção do Gradle; testes entre aplicativos continuam pendentes.</p></div>
-          <div class="showcase-stack" aria-label="Tecnologias documentadas"><span>Kotlin</span><span>Compose</span><span>BatteryManager</span><span>Room</span><span>AIDL</span></div>
-          <div class="showcase-links"><a href="https://github.com/drilemoz/Pulso" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a><a href="https://github.com/drilemoz/Pulso/blob/main/docs/VALIDATION.md" target="_blank" rel="noopener noreferrer">Relatório de validação ↗</a></div>
+          <div class="showcase-flow"><span class="showcase-flow-label">FLUXO TÉCNICO SIMPLIFICADO</span><ol><li>Leituras Android</li><li>Sessões / Labs</li><li>Pareamento LAN</li><li>Histórico / relatório</li></ol></div>
+          <div class="showcase-evidence"><strong>O que está validado e o que falta</strong><p>O README da alpha.73 documenta alertas remotos e registro real de 100% antes do encerramento. Previsões de término só aparecem com progresso suficiente; credenciais locais de reconexão têm proteção AndroidKeyStore. Não assumir precisão de corrente ou conclusão de testes Android sem medições e CI confirmados.</p></div>
+          <div class="showcase-stack" aria-label="Tecnologias documentadas"><span>Kotlin</span><span>Jetpack Compose</span><span>BatteryManager</span><span>Room</span><span>LAN / QR</span></div>
+          <div class="showcase-links"><a href="https://github.com/drilemoz/Pulso" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a><a href="https://github.com/drilemoz/Pulso/blob/main/docs/REMOTE_LABS.md" target="_blank" rel="noopener noreferrer">Guia de monitoramento LAN ↗</a></div>
         </div>
       </article>
 <article class="showcase-card" id="estudo-minha-camera" aria-labelledby="titulo-minha-camera">
@@ -202,17 +202,17 @@
           <span class="showcase-caption">Arte conceitual · não é captura de tela</span>
         </div>
         <div class="showcase-body">
-          <div class="showcase-overline"><span>04 / VÍDEO PELA REDE LOCAL</span><span class="showcase-stage">Em testes · H.264 experimental</span></div>
+          <div class="showcase-overline"><span>04 / VÍDEO PELA REDE LOCAL</span><span class="showcase-stage">Em testes · código 1.4.76</span></div>
           <h3 id="titulo-minha-camera">Minha Câmera</h3>
-          <p class="showcase-summary">Um celular funciona como câmera e o outro recebe vídeo sem nuvem.</p>
+          <p class="showcase-summary">Um Android como câmera remota para outro, pela LAN e sem nuvem obrigatória.</p>
           <dl class="showcase-facts">
-            <div><dt>O desafio</dt><dd>Reaproveitar um Android como câmera remota, inclusive com tela apagada, e reduzir latência e consumo de energia.</dd></div>
-            <div><dt>Como foi abordado</dt><dd>Transmissão MJPEG em Wi-Fi local com pareamento e comandos autenticados. Controles de gravação, foto, zoom e lanterna são condicionados à capacidade do transmissor. H.264 continua experimental.</dd></div>
+            <div><dt>O desafio</dt><dd>Obter vídeo estável com tela apagada e controle autorizado mantendo baixo consumo e temperatura segura.</dd></div>
+            <div><dt>Como foi abordado</dt><dd>MJPEG em Wi-Fi local com autenticação e comandos de lanterna conforme suporte do hardware. H.264 experimental; o diagnóstico registra falhas e o sistema tenta recuperar um fluxo MJPEG parado com ajustes progressivos.</dd></div>
           </dl>
-          <div class="showcase-flow"><span class="showcase-flow-label">FLUXO TÉCNICO SIMPLIFICADO</span><ol><li>Câmera Android</li><li>Wi-Fi local / token</li><li>Fluxo MJPEG</li><li>Receptor / gravação</li></ol></div>
-          <div class="showcase-evidence"><strong>O que está validado e o que falta</strong><p>O README registra paradas de quadros MJPEG e falhas H.264 no Redmi A3. As correções mais recentes precisam de build completo e ensaio físico; metas de FPS não equivalem a FPS observados.</p></div>
-          <div class="showcase-stack" aria-label="Tecnologias documentadas"><span>Kotlin</span><span>Camera API</span><span>MJPEG</span><span>Wi-Fi local</span><span>MCRP</span></div>
-          <div class="showcase-links"><a href="https://github.com/drilemoz/Minha-Camera" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a><a href="https://github.com/drilemoz/Minha-Camera/blob/main/docs/VALIDACAO_1_4_74.md" target="_blank" rel="noopener noreferrer">Análise de FPS e limitações ↗</a></div>
+          <div class="showcase-flow"><span class="showcase-flow-label">FLUXO TÉCNICO SIMPLIFICADO</span><ol><li>Câmera Android</li><li>Token / Wi-Fi LAN</li><li>MJPEG / H.264 em teste</li><li>Receptor / gravação</li></ol></div>
+          <div class="showcase-evidence"><strong>O que está validado e o que falta</strong><p>O README da 1.4.76 registra correção na configuração das tarefas Gradle; o build Android completo ainda precisa ser confirmado. Relatórios anteriores apontaram quadros parados em MJPEG e IllegalStateException com H.264 no Redmi A3. Metas de FPS não são medições reais ou garantia de estabilidade.</p></div>
+          <div class="showcase-stack" aria-label="Tecnologias documentadas"><span>Kotlin</span><span>Camera2</span><span>MJPEG</span><span>H.264 experimental</span><span>LAN / MCRP</span></div>
+          <div class="showcase-links"><a href="https://github.com/drilemoz/Minha-Camera" target="_blank" rel="noopener noreferrer">Código no GitHub ↗</a><a href="https://github.com/drilemoz/Minha-Camera/blob/main/README.md" target="_blank" rel="noopener noreferrer">FPS, CI e limitações ↗</a></div>
         </div>
       </article>
         </div>
@@ -223,7 +223,7 @@
     <section id="projetos" class="section projects-section">
       <div class="container">
         <div class="projects-head">
-          <div><p class="kicker">PORTFÓLIO</p><h2>Projetos que saíram <span class="muted">do papel.</span></h2><p class="section-lead">Catálogo completo com 17 projetos públicos, incluindo os quatro estudos técnicos acima. As capas são ilustrações, não capturas reais das interfaces.</p></div>
+          <div><p class="kicker">PORTFÓLIO</p><h2>Projetos que saíram <span class="muted">do papel.</span></h2><p class="section-lead">Catálogo local revisado em 01/11/2026 com 21 projetos públicos, incluindo os quatro estudos técnicos acima. A consulta online pode descobrir outros repositórios. As capas são ilustrações, não capturas reais das interfaces.</p></div>
           <div class="projects-count"><strong id="total">...</strong><span>projetos<br>apresentados</span></div>
         </div>
         <div class="controls">
@@ -238,7 +238,7 @@
         <div id="projects" class="project-grid" aria-live="polite" aria-busy="true"></div>
         <p id="empty" class="empty" hidden>Nenhum projeto encontrado. Tente outro filtro.</p>
         <div class="projects-footer"><p id="github-status" role="status">Carregando repositórios públicos...</p><a class="text-link" data-profile href="https://github.com/drilemoz" target="_blank" rel="noopener noreferrer">Ver todos no GitHub ↗</a></div>
-        <p class="notice">Etapas como Alfa, Beta ou Em testes descrevem o estágio informado no catálogo, não certificam a estabilidade do APK. Versões são consultadas nas Releases ou tags públicas do GitHub, identificadas separadamente. O download direto aparece apenas para APKs anexados a Releases públicas. Arquivos do GitHub Actions são temporários, podem exigir login e normalmente vêm em ZIP. Quando um projeto não possui Releases, mostramos o README ou as compilações disponíveis, sem inventar APKs.</p>
+        <p class="notice">Etapas como Alfa, Beta ou Em testes descrevem o estágio informado no catálogo, não certificam a estabilidade do APK. A versão do código é um registro do README em 01/11/2026, enquanto Releases e tags são consultadas separadamente no GitHub; nenhuma dessas informações, isoladamente, comprova APK validado. O download direto aparece apenas para APKs anexados a Releases públicas. Arquivos do GitHub Actions são temporários, podem exigir login e normalmente vêm em ZIP. Quando um projeto não possui Releases, mostramos o README ou as compilações disponíveis, sem inventar APKs.</p>
       </div>
     </section>
 
@@ -281,7 +281,7 @@
       <a href="#inicio" class="footer-brand" aria-label="Voltar ao início">AL<span>.</span></a>
       <div class="footer-details">
         <p>© <span id="year"></span> Adriedson Lemos. HTML, CSS, JavaScript e curiosidade.</p>
-        <p class="footer-version">Versão do portal <strong>v1.6.0</strong> <span aria-hidden="true">·</span> <a href="https://github.com/drilemoz/adriedsonlemos/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Histórico de alterações ↗</a></p>
+        <p class="footer-version">Versão do portal <strong>v1.7.0</strong> <span aria-hidden="true">·</span> <a href="https://github.com/drilemoz/adriedsonlemos/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Histórico de alterações ↗</a></p>
       </div>
       <a href="#inicio" class="back-to-top">Voltar ao topo ↑</a>
     </div>
