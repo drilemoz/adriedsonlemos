@@ -1,38 +1,41 @@
-const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
-const vm = require('node:vm');
-const js = fs.readFileSync(path.join(__dirname,'..','app.js'),'utf8');
-function testHarness(data) {
-  const body=js.replace('  setupNavigation();\n  repositoryList.sort', '  globalThis.__ports = {loadRelease,applyRelease}; return;\n  setupNavigation();\n  repositoryList.sort');
-  const calls=[];
-  const ctx={document:{querySelector:()=>({})},AbortController,URL,setTimeout,clearTimeout,console,
-    fetch:async(url)=>{calls.push(url);const found=Object.keys(data).find(k=>url.includes(k));
-      if (!found) throw Error('Unexpected URL: '+url);
-      return {ok:true,headers:{get:()=>null},json:async()=>data[found]};},
-    sessionStorage:{getItem:()=>null,setItem:()=>{}}};ctx.globalThis=ctx;
-  vm.createContext(ctx);vm.runInContext(body,ctx);
-  return {...ctx.__ports,calls};
-}
-function fakeCard(repo) {
-  const badge={textContent:'',title:''};const meta={textContent:''};
-  const link={textContent:'',href:'',hidden:true,classList:{add(){},remove(){}},removeAttribute(){},setAttribute(){}};
-  return {badge,meta,link,card:{dataset:{repo,title:repo,android:'false'},querySelector:s=>s.includes('project-version')?badge:s.includes('project-meta')?meta:link}};
-}
+const assert=require('node:assert/strict');
 (async()=>{
-  let t=testHarness({'/releases?':[], '/tags?':[{name:'v1.0.121'}]});
-  let r=await t.loadRelease('TermuxManager'), c=fakeCard('TermuxManager');t.applyRelease(c.card,r);
-  assert.equal(r.version,'');assert.equal(r.tag,'v1.0.121');assert.equal(c.badge.textContent,'Tag: v1.0.121');
-  assert.equal(c.link.textContent,'Como instalar ↗');
-  assert.ok(t.calls.some(u=>u.includes('/tags?')));
-  t=testHarness({'/releases?':[{draft:false,tag_name:'v1.4.76',prerelease:true,assets:[]}] ,'/actions/artifacts?':{artifacts:[]}});
-  r=await t.loadRelease('Minha-Camera');c=fakeCard('Minha-Camera');t.applyRelease(c.card,r);
-  assert.equal(c.badge.textContent,'Release: v1.4.76');
-  assert.equal(t.calls.some(u=>u.includes('/tags?')),false);
-  assert.equal(c.link.textContent,'Ver versões ↗');
-  t=testHarness({'/releases?':[], '/tags?':[], '/actions/artifacts?':{artifacts:[]}});
-  r=await t.loadRelease('Pulso');c=fakeCard('Pulso');t.applyRelease(c.card,r);
-  assert.equal(c.badge.textContent,'Sem Release/tag pública');
-  assert.match(c.meta.textContent,/Ainda não há Releases/);
-  console.log('Versões via API: Tag sem APK, Release prévia sem APK e repositório sem versão validados.');
-})().catch(error=>{console.error(error);process.exitCode=1});
+  const {createGithubClient}=await import('../src/github.mjs');
+  let calls=[];
+  const storage=new Map();
+  const request=async(url)=>{
+    calls.push(url);
+    if(url.includes('/releases?')) return {ok:true,json:async()=>[],headers:{get:()=>null}};
+    if(url.includes('/tags?')) return {ok:true,json:async()=>[{name:'v1.0.121'}],headers:{get:()=>null}};
+    throw Error('Unexpected URL '+url);
+  };
+  let clock=100000;
+  const client=createGithubClient({request,storage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v)},clock:()=>clock});
+  const [a,b]=await Promise.all([client.loadRelease('TermuxManager'),client.loadRelease('TermuxManager')]);
+  assert.equal(a.tag,'v1.0.121');assert.equal(a.version,'');assert.deepEqual(a,b);
+  assert.equal(calls.length,2,'Chamadas simultâneas deduplicadas');
+  const cachedClient=createGithubClient({request:async()=>{throw Error('Não consultar cache válido')},storage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v)},clock:()=>clock+1000});
+  assert.equal((await cachedClient.loadRelease('TermuxManager')).tag,'v1.0.121');
+  clock+=16*60*1000;
+  calls=[];
+  const expired=createGithubClient({request,storage:{getItem:k=>storage.get(k),setItem:(k,v)=>storage.set(k,v)},clock:()=>clock});
+  await expired.loadRelease('TermuxManager');assert.equal(calls.length,2,'Cache expirado recarregado');
+
+  let active=0,maxActive=0;
+  const limited=createGithubClient({releaseConcurrency:2,request:async(url)=>{
+    active++;maxActive=Math.max(maxActive,active);
+    await new Promise(r=>setTimeout(r,3)); active--;
+    if(url.includes('/releases?'))return{ok:true,json:async()=>[{tag_name:'v1',draft:false,assets:[]}],headers:{get:()=>null}};
+    return{ok:true,json:async()=>[],headers:{get:()=>null}};
+  }});
+  await Promise.all(['A','B','C','D','E','F'].map(repo=>limited.loadRelease(repo)));
+  assert.ok(maxActive<=2 && maxActive>0,'Concorrência limitada a duas requisições');
+
+  let amount=0;
+  const rate=createGithubClient({request:async()=>{amount++;return{ok:false,status:403,headers:{get:key=>key==='x-ratelimit-remaining'?'0':null}}}});
+  assert.equal((await rate.loadRelease('Pulso')).error,true);
+  assert.equal(rate.isRateLimited(),true);
+  assert.equal((await rate.loadRelease('Nexora')).error,true);
+  assert.equal(amount,1,'Limite evita requisições subsequentes');
+  console.log('GitHub API: tags, TTL, cache, deduplicação, concorrência e rate limit OK.');
+})().catch(e=>{console.error(e);process.exitCode=1});

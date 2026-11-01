@@ -1,4 +1,4 @@
-# Adriedson Lemos | Portfólio pessoal v1.7.0
+# Adriedson Lemos | Portfólio pessoal v1.8.0
 
 Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a trajetória de Adriedson Lemos e seus projetos públicos do GitHub.
 
@@ -17,7 +17,11 @@ Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a traj
 
 - `index.html`: conteúdo e estrutura semântica.
 - `styles.css`: design, responsividade e temas.
-- `app.js`: catálogo, busca, filtros, tema, integração GitHub, APKs.
+- `app.js`: inicialização e fluxo de apresentação (entrada ES Module).
+- `src/projects.mjs`: catálogo editorial offline de 21 projetos.
+- `src/catalog.mjs`: normalização, classificação, ordenação e busca pura.
+- `src/github.mjs`: cliente GitHub REST, Releases, Artifacts, cache e limite de concorrência.
+- `src/ui.mjs`: DOM seguro, cartões, estados de download, temas e navegação.
 - `favicon.svg`: identidade visual minimalista.
 - `assets/docs/curriculo-adriedson-lemos.pdf`: currículo profissional público de 2026, com experiência comprovada pelo documento de 2024, formação identificada como trancada e projetos de desenvolvimento. Sem telefone, endereço, idade ou condição de saúde.
 - `assets/projects/*.svg`: capas ilustrativas vetoriais dos 21 projetos, sem dependências externas.
@@ -26,14 +30,16 @@ Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a traj
 - `docs/GITHUB_SNAPSHOT_2026-11-01.md`: auditoria datada com 21 repositórios, versões declaradas e limites de verificação.
 - `VERSION`, `VERSION_CODE` e `github-manager.json`: metadados explícitos de versão e identidade para importação do site no GitHub Manager. Não é APK e não usa identificador Android.
 - `CHANGELOG.md`: histórico de evolução mostrado no rodapé do site.
-- `tests/*.test.cjs`: sete grupos de testes automatizados para catálogo, privacidade, versão, estudos técnicos, links APK, Releases e Artifacts, executados com Node.js, sem dependências externas.
+- `tests/*.test.cjs`: dez grupos de testes automatizados, com Node.js sem dependências externas.
+- `docs/ARCHITECTURE.md` e `docs/VALIDATION-v1.8.0.md`: desenho técnico e evidências de validação da refatoração.
 
-Para testar a lógica de downloads:
+Para executar a suíte completa (Node.js 20.11+ recomendado):
 
 ```bash
-node tests/portfolio.test.cjs
-node tests/visual-version.test.cjs
+node --test tests/*.test.cjs
 ```
+
+**Importante:** ES Modules requerem um servidor HTTP para abrir a página normalmente. Evite abrir o arquivo `index.html` diretamente via `file://`.
 
 ## Publicar na Vercel
 
@@ -44,7 +50,7 @@ node tests/visual-version.test.cjs
 5. Publique. O endereço `.vercel.app` final depende da disponibilidade do nome.
 6. A partir daí, as alterações feitas na branch conectada podem gerar novas implantações automaticamente.
 
-Para testar localmente, abra `index.html` no navegador ou use:
+Para testar localmente, inicie um servidor estático na raiz do projeto (não use `file://`):
 
 ```bash
 python3 -m http.server 8080
@@ -72,6 +78,15 @@ O código tenta descobrir automaticamente o nome atual a partir da URL do reposi
 - **Falha na API ou limite de requisições:** não anuncia que não há Releases; informa indisponibilidade temporária da consulta, mantendo o link para o código.
 
 O site não armazena APKs, não usa credenciais nem cria links de download temporário ou fictícios. Por depender de APIs públicas, a seção de downloads pode sofrer com limites de taxa, erros de rede e expiração dos Artifacts. As consultas de cada projeto são feitas conforme os cartões aparecem e ficam em cache por aba por 15 minutos.
+
+## Atualização 1.8.0 (01/11/2026)
+
+- Refatoração do JavaScript monolítico para módulos nativos, sem framework, bundler ou novas dependências.
+- Separação do catálogo editorial, lógica de filtros e classificação, cliente HTTP GitHub, apresentação DOM e inicialização.
+- Cliente GitHub com fila de até três consultas de Releases, deduplicação de requisições simultâneas, cache de 15 minutos e proteção contra resposta inválida / rate limit.
+- Links diretos de APK mantêm validação de HTTPS, domínio `github.com` e caminho específico do repositório; texto da API continua inserido via `textContent`.
+- Dez grupos de testes Node.js aprovados; ver `docs/VALIDATION-v1.8.0.md` para limites e resultados.
+- Versionamento `1.8.0` / código `9` sincronizado em VERSION, VERSION_CODE, HTML e github-manager.json.
 
 ## Atualização 1.7.0 (01/11/2026)
 
@@ -132,7 +147,7 @@ O site não armazena APKs, não usa credenciais nem cria links de download tempo
 
 Atualize **juntos** os arquivos `VERSION`, `VERSION_CODE`, `github-manager.json`, rodapé no `index.html`, README e CHANGELOG em cada nova entrega. `VERSION_CODE` é um contador sequencial de entregas do site (`8` nesta versão), não um código Android. A identificação efetiva depende da versão instalada do GitHub Manager.
 
-**Privacidade atual (v1.7.0):** somente o e-mail profissional e os links de GitHub/LinkedIn aparecem no contato. O telefone da versão antiga foi removido. Não há analytics nem formulário com armazenamento; o e-mail visível ainda pode ser coletado por robôs.
+**Privacidade atual (v1.8.0):** somente o e-mail profissional e os links de GitHub/LinkedIn aparecem no contato. O telefone da versão antiga foi removido. Não há analytics nem formulário com armazenamento; o e-mail visível ainda pode ser coletado por robôs.
 
 ## Atualização 1.1.0
 

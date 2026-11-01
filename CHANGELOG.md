@@ -1,5 +1,14 @@
 # Histórico de alterações
 
+## v1.8.0 · 01/11/2026
+
+- **Refatoração modular:** `app.js` passa a orquestrar a interface; `src/projects.mjs`, `src/catalog.mjs`, `src/github.mjs` e `src/ui.mjs` separam dados, regras puras, API e DOM.
+- **Sem dependências ou build:** JavaScript ES Modules nativo, site ainda estático e pronto para Vercel; `index.html` carrega `app.js` com `type="module"`.
+- **Resiliência do GitHub:** concorrência máxima de três consultas de Release, deduplicação de pedidos, cache de sessão de 15 minutos, validação de URLs APK e fallback editorial sem rede.
+- **Segurança e testes:** renderização somente por `textContent`, verificação de metadados públicos, testes de entradas suspeitas e 10 grupos de testes Node.js.
+- **Documentação e versão:** README, arquitetura, validação, `VERSION=1.8.0`, `VERSION_CODE=9` e `github-manager.json` sincronizados. Layout, catálogo de 21 projetos, estudos técnicos e imagens preservados.
+- **Limites:** teste de navegador automatizado não executado por bloqueio de navegação do ambiente. Deploy e teste na Vercel pendentes. Nenhuma alteração no GitHub remoto foi feita.
+
 ## v1.7.0 · 01/11/2026
 
 - Catálogo local atualizado de 17 para 21 repositórios públicos após comparação com os READMEs do GitHub. Novos projetos: UAI Cortes, Quanto Sobra?, Finanças da Viagem e Internet XP.

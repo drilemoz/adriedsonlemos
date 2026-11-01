@@ -1,39 +1,23 @@
-const assert = require('node:assert/strict');
-const fs = require('node:fs');
-const path = require('node:path');
-const vm = require('node:vm');
-const root=path.join(__dirname,'..');
-const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
-const js=fs.readFileSync(path.join(root,'app.js'),'utf8');
-const css=fs.readFileSync(path.join(root,'styles.css'),'utf8');
-const repos=['Vigia-IA','Nexora','Pulso','Minha-Camera'];
-const targets=['vigia-ia','nexora','pulso-bateria','minha-camera'];
-assert.equal((html.match(/class="showcase-card"/g)||[]).length,4);
-for(const [i,slug] of targets.entries()) {
- assert.match(html,new RegExp('id="estudo-'+slug+'"'));
- assert.match(html,new RegExp('href="#estudo-'+slug+'"'));
- assert.match(html,new RegExp('https://github\.com/drilemoz/'+repos[i]));
- assert.match(html,new RegExp('assets/projects/'+repos[i]+'\.svg'));
-}
-assert.match(html,/fluxo técnico simplificado/i);
-assert.match(html,/não é captura de tela/i);
-
-
-
-
-assert.match(html,/H\.264 experimental/i);
-assert.match(html,/Wikipédia offline/i);
-assert.match(html,/1\.0\.323\+323/);
-assert.match(html,/0\.1\.0-alpha\.73/);
-assert.match(html,/1\.4\.76/);
-assert.match(html,/class="showcase-note"/);
-assert.match(css,/\.showcase-grid/);
-assert.match(css,/@media\(max-width:550px\)/);
-const body=js.replace('  let githubUser = INITIAL_GITHUB_USER;', '  globalThis.__known = KNOWN; return;\n  let githubUser = INITIAL_GITHUB_USER;');
-const ctx={};ctx.globalThis=ctx;vm.createContext(ctx);vm.runInContext(body,ctx);
-const featured=ctx.__known.filter(i=>i.featured).map(i=>i.repo).sort();
-assert.deepEqual(Array.from(featured, String),repos.slice().sort());
-assert.equal(ctx.__known.length,21);
-assert.match(js,/Análise técnica ↗/);
-assert.doesNotMatch(html,/visão monocular|CID H54|href="tel:/i);
-console.log('Quatro estudos, fontes, ressalvas, navegação, 21 projetos e privacidade validados.');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');const path=require('node:path');
+(async()=>{
+ const root=path.resolve(__dirname,'..');
+ const html=fs.readFileSync(path.join(root,'index.html'),'utf8');
+ const css=fs.readFileSync(path.join(root,'styles.css'),'utf8');
+ const ui=fs.readFileSync(path.join(root,'src/ui.mjs'),'utf8');
+ const {PROJECTS}=await import('../src/projects.mjs');
+ const {STUDIES}=await import('../src/catalog.mjs');
+ const repos=['Vigia-IA','Nexora','Pulso','Minha-Camera'];
+ assert.equal((html.match(/class="showcase-card"/g)||[]).length,4);
+ for(const repo of repos){const slug=STUDIES[repo];assert.ok(slug);
+  assert.ok(html.includes('id="estudo-'+slug+'"'));assert.ok(html.includes('href="#estudo-'+slug+'"'));
+  assert.ok(html.includes('https://github.com/drilemoz/'+repo));assert.ok(html.includes('assets/projects/'+repo+'.svg'));
+ }
+ assert.match(html,/fluxo técnico simplificado/i);assert.match(html,/não é captura de tela/i);
+ for(const pattern of [/H\.264 experimental/i,/Wikipédia offline/i,/1\.0\.323\+323/,/0\.1\.0-alpha\.73/,/1\.4\.76/,/class="showcase-note"/]) assert.match(html,pattern);
+ assert.match(css,/\.showcase-grid/);assert.match(css,/@media\(max-width:550px\)/);
+ assert.deepEqual(PROJECTS.filter(x=>x.featured).map(x=>x.repo).sort(),repos.sort());
+ assert.match(ui,/Análise técnica ↗/);
+ assert.doesNotMatch(html,/visão monocular|CID H54|href="tel:/i);
+ console.log('Estudos, fontes, navegação, quatro destaques e privacidade OK.');
+})().catch(e=>{console.error(e);process.exitCode=1});
