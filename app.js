@@ -48,7 +48,9 @@ function observeReleases(cards) {
 }
 
 function render() {
-  const cards = view.render(filterProjects(projects, category, search), projects.length);
+  view.renderFeatured(projects.filter(project => project.featured));
+  const secondary = projects.filter(project => !project.featured);
+  const cards = view.render(filterProjects(secondary, category, search), secondary.length);
   observeReleases(cards);
 }
 
@@ -62,7 +64,7 @@ async function synchronizeGithub() {
   await client.resolveOwner();
   view.updateProfileLinks();
   if (client.isRateLimited()) {
-    view.setStatus('Catálogo local disponível. A API do GitHub atingiu o limite de consultas.');
+    view.setStatus('Lista local conferida em 07/11/2026. O estado atual dos repositórios não pôde ser confirmado (limite da API).');
     render();
     return;
   }
@@ -70,9 +72,9 @@ async function synchronizeGithub() {
     const repositories = publicProjects(await client.listPublicRepositories(), client.getUser());
     if (!repositories.length) throw new Error('Nenhum repositório público encontrado');
     projects = repositories;
-    view.setStatus('Catálogo sincronizado com os repositórios públicos do GitHub.');
+    view.setStatus('Lista atualizada pelo GitHub. Repositórios privados, arquivados, desativados e não selecionados ficam de fora.');
   } catch {
-    view.setStatus('Mostrando projetos conhecidos. A atualização pelo GitHub não está disponível no momento.');
+    view.setStatus('Lista local conferida em 07/11/2026. Não foi possível confirmar mudanças recentes no GitHub.');
   }
   render();
 }

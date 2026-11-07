@@ -1,14 +1,9 @@
 import { PROJECTS } from './projects.mjs';
 
-export const CATALOG_DATE = '01/11/2026';
+export const CATALOG_DATE = '07/11/2026';
 export const PORTFOLIO_REPO = 'adriedsonlemos';
 export const INITIAL_GITHUB_USER = 'drilemoz';
-export const STUDIES = Object.freeze({
-  'Vigia-IA': 'vigia-ia',
-  Nexora: 'nexora',
-  Pulso: 'pulso-bateria',
-  'Minha-Camera': 'minha-camera'
-});
+export const STUDIES = Object.freeze({});
 
 const knownByName = new Map(PROJECTS.map((project) => [project.repo.toLowerCase(), project]));
 
@@ -28,8 +23,9 @@ export function inferredCategories(repo) {
 }
 
 export function projectDetails(repo) {
-  if (!repo || !safeRepoName(repo.name)) return null;
+  if (!repo || !safeRepoName(repo.name) || repo.archived === true || repo.disabled === true || repo.private === true || repo.fork === true) return null;
   const known = knownByName.get(repo.name.toLowerCase());
+  if (!known) return null; // Curadoria explícita: evitar exibir projetos desativados ou desconhecidos.
   return {
     repo: repo.name,
     name: known?.name || repo.name,
@@ -56,7 +52,7 @@ export function publicProjects(repos, githubUser) {
   if (!Array.isArray(repos) || !safeRepoName(githubUser)) return [];
   const unique = new Map();
   for (const repo of repos) {
-    if (!repo || repo.private || !safeRepoName(repo.name) || !repo.owner ||
+    if (!repo || repo.private || repo.archived || repo.disabled || repo.fork || !safeRepoName(repo.name) || !repo.owner ||
         String(repo.owner.login).toLowerCase() !== githubUser.toLowerCase() ||
         repo.name.toLowerCase() === PORTFOLIO_REPO.toLowerCase()) continue;
     const project = projectDetails(repo);
@@ -73,6 +69,7 @@ export function sortProjects(projects) {
 export function filterProjects(projects, category = 'todos', search = '') {
   const term = search.trim().toLocaleLowerCase('pt-BR');
   return projects.filter((project) => {
+    if (project.archived || project.disabled) return false;
     const categories = project.categories || [];
     if (category !== 'todos' && !categories.includes(category)) return false;
     const haystack = [project.name, project.repo, project.description, project.kind, ...(project.stack || [])]

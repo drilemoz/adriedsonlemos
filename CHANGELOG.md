@@ -1,5 +1,15 @@
 # Histórico de alterações
 
+## v2.0.0 — 07/11/2026
+
+- Novo design Tech Dark responsivo, tema claro opcional, Home com quatro destaques e catálogo secundário.
+- Página `contato.html` com WhatsApp, e-mail, LinkedIn, GitHub e chave Pix com cópia.
+- Projetos curados por repositórios públicos não arquivados: 14 em 07/11/2026. Na consulta online: excluir `archived`, `disabled`, `private`, `fork` e não selecionados.
+- Fallback datado em falhas da API; não alegar verificação atual quando indisponível.
+- Versionamento 2.0.0, código 10, sitemap, documentação e testes atualizados.
+
+# Histórico de alterações
+
 ## v1.8.0 · 01/11/2026
 
 - **Refatoração modular:** `app.js` passa a orquestrar a interface; `src/projects.mjs`, `src/catalog.mjs`, `src/github.mjs` e `src/ui.mjs` separam dados, regras puras, API e DOM.

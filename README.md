@@ -1,165 +1,46 @@
-# Adriedson Lemos | Portfólio pessoal v1.8.0
+# Adriedson Lemos | Tecnologia & Projetos v2.0.0
 
-Site estático em **HTML, CSS e JavaScript puro**, criado para apresentar a trajetória de Adriedson Lemos e seus projetos públicos do GitHub.
+Portfólio estático de **Adriedson Lemos**, disponível em <https://adriedsonlemos.vercel.app/>, sem framework ou dependências externas.
 
-## Funcionalidades
+## O que mudou na versão 2.0.0
 
-- **Tema claro por padrão**: fundo branco. Botão para alternar para tema escuro com fundo quase preto (`#08090c`); escolha fica salva no navegador.
-- Layout responsivo para celular, tablet e desktop.
-- Seções: apresentação, sobre mim, experiência profissional, habilidades, quatro estudos técnicos em destaque, catálogo completo, jornada e contato profissional por e-mail, LinkedIn e GitHub.
-- Catálogo inicial com os 21 projetos públicos verificados em 01/11/2026, renderizado mesmo sem acesso à API do GitHub. A consulta online pode descobrir projetos novos depois dessa data.
-- Consulta opcional à API pública do GitHub para listar os repositórios públicos (sem tokens).
-- Busca e filtros por tipo de projeto.
-- Consulta sob demanda às Releases, à medida que os cartões entram na tela: exibe um **link direto para APK** somente se uma Release pública tiver um arquivo `.apk` válido. Caso contrário, mantém o link de Releases.
-- Nenhum SDK de analytics, nenhuma conta exigida e nenhuma dependência JavaScript externa.
+- Redesign completo **Tech Dark** com tema escuro inicial, alternativa clara, responsividade e preferência persistida localmente.
+- **Home** com quatro projetos destacados: Vigia IA, Explorador XP, GitHub Manager e UAI Cortes. Os cartões são renderizados a partir da curadoria local e reconciliados com a API pública do GitHub.
+- **Catálogo secundário** de até dez projetos adicionais selecionados, com pesquisa, filtros e consulta sob demanda de Releases/Artifacts.
+- **Não mostrar** repositórios arquivados, desativados, privados, forks, entradas desconhecidas ou sem seleção editorial quando a API responde. Em falha de rede, usa a lista local verificada em 07/11/2026, identificando que pode estar desatualizada.
+- Nova **página `contato.html`**, com WhatsApp `(37) 99874-7642` no formato wa.me, e-mail, GitHub, LinkedIn e chave Pix `drilemoz@gmail.com` com botão para copiar.
+- SEO de ambas as páginas, sitemap atualizado, sem token GitHub no navegador nem dados falsos de downloads.
+- Histórico profissional, PDF do currículo e informações sobre formação preservados.
 
-## Arquivos
+## Organização
 
-- `index.html`: conteúdo e estrutura semântica.
-- `styles.css`: design, responsividade e temas.
-- `app.js`: inicialização e fluxo de apresentação (entrada ES Module).
-- `src/projects.mjs`: catálogo editorial offline de 21 projetos.
-- `src/catalog.mjs`: normalização, classificação, ordenação e busca pura.
-- `src/github.mjs`: cliente GitHub REST, Releases, Artifacts, cache e limite de concorrência.
-- `src/ui.mjs`: DOM seguro, cartões, estados de download, temas e navegação.
-- `favicon.svg`: identidade visual minimalista.
-- `assets/docs/curriculo-adriedson-lemos.pdf`: currículo profissional público de 2026, com experiência comprovada pelo documento de 2024, formação identificada como trancada e projetos de desenvolvimento. Sem telefone, endereço, idade ou condição de saúde.
-- `assets/projects/*.svg`: capas ilustrativas vetoriais dos 21 projetos, sem dependências externas.
-- `og-image.png`, `robots.txt`, `sitemap.xml`: apresentação nas redes e configuração de indexação.
-- `vercel.json`: cabeçalhos de segurança para Vercel.
-- `docs/GITHUB_SNAPSHOT_2026-11-01.md`: auditoria datada com 21 repositórios, versões declaradas e limites de verificação.
-- `VERSION`, `VERSION_CODE` e `github-manager.json`: metadados explícitos de versão e identidade para importação do site no GitHub Manager. Não é APK e não usa identificador Android.
-- `CHANGELOG.md`: histórico de evolução mostrado no rodapé do site.
-- `tests/*.test.cjs`: dez grupos de testes automatizados, com Node.js sem dependências externas.
-- `docs/ARCHITECTURE.md` e `docs/VALIDATION-v1.8.0.md`: desenho técnico e evidências de validação da refatoração.
+- `index.html`: Home, destaques, catálogo, apresentação, habilidades e experiência.
+- `contato.html` e `contato.js`: canais públicos e cópia da chave Pix.
+- `styles.css`: identidade e responsividade.
+- `src/projects.mjs`: curadoria dos 14 repositórios não arquivados conferidos em 07/11/2026.
+- `src/catalog.mjs`: filtragem conservadora de status e classificação.
+- `src/github.mjs`: API pública do GitHub, cache, Releases e Artifacts.
+- `src/ui.mjs`: geração de cartões seguros, shell, tema e menu.
+- `app.js`: inicialização do catálogo e sincronização com GitHub.
+- `tests/`: testes Node.js de catálogo, privacidade, interface, API, contato, versão e SEO.
 
-Para executar a suíte completa (Node.js 20.11+ recomendado):
+## Executar e testar
 
-```bash
+```sh
 node --test tests/*.test.cjs
-```
-
-**Importante:** ES Modules requerem um servidor HTTP para abrir a página normalmente. Evite abrir o arquivo `index.html` diretamente via `file://`.
-
-## Publicar na Vercel
-
-1. Crie ou use o repositório `adriedsonlemos` no GitHub.
-2. Envie **todos os arquivos deste diretório para a raiz** do repositório (não envie apenas o `.zip`).
-3. Em <https://vercel.com/new>, importe o repositório do GitHub.
-4. Em **Framework Preset**, selecione **Other** (site estático). Não configure comando de build nem diretório de saída personalizado; a raiz contém `index.html`.
-5. Publique. O endereço `.vercel.app` final depende da disponibilidade do nome.
-6. A partir daí, as alterações feitas na branch conectada podem gerar novas implantações automaticamente.
-
-Para testar localmente, inicie um servidor estático na raiz do projeto (não use `file://`):
-
-```bash
 python3 -m http.server 8080
 ```
 
-Acesse `http://localhost:8080` dentro da pasta do site.
+Abra `http://localhost:8080`. Não abra via `file://`, pois há módulos ES.
 
-## GitHub e mudança futura do nome de usuário
+## Publicar
 
-O nome atual configurado no topo de `app.js` é:
+Site para implantação estática na Vercel, com a raiz do repositório como diretório público, sem build. Configuração em `vercel.json`.
 
-```js
-const INITIAL_GITHUB_USER = 'drilemoz';
-const PORTFOLIO_REPO = 'adriedsonlemos';
-```
+## Limites importantes
 
-O código tenta descobrir automaticamente o nome atual a partir da URL do repositório, aproveitando o redirecionamento de URLs antigas feito pelo GitHub. **Isso não é garantia permanente**, especialmente se o login antigo for assumido por outra conta. Ao mudar de usuário, atualize `INITIAL_GITHUB_USER`, as URLs de fallback em `index.html`, e qualquer link em redes sociais e integrações. 
+O GitHub é fonte para existência e situação dos repositórios, mas não confirma que o APK foi testado. Sem API, o site deixa claro que o catálogo local é uma fotografia datada, e não disponibilidade verificada em tempo real. Capas SVG são ilustrações, não capturas reais. O botão Pix copia a chave, não gera uma cobrança nem um QR Code.
 
-## Downloads: Releases, Actions e projetos sem APK (v1.1.0)
+A mudança do nome de usuário GitHub exige revisão de referências estáticas e da constante `INITIAL_GITHUB_USER`; a detecção de redirecionamento não é garantida.
 
-- **Releases públicas:** consulta até 100 Releases, incluindo pré-lançamentos. O botão **Baixar APK** só aparece se existir um arquivo `.apk` real entre os assets da Release. Uma tag ou uma Release com nome de APK, mas sem arquivo anexado, **não** é link de download.
-- **GitHub Actions:** se não encontrar APK nas Releases de um projeto Android, consulta os Artifacts públicos recentes. Se encontrar um Artifact não expirado com nome associado a APK, mostra **Ver APK no Actions**, levando à execução de origem (não tenta download direto). O visitante deve entrar no GitHub para baixar o Artifact, geralmente ZIP, que expira segundo a retenção configurada.
-- **Sem Release nem Artifact:** projetos Android mostram **Ver compilações** (sem garantia de existir APK). Projetos que não são Android ficam apenas com **Ver código**. Se houver uma Release sem APK, mostra **Ver versões** com aviso.
-- **Termux Manager:** não é aplicativo APK: é uma ferramenta para Termux. Quando não há Releases, o botão leva ao README e se chama **Como instalar**. Assim não é exibida uma página de Releases vazia.
-- **Falha na API ou limite de requisições:** não anuncia que não há Releases; informa indisponibilidade temporária da consulta, mantendo o link para o código.
-
-O site não armazena APKs, não usa credenciais nem cria links de download temporário ou fictícios. Por depender de APIs públicas, a seção de downloads pode sofrer com limites de taxa, erros de rede e expiração dos Artifacts. As consultas de cada projeto são feitas conforme os cartões aparecem e ficam em cache por aba por 15 minutos.
-
-## Atualização 1.8.0 (01/11/2026)
-
-- Refatoração do JavaScript monolítico para módulos nativos, sem framework, bundler ou novas dependências.
-- Separação do catálogo editorial, lógica de filtros e classificação, cliente HTTP GitHub, apresentação DOM e inicialização.
-- Cliente GitHub com fila de até três consultas de Releases, deduplicação de requisições simultâneas, cache de 15 minutos e proteção contra resposta inválida / rate limit.
-- Links diretos de APK mantêm validação de HTTPS, domínio `github.com` e caminho específico do repositório; texto da API continua inserido via `textContent`.
-- Dez grupos de testes Node.js aprovados; ver `docs/VALIDATION-v1.8.0.md` para limites e resultados.
-- Versionamento `1.8.0` / código `9` sincronizado em VERSION, VERSION_CODE, HTML e github-manager.json.
-
-## Atualização 1.7.0 (01/11/2026)
-
-- Catálogo offline ampliado de 17 para **21 repositórios públicos** após conferência com o GitHub: UAI Cortes, Quanto Sobra?, Finanças da Viagem e Internet XP. Quatro novas capas SVG locais e conceituais.
-- Revisadas as descrições dos demais aplicativos de acordo com os READMEs públicos consultados, sem atribuir recursos experimentais como testados.
-- Quatro estudos de caso atualizados: **Vigia IA 1.0.323+323**, **Nexora alpha.38**, **Pulso Bateria alpha.73** e **Minha Câmera 1.4.76**. As versões indicam o estado do código nos READMEs em 01/11/2026, **não** a disponibilidade de um APK validado.
-- Os cartões mostram o número de versão do código como referência histórica datada, separado da consulta dinâmica das Releases/tags. Releases continuam sendo conferidas para downloads APK confiáveis.
-- Para repositórios futuros não catalogados, categorias Android/Web/Ferramentas só são inferidas quando houver metadados explícitos. Casos desconhecidos aparecem em **Todos**, sem classificação inventada.
-- Testes do catálogo, capas, estudos, versionamento e categorias atualizados. Mantidos tema claro/escuro, responsividade, privacidade, currículo, SEO e lógica de links de Downloads/Artifacts.
-- Versão `1.7.0`, código `8` sincronizados. A presença de README/versão no GitHub **não** é prova de compilação, publicação ou instalação. 
-
-## Atualização 1.6.0 (17/10/2026)
-
-- Quatro estudos técnicos antes do catálogo de 17 projetos: Vigia IA, Nexora, Pulso Bateria e Minha Câmera. Cada estudo mostra desafio, implementação, fluxo conceitual, tecnologias e estágio de validação, com acesso a README/documentação do projeto.
-- As quatro vitrines têm ilustrações SVG locais identificadas como conceituais; nenhuma captura real foi obtida ou simulada. Não foram fabricados resultados de benchmarking de CPU, memória, FPS ou bateria.
-- Destaque especial às limitações: transmissão Kotlin do Vigia IA ainda experimental, ganhos do Nexora não quantificados, no Pulso Bateria a validação alpha.36 inclui testes estáticos e Kotlin/JVM mas não build Android, e Minha Câmera ainda investiga instabilidades em MJPEG/H.264.
-- Navegação principal ganhou **Destaques** e os quatro cartões correspondentes têm **Análise técnica**. Todos os 17 projetos são preservados no catálogo completo.
-- Página estática sem JavaScript de terceiros; continuam os links às fontes públicas e a API GitHub já existente. Nenhum backend ou integração adicional.
-- `VERSION` 1.6.0, `VERSION_CODE` 7 e metadados sincronizados. Pendente: publicação na hospedagem e confirmação da URL canônica.
-
-## Atualização 1.5.0 (17/10/2026)
-
-- Apresentação reforçada com experiência em suporte e infraestrutura de TI, sem confundir empregos anteriores e projetos atuais.
-- Nova seção **Experiência profissional**: Atacadão (2019–2022), MEDGRUPO (2018–2019) e Prefeitura de Iguatama (2012–2014), conforme currículo de 2024 fornecido pelo titular.
-- Nova seção **Habilidades**: desenvolvimento, infraestrutura, ferramentas/dados e projetos pessoais, distinguindo conhecimento declarado de prática em projetos.
-- Formação indicada corretamente como **graduação trancada em Análise e Desenvolvimento de Sistemas (Estácio EAD)**, sem declarar diploma concluído.
-- PDF do currículo profissional revisado gerado localmente, incluído no site e acessível pelos botões **Baixar currículo** e **Visualizar PDF**. Fonte original de 2024 permanece fora do site, por conter dados pessoais e informações médicas.
-- Contato público: e-mail já existente e novo link ao LinkedIn informado no currículo. O telefone público anterior foi removido da página e **não** consta no PDF para reduzir a exposição de dados pessoais. Não publica condição médica, CID, estado civil, idade ou endereço.
-- Navegação, estilo responsivo e modo AMOLED/claro preservados. Sem bibliotecas ou servidores externos adicionados.
-- Versão `1.5.0`, código `6`, README, CHANGELOG, testes e `github-manager.json` sincronizados. A URL canônica herdada deve ser conferida antes da publicação.
-
-## Atualização 1.4.0 (17/10/2026)
-
-- Foram adicionadas **17 capas vetoriais locais e leves**, uma por projeto catalogado. São **ilustrações conceituais**, não capturas reais dos aplicativos. O rótulo e o texto alternativo deixam isso explícito. Futuras capturas verificadas poderão substituir os arquivos em `assets/projects/`.
-- Os cartões agora mostram o estágio indicativo do desenvolvimento (Alfa, Beta, Em testes, Em evolução, Experimental ou Estável). Os estágios são editoriais, com base na documentação pública consultada; não são certificação de segurança/estabilidade do APK nem substituem testes em aparelho.
-- Adicionado selo de versão obtida sob demanda pela API do GitHub: **Release** para uma Release pública ou **Tag** para um repositório sem Release. Nunca deduz download a partir do nome de uma tag; o APK segue exigindo asset `.apk` real.
-- Corrigido fallback sem IntersectionObserver para consultar todas as versões, no máximo três requisições de cartões em paralelo, em vez de apenas os oito primeiros cartões.
-- SEO: metadados Open Graph/Twitter, imagem social PNG local, URL canônica, `robots.txt`, `sitemap.xml` e dados estruturados básicos. **A URL pública foi herdada do campo `website` de `github-manager.json` e deve ser verificada na hospedagem** antes de divulgar. Nenhuma implantação foi feita nesta entrega.
-- Atualizados VERSION, VERSION_CODE 5, identidade, documentação, rodapé e testes. Sem analytics, SDK externo, imagens de terceiros ou mudanças nos contatos públicos.
-
-## Atualização 1.3.0 (17/10/2026)
-
-- Catálogo local revisado com base nos **17 repositórios públicos de projetos** da conta `drilemoz` (além do repositório deste portfólio).
-- Novos cartões conhecidos: **Nexora**, **Minha Câmera**, **Uai Vozes**, **Baixa Fácil**, **MeuGiga**, **Meu Vercel**, **Tática Manager**, **Lista de Compras** (`Lista-de-Compras`) e **Termux Manager Android** (`Termux-Manager`).
-- Removidos do catálogo de reserva os projetos **Saldo Real**, **Lista Nômade**, **Lista de Mercado**, **Meu PC**, **Guia DOA** e **Meu Bolsa Família**, não encontrados entre os repositórios públicos atuais. Eles podem continuar existindo fora da conta pública; a alteração não exclui repositórios nem seus dados.
-- Atualizadas as descrições das ferramentas que permaneceram no catálogo; diferenciado o projeto Android `Termux-Manager` da ferramenta de terminal `TermuxManager`.
-- Preservados tema claro/escuro, busca, filtros, links de GitHub, lógica de Releases/APKs e atualização automática pela API. Se a API pública falhar, a página usa os 17 projetos catalogados localmente.
-- Versão do portal `1.3.0`, `VERSION_CODE` `4`, metadados, rodapé e testes sincronizados.
-
-## Atualização 1.2.0
-
-- Incluídos e-mail profissional e telefone para contato na versão histórica 1.2.0 (telefone removido do site na 1.5.0).
-- Adicionado número **v1.2.0** no rodapé, com link para o histórico público de alterações.
-- Criados `VERSION`, `VERSION_CODE` e `github-manager.json`, para oferecer identidade e versão explícitas ao GitHub Manager, sem simular projeto Android.
-- Mantidos o tema branco padrão e o preto profundo opcional, a navegação responsiva e os links aos projetos.
-
-### Versionamento do portal
-
-Atualize **juntos** os arquivos `VERSION`, `VERSION_CODE`, `github-manager.json`, rodapé no `index.html`, README e CHANGELOG em cada nova entrega. `VERSION_CODE` é um contador sequencial de entregas do site (`8` nesta versão), não um código Android. A identificação efetiva depende da versão instalada do GitHub Manager.
-
-**Privacidade atual (v1.8.0):** somente o e-mail profissional e os links de GitHub/LinkedIn aparecem no contato. O telefone da versão antiga foi removido. Não há analytics nem formulário com armazenamento; o e-mail visível ainda pode ser coletado por robôs.
-
-## Atualização 1.1.0
-
-- Corrigido botão de Releases vazias, inclusive Termux Manager.
-- Corrigida distinção entre arquivo APK real, nome de Release, e Artifact do Actions.
-- Atualizado o usuário do GitHub para `drilemoz` nos links iniciais, mantendo a descoberta automática do proprietário pela API.
-- Mantidos os modos branco padrão e escuro quase preto, layout, filtros e estrutura estática sem dependências.
-
-## Observações
-
-- Site pessoal em português brasileiro.
-- Descrições resumidas baseadas nos READMEs públicos dos projetos e nos interesses informados pelo autor.
-- Os empregadores anteriores aparecem a partir do currículo de 2024. Não incluímos fotos privadas, endereço, telefone, estado civil, idade ou informações médicas. O e-mail público é o mesmo do site anterior.
-- Alguns projetos estão em fase de desenvolvimento, pré-lançamento ou validação. Links de repositório não equivalem a APK estável.
-- Antes de divulgar o domínio final, confira a descrição pessoal e os links de downloads.
+Histórico de versões anteriores: [CHANGELOG.md](CHANGELOG.md).

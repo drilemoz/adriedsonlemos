@@ -1,5 +1,3 @@
-import { CATALOG_DATE, STUDIES } from './catalog.mjs';
-
 function element(doc, tag, className = '', textValue) {
   const node = doc.createElement(tag);
   if (className) node.className = className;
@@ -120,20 +118,9 @@ export function createProjectCard(doc, item, repoUrl) {
   const version = element(doc, 'div', 'project-version', 'Versão: consulta sob demanda');
   version.title = 'Releases e tags são consultadas via GitHub ao visualizar o projeto';
   card.appendChild(version);
-  if (item.sourceVersion) {
-    const declared = element(doc, 'div', 'project-code-version', `Código (README, ${CATALOG_DATE}): ${item.sourceVersion}`);
-    declared.title = 'Versão declarada no código na data de conferência. Não comprova APK publicado ou compilação aprovada.';
-    card.appendChild(declared);
-  }
   card.appendChild(element(doc, 'div', 'project-meta', 'Código e documentação no GitHub'));
   const links = element(doc, 'div', 'project-links');
   links.appendChild(externalLink(doc, repoUrl(item.repo), 'Ver código ↗', 'project-link code'));
-  if (Object.hasOwn(STUDIES, item.repo)) {
-    const study = element(doc, 'a', 'project-link study', 'Análise técnica ↗');
-    study.href = '#estudo-' + STUDIES[item.repo];
-    study.setAttribute('aria-label', 'Ler análise técnica de ' + item.name);
-    links.appendChild(study);
-  }
   const releases = externalLink(doc, repoUrl(item.repo) + '/releases', 'Consultando versões...', 'project-link release');
   releases.hidden = true;
   links.appendChild(releases);
@@ -141,8 +128,35 @@ export function createProjectCard(doc, item, repoUrl) {
   return card;
 }
 
+export function createFeaturedCard(doc, item, repoUrl, index) {
+  const card = element(doc, 'article', 'featured-card');
+  const art = element(doc, 'div', 'featured-art');
+  const image = element(doc, 'img');
+  image.src = './assets/projects/' + encodeURIComponent(item.repo) + '.svg';
+  image.alt = 'Capa ilustrativa de ' + item.name;
+  image.width = 720;
+  image.height = 400;
+  image.loading = 'lazy';
+  image.decoding = 'async';
+  art.appendChild(image);
+  card.appendChild(art);
+  const body = element(doc, 'div', 'featured-body');
+  const overline = element(doc, 'div', 'featured-overline');
+  overline.append(element(doc, 'span', '', `0${index + 1} / PROJETO EM DESTAQUE`), element(doc, 'span', 'featured-type', item.kind));
+  body.appendChild(overline);
+  body.appendChild(element(doc, 'h3', '', item.name));
+  body.appendChild(element(doc, 'p', '', item.description));
+  const tags = element(doc, 'div', 'tech-tags');
+  item.stack.slice(0, 3).forEach(tag => tags.appendChild(element(doc, 'span', '', tag)));
+  body.appendChild(tags);
+  body.appendChild(externalLink(doc, repoUrl(item.repo), 'Explorar projeto ↗', 'featured-action'));
+  card.appendChild(body);
+  return card;
+}
+
 export function createPortfolioView(doc, client) {
   const grid = doc.querySelector('#projects');
+  const featured = doc.querySelector('#featured');
   const status = doc.querySelector('#github-status');
   const total = doc.querySelector('#total');
   const empty = doc.querySelector('#empty');
@@ -158,12 +172,17 @@ export function createPortfolioView(doc, client) {
   }
   return {
     render,
+    renderFeatured: (items) => {
+      const fragment = doc.createDocumentFragment();
+      items.forEach((item, index) => fragment.appendChild(createFeaturedCard(doc, item, client.repoUrl, index)));
+      featured.replaceChildren(fragment);
+    },
     setStatus: (text) => { status.textContent = text; },
     updateProfileLinks: () => doc.querySelectorAll('[data-profile]').forEach((link) => { link.href = client.profileUrl(); })
   };
 }
 
-export function setupControls(doc, { onCategory, onSearch }) {
+export function setupShell(doc) {
   const themeButton = doc.querySelector('#theme-toggle');
   const metaTheme = doc.querySelector('meta[name="theme-color"]');
   function setTheme(theme) {
@@ -171,11 +190,11 @@ export function setupControls(doc, { onCategory, onSearch }) {
     doc.documentElement.dataset.theme = selected;
     themeButton.setAttribute('aria-label', selected === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro');
     themeButton.querySelector('.theme-icon').textContent = selected === 'dark' ? '☀' : '☾';
-    if (metaTheme) metaTheme.content = selected === 'dark' ? '#08090c' : '#ffffff';
+    if (metaTheme) metaTheme.content = selected === 'dark' ? '#080f1d' : '#f5f8fd';
     try { localStorage.setItem('adriedson-theme', selected); } catch { /* modo privado */ }
   }
-  let preferred = 'light';
-  try { preferred = localStorage.getItem('adriedson-theme') || 'light'; } catch { /* modo privado */ }
+  let preferred = 'dark';
+  try { preferred = localStorage.getItem('adriedson-theme') || 'dark'; } catch { /* modo privado */ }
   setTheme(preferred);
   themeButton.addEventListener('click', () => setTheme(doc.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
 
@@ -191,6 +210,10 @@ export function setupControls(doc, { onCategory, onSearch }) {
   doc.addEventListener('keydown', (event) => { if (event.key === 'Escape') setMenu(false); });
   doc.querySelector('#year').textContent = String(new Date().getFullYear());
 
+}
+
+export function setupControls(doc, { onCategory, onSearch }) {
+  setupShell(doc);
   const filters = Array.from(doc.querySelectorAll('.filter'));
   filters.forEach((button) => button.addEventListener('click', () => {
     filters.forEach((other) => {
