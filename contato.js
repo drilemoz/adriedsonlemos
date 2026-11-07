@@ -1,14 +1,25 @@
 import { setupShell } from './src/ui.mjs';
 setupShell(document);
-const button = document.querySelector('#copy-pix');
-const feedback = document.querySelector('#pix-feedback');
-button.addEventListener('click', async () => {
-  const pix = 'drilemoz@gmail.com';
+
+async function copyText(value, feedback, success, failure) {
   try {
-    if (!navigator.clipboard?.writeText) throw new Error('Clipboard indisponível');
-    await navigator.clipboard.writeText(pix);
-    feedback.textContent = 'Chave Pix copiada. Confira o destinatário no seu banco antes de confirmar.';
+    if (!navigator.clipboard?.writeText) throw new Error('Área de transferência indisponível');
+    await navigator.clipboard.writeText(value);
+    feedback.textContent = success;
+    feedback.classList.add('is-success');
   } catch {
-    feedback.textContent = 'Não foi possível copiar automaticamente. Selecione a chave acima para copiar.';
+    feedback.textContent = failure;
+    feedback.classList.remove('is-success');
   }
-});
+}
+
+document.querySelector('#copy-pix').addEventListener('click', () => copyText(
+  'drilemoz@gmail.com', document.querySelector('#pix-feedback'),
+  '✓ Chave Pix copiada. Confira o destinatário no seu banco antes de confirmar.',
+  'Não foi possível copiar automaticamente. Selecione a chave acima para copiar.'
+));
+document.querySelector('#copy-whatsapp').addEventListener('click', () => copyText(
+  '37998747642', document.querySelector('#whatsapp-feedback'),
+  '✓ Número copiado com DDD. Abra o WhatsApp para iniciar a conversa.',
+  'Não foi possível copiar automaticamente. Selecione o número acima para copiar.'
+));

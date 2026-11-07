@@ -1,12 +1,16 @@
 <!doctype html>
-<html lang="pt-BR" data-theme="dark">
+<html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#080f1d">
-  <meta name="color-scheme" content="dark light">
-  <meta name="application-version" content="2.0.0">
+  <meta name="theme-color" content="#f7faff">
+  <meta name="color-scheme" content="light dark">
+  <meta name="application-version" content="2.1.0">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <script>
+    try { if (localStorage.getItem('adriedson-theme-v21') === 'dark') { document.documentElement.dataset.theme = 'dark'; document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#080f1d'); } }
+    catch (_) { /* armazenamento opcional */ }
+  </script>
   <link rel="stylesheet" href="./styles.css">
   <title>Adriedson Lemos | Aplicativos, tecnologia e projetos</title>
   <meta name="description" content="Conheça os aplicativos e projetos de Adriedson Lemos: desenvolvimento Android, ferramentas, IA local, mapas offline e tecnologia aplicada.">
@@ -33,7 +37,7 @@
         <a href="./contato.html" class="nav-contact">Contato <span aria-hidden="true">↗</span></a>
       </nav>
       <div class="header-actions">
-        <button id="theme-toggle" class="icon-btn theme-toggle" type="button" aria-label="Ativar modo claro"><span class="theme-icon" aria-hidden="true">☀</span><span class="theme-text">Tema</span></button>
+        <button id="theme-toggle" class="icon-btn theme-toggle" type="button" aria-label="Ativar modo escuro"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-text">Tema</span></button>
         <button id="menu-toggle" class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu">☰</button>
       </div>
     </div>
@@ -72,7 +76,7 @@
 
     <section class="section catalog-section" id="projetos" aria-labelledby="projetos-title">
       <div class="container">
-        <div class="section-heading catalog-heading"><div><p class="kicker"><span class="small-line"></span> OUTROS PROJETOS</p><h2 id="projetos-title">Mais ideias. <span class="accent">Mais soluções.</span></h2><p class="section-lead">Explore os demais repositórios selecionados, sem projetos arquivados ou desativados. Versões e downloads dependem das publicações reais no GitHub.</p></div><div class="catalog-counter"><strong id="total">0</strong><span>projetos no catálogo</span></div></div>
+        <div class="section-heading catalog-heading"><div><p class="kicker"><span class="small-line"></span> OUTROS PROJETOS</p><h2 id="projetos-title">Mais ideias. <span class="accent">Mais soluções.</span></h2><p class="section-lead">Explore os demais repositórios selecionados, sem projetos arquivados ou desativados. Versões e downloads dependem das publicações reais no GitHub.</p></div><div class="catalog-counter"><strong id="total">0</strong><span id="catalog-count-label">de 10 projetos no catálogo</span></div></div>
         <div class="controls"><div class="filters" role="group" aria-label="Filtrar projetos"><button type="button" class="filter active" data-filter="todos" aria-pressed="true">Todos</button><button type="button" class="filter" data-filter="android" aria-pressed="false">Android</button><button type="button" class="filter" data-filter="web" aria-pressed="false">Web</button><button type="button" class="filter" data-filter="ferramentas" aria-pressed="false">Ferramentas</button></div><label class="search"><span aria-hidden="true">⌕</span><span class="sr-only">Pesquisar projeto</span><input type="search" id="search" placeholder="Buscar por nome ou tecnologia" autocomplete="off"></label></div>
         <div id="projects" class="project-grid" aria-live="polite" aria-busy="true"></div>
         <p id="empty" class="empty" hidden>Nenhum projeto corresponde à sua busca.</p>
@@ -93,7 +97,7 @@
     <div class="container footer-inner">
       <div class="footer-left"><a class="footer-brand" href="./index.html#inicio">AL<span>.</span></a><div><p>© <span id="year">2026</span> Adriedson Lemos</p><small>Feito com HTML, CSS, JavaScript e projetos reais.</small></div></div>
       <div class="footer-right"><a href="./index.html#projetos">Projetos</a><a href="./contato.html">Contato</a><a data-profile href="https://github.com/drilemoz" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div>
-      <p class="footer-version">v2.0.0 · <a href="https://github.com/drilemoz/adriedsonlemos/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Histórico de alterações ↗</a></p>
+      <p class="footer-version">v2.1.0 · <a href="https://github.com/drilemoz/adriedsonlemos/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Histórico de alterações ↗</a></p>
     </div>
   </footer>
 </body></html>

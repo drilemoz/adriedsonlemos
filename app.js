@@ -51,7 +51,7 @@ function render() {
   view.renderFeatured(projects.filter(project => project.featured));
   const secondary = projects.filter(project => !project.featured);
   const cards = view.render(filterProjects(secondary, category, search), secondary.length);
-  observeReleases(cards);
+  observeReleases([...document.querySelectorAll('.featured-card'), ...cards]);
 }
 
 setupControls(document, {

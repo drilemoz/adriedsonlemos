@@ -1,5 +1,15 @@
 # Histórico de alterações
 
+## v2.1.0 — 07/11/2026
+
+- Tema **claro por padrão**, mantendo escuro opcional pelo botão e persistência apenas após escolha explícita.
+- Cartões secundários compactos no celular; contador de resultados passa a indicar `N de total` conforme filtros e busca.
+- Destaques com páginas individuais de detalhes, tecnologias, funcionalidades, limites e links de documentação.
+- Downloads/Releases consultados também nos quatro cartões principais e nas páginas individuais, sem inventar APK nem afirmar builds válidas sem evidência.
+- WhatsApp recebe botão de copiar número; Pix informa sucesso/erro de cópia; seção Contato ocupa menos espaço vertical.
+- Sitemap/SEO/README/versões atualizados para `2.1.0` e código `11`.
+- Preservada a curadoria de projetos ativos e a arquitetura HTML/CSS/JS sem dependências extras.
+
 ## v2.0.0 — 07/11/2026
 
 - Novo design Tech Dark responsivo, tema claro opcional, Home com quatro destaques e catálogo secundário.

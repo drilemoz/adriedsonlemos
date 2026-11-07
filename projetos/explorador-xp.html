@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7faff">
+  <meta name="color-scheme" content="light dark">
+  <meta name="application-version" content="2.1.0">
+  <title>Explorador XP | Projetos de Adriedson Lemos</title>
+  <meta name="description" content="Gerenciador de arquivos Android com visualizadores, mídia e compartilhamento autorizado. Conheça tecnologias, funcionalidades, limitações e acesso ao código no GitHub.">
+  <link rel="canonical" href="https://adriedsonlemos.vercel.app/projetos/explorador-xp.html">
+  <meta property="og:type" content="article"><meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Explorador XP | Adriedson Lemos">
+  <meta property="og:description" content="Gerenciador de arquivos Android com visualizadores, mídia e compartilhamento autorizado.">
+  <meta property="og:url" content="https://adriedsonlemos.vercel.app/projetos/explorador-xp.html">
+  <meta property="og:image" content="https://adriedsonlemos.vercel.app/og-image.png">
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <script>
+    try { if (localStorage.getItem('adriedson-theme-v21') === 'dark') { document.documentElement.dataset.theme = 'dark'; document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#080f1d'); } }
+    catch (_) { /* armazenamento opcional */ }
+  </script>
+  <link rel="stylesheet" href="../styles.css">
+  <script type="module" src="../detalhe.js"></script>
+</head>
+<body>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <header class="header"><div class="container header-inner">
+    <a class="brand" href="../index.html#inicio" aria-label="Adriedson Lemos, início"><span class="brand-logo">AL<span>.</span></span><span class="brand-title">adriedson<strong>lemos</strong><small>DESENVOLVIMENTO &amp; TECNOLOGIA</small></span></a>
+    <nav id="nav" class="nav" aria-label="Navegação principal">
+      <a href="../index.html#destaques">Destaques</a><a href="../index.html#projetos">Projetos</a><a href="../index.html#sobre">Sobre</a><a href="../index.html#experiencia">Experiência</a><a href="../contato.html" class="nav-contact">Contato ↗</a>
+    </nav>
+    <div class="header-actions"><button id="theme-toggle" class="icon-btn theme-toggle" type="button" aria-label="Ativar modo escuro"><span class="theme-icon" aria-hidden="true">☾</span><span class="theme-text">Tema</span></button><button id="menu-toggle" class="icon-btn menu-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir menu">☰</button></div>
+  </div></header>
+  <main id="conteudo">
+    <section class="detail-hero"><div class="container">
+      <a href="../index.html#destaques" class="detail-breadcrumb">← Voltar aos projetos</a>
+      <div class="detail-layout"><div>
+        <p class="kicker"><span class="small-line"></span> PROJETO EM DESTAQUE · ANDROID · ARQUIVOS E REDE</p>
+        <h1>Explorador XP</h1>
+        <p class="detail-summary">Gerenciador de arquivos Android com visualizadores, mídia e compartilhamento autorizado.</p>
+        <a class="btn btn-primary" href="https://github.com/drilemoz/Explorador-XP" target="_blank" rel="noopener noreferrer">Abrir repositório ↗</a>
+      </div><figure class="detail-cover"><img src="../assets/projects/Explorador-XP.svg" width="720" height="400" alt="Arte ilustrativa do projeto Explorador XP, não é captura de tela" decoding="async"><figcaption>Ilustração conceitual. Não representa captura real do aplicativo.</figcaption></figure></div>
+    </div></section>
+    <section class="detail-content"><div class="container detail-columns"><div>
+      <section class="detail-section"><h2>O que é o projeto</h2><p>O Explorador XP integra navegação de arquivos, ferramentas de organização, visualização de mídia e recursos de rede local em uma interface Android. O acesso a arquivos de outro aparelho exige serviço de compartilhamento e autorização.</p></section>
+      <section class="detail-section"><h2>Principais funcionalidades</h2><ul class="detail-list">
+              <li>Navegação e organização de arquivos, ferramentas e visualizações locais.</li>
+              <li>Reprodução e gerenciamento de mídias, com integração a APIs de armazenamento do Android.</li>
+              <li>Integração com serviços compatíveis de rede local, incluindo SMB/WebDAV, quando configurados.</li>
+      </ul></section>
+      <section class="detail-section"><h2>Limitações e requisitos</h2><p>O Android não permite leitura automática do armazenamento de outro celular apenas por estarem no mesmo Wi-Fi. Compatibilidade e recursos variam por versão do Android, permissões e serviços disponíveis.</p></section>
+      <section class="detail-section"><h2>Documentação e validação</h2><p>Leia o histórico de validações e os workflows do GitHub; recursos alfa ainda exigem testes em aparelhos reais.</p><a class="text-link" href="https://github.com/drilemoz/Explorador-XP/blob/main/README.md" target="_blank" rel="noopener noreferrer">Consultar documentação no GitHub ↗</a></section>
+    </div><aside>
+      <article class="detail-panel" data-detail-card data-repo="Explorador-XP" data-title="Explorador XP" data-android="true">
+        <h2>Versões e downloads</h2><p>Os links são consultados na API pública do GitHub. Um APK é oferecido somente quando identificado numa Release.</p>
+        <div class="project-version">Versão: consultando GitHub...</div><div class="project-meta" role="status" aria-live="polite">Consultando versões públicas...</div>
+        <div class="tech-tags"><span>Kotlin</span><span>Jetpack Compose</span><span>Android</span><span>SMB / WebDAV</span></div>
+        <div class="detail-actions"><a class="project-link code" href="https://github.com/drilemoz/Explorador-XP" target="_blank" rel="noopener noreferrer">Código ↗</a><a class="project-link release" href="https://github.com/drilemoz/Explorador-XP/releases" target="_blank" rel="noopener noreferrer" hidden>Ver versões ↗</a></div>
+        <p class="detail-footnote">GitHub Actions pode exigir login e os Artifacts podem expirar. Releases e APKs não equivalem a testes físicos concluídos.</p>
+      </article>
+    </aside></div></section>
+  </main>
+  <footer class="footer"><div class="container footer-inner"><div class="footer-left"><a class="footer-brand" href="../index.html#inicio">AL<span>.</span></a><div><p>© <span id="year">2026</span> Adriedson Lemos</p><small>Desenvolvimento, documentação e testes.</small></div></div><div class="footer-right"><a href="../index.html#projetos">Projetos</a><a href="../contato.html">Contato</a><a href="https://github.com/drilemoz" target="_blank" rel="noopener noreferrer">GitHub ↗</a></div><p class="footer-version">v2.1.0 · <a href="https://github.com/drilemoz/adriedsonlemos/blob/main/CHANGELOG.md" target="_blank" rel="noopener noreferrer">Histórico de alterações ↗</a></p></div></footer>
+</body></html>

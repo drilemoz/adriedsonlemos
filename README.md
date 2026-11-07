@@ -1,22 +1,23 @@
-# Adriedson Lemos | Tecnologia & Projetos v2.0.0
+# Adriedson Lemos | Tecnologia & Projetos v2.1.0
 
 Portfólio estático de **Adriedson Lemos**, disponível em <https://adriedsonlemos.vercel.app/>, sem framework ou dependências externas.
 
-## O que mudou na versão 2.0.0
+## O que mudou na versão 2.1.0
 
-- Redesign completo **Tech Dark** com tema escuro inicial, alternativa clara, responsividade e preferência persistida localmente.
-- **Home** com quatro projetos destacados: Vigia IA, Explorador XP, GitHub Manager e UAI Cortes. Os cartões são renderizados a partir da curadoria local e reconciliados com a API pública do GitHub.
-- **Catálogo secundário** de até dez projetos adicionais selecionados, com pesquisa, filtros e consulta sob demanda de Releases/Artifacts.
+- Design **Light Tech** como padrão, fundo claro, cartões brancos e detalhes azul-petróleo; tema escuro opcional por escolha manual, persistida no navegador (chave `adriedson-theme-v21`). O modo escuro antigo não é migrado automaticamente porque era o padrão da versão 2.0.0.
+- **Home** com quatro projetos destacados, com páginas próprias em `projetos/`, acesso ao código e consulta real de Releases/APKs: Vigia IA, Explorador XP, GitHub Manager e UAI Cortes. Os cartões são renderizados a partir da curadoria local e reconciliados com a API pública do GitHub.
+- **Catálogo secundário** compacto no celular, com contador de resultados filtrados (`N de 10`), busca, filtros e consulta sob demanda de Releases/Artifacts.
 - **Não mostrar** repositórios arquivados, desativados, privados, forks, entradas desconhecidas ou sem seleção editorial quando a API responde. Em falha de rede, usa a lista local verificada em 07/11/2026, identificando que pode estar desatualizada.
-- Nova **página `contato.html`**, com WhatsApp `(37) 99874-7642` no formato wa.me, e-mail, GitHub, LinkedIn e chave Pix `drilemoz@gmail.com` com botão para copiar.
+- **Página `contato.html`** mais compacta: link direto para WhatsApp `(37) 99874-7642`, botão para copiar o número, retorno visual ao copiar a chave Pix `drilemoz@gmail.com`, além de e-mail, GitHub e LinkedIn.
 - SEO de ambas as páginas, sitemap atualizado, sem token GitHub no navegador nem dados falsos de downloads.
 - Histórico profissional, PDF do currículo e informações sobre formação preservados.
 
 ## Organização
 
 - `index.html`: Home, destaques, catálogo, apresentação, habilidades e experiência.
-- `contato.html` e `contato.js`: canais públicos e cópia da chave Pix.
-- `styles.css`: identidade e responsividade.
+- `contato.html` e `contato.js`: canais públicos, cópia do número e da chave Pix.
+- `projetos/*.html` e `detalhe.js`: quatro páginas individuais estáticas com funcionalidades, limitações, tecnologias e consulta pública de downloads.
+- `styles.css`: tema claro padrão, escuro opcional, layout responsivo e cartões compactos.
 - `src/projects.mjs`: curadoria dos 14 repositórios não arquivados conferidos em 07/11/2026.
 - `src/catalog.mjs`: filtragem conservadora de status e classificação.
 - `src/github.mjs`: API pública do GitHub, cache, Releases e Artifacts.

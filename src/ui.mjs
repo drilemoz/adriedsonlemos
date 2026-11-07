@@ -128,8 +128,18 @@ export function createProjectCard(doc, item, repoUrl) {
   return card;
 }
 
+export const FEATURED_DETAIL_LINKS = Object.freeze({
+  'Vigia-IA': './projetos/vigia-ia.html',
+  'Explorador-XP': './projetos/explorador-xp.html',
+  'GitHub-Manager': './projetos/github-manager.html',
+  'UAI-Cortes': './projetos/uai-cortes.html'
+});
+
 export function createFeaturedCard(doc, item, repoUrl, index) {
   const card = element(doc, 'article', 'featured-card');
+  card.dataset.repo = item.repo;
+  card.dataset.title = item.name;
+  card.dataset.android = String(item.categories.includes('android'));
   const art = element(doc, 'div', 'featured-art');
   const image = element(doc, 'img');
   image.src = './assets/projects/' + encodeURIComponent(item.repo) + '.svg';
@@ -149,7 +159,18 @@ export function createFeaturedCard(doc, item, repoUrl, index) {
   const tags = element(doc, 'div', 'tech-tags');
   item.stack.slice(0, 3).forEach(tag => tags.appendChild(element(doc, 'span', '', tag)));
   body.appendChild(tags);
-  body.appendChild(externalLink(doc, repoUrl(item.repo), 'Explorar projeto ↗', 'featured-action'));
+  const version = element(doc, 'div', 'project-version', 'Versão: consulta sob demanda');
+  body.appendChild(version);
+  body.appendChild(element(doc, 'div', 'project-meta', 'Consultando versões públicas no GitHub...'));
+  const links = element(doc, 'div', 'featured-links');
+  const detail = element(doc, 'a', 'featured-action', 'Ver detalhes →');
+  detail.href = FEATURED_DETAIL_LINKS[item.repo] || repoUrl(item.repo);
+  links.appendChild(detail);
+  links.appendChild(externalLink(doc, repoUrl(item.repo), 'Código ↗', 'project-link code'));
+  const release = externalLink(doc, repoUrl(item.repo) + '/releases', 'Consultando...', 'project-link release');
+  release.hidden = true;
+  links.appendChild(release);
+  body.appendChild(links);
   card.appendChild(body);
   return card;
 }
@@ -159,13 +180,15 @@ export function createPortfolioView(doc, client) {
   const featured = doc.querySelector('#featured');
   const status = doc.querySelector('#github-status');
   const total = doc.querySelector('#total');
+  const totalLabel = doc.querySelector('#catalog-count-label');
   const empty = doc.querySelector('#empty');
   function render(items, totalCount) {
     grid.setAttribute('aria-busy', 'true');
     const fragment = doc.createDocumentFragment();
     for (const item of items) fragment.appendChild(createProjectCard(doc, item, client.repoUrl));
     grid.replaceChildren(fragment);
-    total.textContent = String(totalCount);
+    total.textContent = String(items.length);
+    if (totalLabel) totalLabel.textContent = `de ${totalCount} projetos no catálogo`;
     empty.hidden = items.length > 0;
     grid.setAttribute('aria-busy', 'false');
     return Array.from(grid.children);
@@ -190,13 +213,18 @@ export function setupShell(doc) {
     doc.documentElement.dataset.theme = selected;
     themeButton.setAttribute('aria-label', selected === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro');
     themeButton.querySelector('.theme-icon').textContent = selected === 'dark' ? '☀' : '☾';
+    themeButton.title = selected === 'dark' ? 'Usar tema claro' : 'Usar tema escuro';
     if (metaTheme) metaTheme.content = selected === 'dark' ? '#080f1d' : '#f5f8fd';
-    try { localStorage.setItem('adriedson-theme', selected); } catch { /* modo privado */ }
+    // Preferência é gravada somente após escolha manual, não na primeira visita.
   }
-  let preferred = 'dark';
-  try { preferred = localStorage.getItem('adriedson-theme') || 'dark'; } catch { /* modo privado */ }
+  let preferred = 'light';
+  try { preferred = localStorage.getItem('adriedson-theme-v21') === 'dark' ? 'dark' : 'light'; } catch { /* modo privado */ }
   setTheme(preferred);
-  themeButton.addEventListener('click', () => setTheme(doc.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+  themeButton.addEventListener('click', () => {
+    const next = doc.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    try { localStorage.setItem('adriedson-theme-v21', next); } catch { /* modo privado */ }
+  });
 
   const menu = doc.querySelector('#menu-toggle');
   const nav = doc.querySelector('#nav');
